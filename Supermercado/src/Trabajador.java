@@ -106,7 +106,7 @@ public class Trabajador {
 					+ ", disponibilidad=" + disponibilidad + "]";
 		}
 		
-	
+	//
 		
 	
 
