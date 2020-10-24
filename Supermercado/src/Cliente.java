@@ -4,12 +4,7 @@ public class Cliente {
 	protected String apellido;
 	protected String dni;
 	protected Boolean socio;
-	
-	
-	
-	
-	
-	
+		
 	
 	public Cliente(String nombre, String apellido, String dni, Boolean socio) {
 		super();
@@ -26,8 +21,6 @@ public class Cliente {
 		this.dni = "";
 		this.socio = false;
 	}
-
-
 
 
 
@@ -96,8 +89,4 @@ public class Cliente {
 
 
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
-	}
 }
