@@ -52,7 +52,7 @@ public class VentanaGestionTrabajadores extends JFrame{
 		ventana.setVisible(true);
 		ventana.add(panel);
 		ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		panel.setLayout(new GridLayout(8,2));
+		panel.setLayout(new GridLayout(8,2)); //Cambiar esto
 		panel.setVisible(true);
 		
 		panel.add(nombre);
@@ -71,7 +71,7 @@ public class VentanaGestionTrabajadores extends JFrame{
 		panel.add(horT);
 		panel.add(disponibilidad);
 		panel.add(dis);
-				
+			
 				
 		}
 	
