@@ -21,6 +21,7 @@ public class VentanaGestionCompra extends JFrame{
 
 	JPanel listaPanel = new JPanel();
 	JPanel infoPanel = new JPanel();
+	JPanel acciones = new JPanel();
 	
 	JList listaCompras = new JList<>();
 	JScrollPane listaScroll = new JScrollPane(listaCompras);
@@ -38,9 +39,6 @@ public class VentanaGestionCompra extends JFrame{
 		setSize(900,500);
 		setTitle("Gestión compras");
 	    setLocationRelativeTo(null);
-
-	    JPanel acciones = new JPanel();
-
 
 	    add(acciones);
 	    add(listaPanel);
