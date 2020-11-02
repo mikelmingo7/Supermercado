@@ -1,13 +1,16 @@
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
-public class VentanaGestionTrabajadores {
+public class VentanaGestionTrabajadores extends JFrame{
 
 	public VentanaGestionTrabajadores(){
 		JPanel panel=new JPanel();	
@@ -30,8 +33,22 @@ public class VentanaGestionTrabajadores {
 		JLabel disponibilidad=new JLabel("disponibilidad");
 		JTextField dis=new JTextField();
 		
+		JButton nuevo = new JButton("NUEVO");
+		JButton guardar = new JButton("GUARDAR");
+		JButton eliminar = new JButton("ELIMINAR");
+		
+		panel.add(nuevo);
+	    panel.add(guardar);
+	    panel.add(eliminar);
+	    
+	    JList listaTrabajadores = new JList<>();
+		JScrollPane listaScroll = new JScrollPane(listaTrabajadores);
+		DefaultListModel model = new DefaultListModel<Trabajador>();
+		listaTrabajadores.setModel(model);
+	    panel.add(listaScroll);
+		
 		ventana.setSize(500,300);
-		ventana.setTitle("Ventana de Gestión de Empleados");
+		ventana.setTitle("Ventana de Gestión de Trabajadores");
 		ventana.setVisible(true);
 		ventana.add(panel);
 		ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
