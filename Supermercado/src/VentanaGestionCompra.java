@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.Dimension;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
@@ -10,32 +11,39 @@ public class VentanaGestionCompra extends JFrame{
 
 	JPanel listaPanel = new JPanel();
 	JPanel infoPanel = new JPanel();
-	JFrame ventana = new JFrame("Ventana gestion compras");
 	JList listaCompras = new JList<>();
-	DefaultListModel modeloCompras;
+	DefaultListModel model = new DefaultListModel<Compra>();
 	
 	
 	public VentanaGestionCompra() {
 		
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLayout(null);
-        setLocationRelativeTo(null);
+		setLocationRelativeTo(null);
+        setSize(900,500);
+        setTitle("Gestión compras");
+        
+        
+        listaPanel.setVisible(true);
+        infoPanel.setVisible(true);
         
         add(listaPanel);
-		add(ventana);
-		add(infoPanel);
+        add(infoPanel);
+        
+        listaCompras.setModel(model);
+        JScrollPane listaScroll = new JScrollPane(listaCompras);
+        listaScroll.setPreferredSize(new Dimension(250, 350));
+        listaPanel.add(listaScroll);
+        
 		
-		listaCompras.setModel(modeloCompras);
-		JScrollPane panelLista = new JScrollPane(listaCompras);
-		
-		
-		
-		
-		
-		
-		
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setVisible(true);
 	}
 	
 	
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		VentanaGestionCompra v  = new VentanaGestionCompra();
+	}
 	
 }
