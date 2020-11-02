@@ -87,7 +87,7 @@ public class VentanaGestionTrabajadores extends JFrame{
 	    panel3.add(listaScroll);
 		
 		
-	    
+	    setResizable(false);
 	    setVisible(true);
 				
 		}
