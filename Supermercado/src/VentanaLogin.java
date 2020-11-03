@@ -19,7 +19,7 @@ public class VentanaLogin  extends JFrame{
 	private JButton btnCrearUsuario;
 	
 public VentanaLogin() {
-		setTitle("Ventana login");
+		setTitle("Inicio de sesion");
 		
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -31,7 +31,7 @@ public VentanaLogin() {
 		 
 		 
 		 pnlCentral = new JPanel();
-		 pnlCentral.setBackground(Color.ORANGE);
+		 pnlCentral.setBackground(Color.GREEN);
 			
 		getContentPane().add(pnlCentral, BorderLayout.CENTER);
 		
