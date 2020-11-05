@@ -1,6 +1,7 @@
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -14,7 +15,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
+import javax.swing.JTextField;
 
 
 public class VentanaGestionCompra extends JFrame{
@@ -22,6 +25,18 @@ public class VentanaGestionCompra extends JFrame{
 	JPanel listaPanel = new JPanel();
 	JPanel infoPanel = new JPanel();
 	JPanel acciones = new JPanel();
+	
+	JLabel clientejl = new JLabel("Cliente");
+	JTextField clientejt = new JTextField();
+	JLabel preciojl = new JLabel("Precio");
+	JTextField preciojt = new JTextField();
+	JLabel fechajl = new JLabel("Fecha");
+	JTextField fechajt = new JTextField();
+	JLabel descuentojl = new JLabel("Descuento");
+	JRadioButton botonDescuento = new JRadioButton("Si");
+	JRadioButton botonSinDescuento = new JRadioButton("No");
+	JTextField descuentojt = new JTextField();
+	
 	
 	JList listaCompras = new JList<>();
 	JScrollPane listaScroll = new JScrollPane(listaCompras);
@@ -39,6 +54,10 @@ public class VentanaGestionCompra extends JFrame{
 		setSize(900,500);
 		setTitle("Gestión compras");
 	    setLocationRelativeTo(null);
+	    
+	    JLabel nombre = new JLabel("Compra");
+		JTextField nom = new JTextField();
+		
 
 	    add(acciones);
 	    add(listaPanel);
@@ -55,6 +74,18 @@ public class VentanaGestionCompra extends JFrame{
 	    listaCompras.setModel(model);
     
 	    listaPanel.add(listaScroll);
+	    
+	    infoPanel.setLayout(new GridLayout(8,2));
+	    infoPanel.add(clientejl);
+	    infoPanel.add(clientejt);
+	    infoPanel.add(preciojl);
+	    infoPanel.add(preciojt);
+	    infoPanel.add(fechajl);
+	    infoPanel.add(fechajt);
+	    infoPanel.add(descuentojl);
+	    infoPanel.add(descuentojt);
+	    infoPanel.add(botonDescuento);
+	    infoPanel.add(botonSinDescuento);
 
 	    setResizable(false);
 	    setVisible(true);
