@@ -1,3 +1,4 @@
+package Ventanas;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -20,7 +21,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
 
-public class VentanaGestionCompra extends JFrame{
+public class VentanaGestionCompra<Compra> extends JFrame{
 
 	JPanel listaPanel = new JPanel();
 	JPanel infoPanel = new JPanel();

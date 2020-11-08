@@ -1,3 +1,4 @@
+package Ventanas;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 
@@ -10,11 +11,12 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
-public class VentanaGestionTrabajadores extends JFrame{
+public class VentanaGestionTrabajadores<Trabajador> extends JFrame{
 	
 	
 	JList listaTrabajadores = new JList<>();
 	JScrollPane listaScroll = new JScrollPane(listaTrabajadores);
+	
 	DefaultListModel model = new DefaultListModel<Trabajador>();
 	
 	JPanel panel1=new JPanel();
