@@ -1,3 +1,4 @@
+package ClasesBase;
 import java.util.ArrayList;
 
 public class Compra {

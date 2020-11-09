@@ -1,3 +1,4 @@
+package VentanasGestion;
 
 import java.awt.FlowLayout;
 import java.awt.GridLayout;

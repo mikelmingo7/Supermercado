@@ -1,3 +1,4 @@
+package ClasesBase;
 
 public class Cliente {
 	protected String nombre;

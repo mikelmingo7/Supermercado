@@ -1,3 +1,4 @@
+package Paneles;
 
 import java.awt.GridLayout;
 
