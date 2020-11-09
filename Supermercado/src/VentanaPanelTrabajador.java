@@ -1,4 +1,4 @@
-package Ventanas;
+
 import java.awt.GridLayout;
 
 import javax.swing.JButton;
