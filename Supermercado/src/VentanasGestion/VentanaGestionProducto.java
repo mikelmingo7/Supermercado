@@ -1,18 +1,9 @@
 package VentanasGestion;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -21,42 +12,44 @@ import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
+import ClasesBase.Producto;
 
-public class VentanaGestionCompra<Compra> extends JFrame{
-
+public class VentanaGestionProducto extends JFrame{
+	
 	JPanel listaPanel = new JPanel();
 	JPanel infoPanel = new JPanel();
 	JPanel acciones = new JPanel();
 	
-	JLabel clientejl = new JLabel("Cliente");
-	JTextField clientejt = new JTextField();
+	JLabel nombrejl = new JLabel("Nombre");
+	JTextField nombrejt = new JTextField();
+	JLabel codigojl = new JLabel("Código");
+	JTextField codigojt = new JTextField();
+	JLabel seccionjl = new JLabel("Sección");
+	JTextField seccionjt = new JTextField();
+	JLabel marcajl = new JLabel("Marca");
+	JTextField marcajt = new JTextField();
 	JLabel preciojl = new JLabel("Precio");
+	JLabel pesojl = new JLabel("Peso");
+	JTextField pesojt = new JTextField();
 	JTextField preciojt = new JTextField();
-	JLabel fechajl = new JLabel("Fecha");
-	JTextField fechajt = new JTextField();
-	JLabel descuentojl = new JLabel("Descuento");
-	JRadioButton botonDescuento = new JRadioButton("Si");
-	JRadioButton botonSinDescuento = new JRadioButton("No");
-	JTextField descuentojt = new JTextField();
 	
 	
-	JList listaCompras = new JList<>();
-	JScrollPane listaScroll = new JScrollPane(listaCompras);
-	DefaultListModel model = new DefaultListModel<Compra>();
+	JList listaProductos = new JList<>();
+	JScrollPane listaScroll = new JScrollPane(listaProductos);
+	DefaultListModel model = new DefaultListModel<Producto>();
 	
 	JButton nuevo = new JButton("NUEVO");
 	JButton guardar = new JButton("GUARDAR");
 	JButton eliminar = new JButton("ELIMINAR");
 	
-	
-	
-	public VentanaGestionCompra() {
+	public VentanaGestionProducto() {
 		
 		setLayout(null);
 		setSize(900,500);
-		setTitle("Gestión compras");
+		setTitle("Gestión productos");
 	    setLocationRelativeTo(null);
 	    
+		
 
 	    add(acciones);
 	    add(listaPanel);
@@ -70,31 +63,33 @@ public class VentanaGestionCompra<Compra> extends JFrame{
 	    listaPanel.setBounds(0,80,300,440);
 	    infoPanel.setBounds(320,80,500,400);
 
-	    listaCompras.setModel(model);
+	    listaProductos.setModel(model);
     
 	    listaPanel.add(listaScroll);
 	    
 	    infoPanel.setLayout(new GridLayout(8,2));
-	    infoPanel.add(clientejl);
-	    infoPanel.add(clientejt);
+	   
+	    infoPanel.add(nombrejl);
+	    infoPanel.add(nombrejt);
+	    infoPanel.add(codigojl);
+	    infoPanel.add(codigojt);
+	    infoPanel.add(seccionjl);
+	    infoPanel.add(seccionjt);
+	    infoPanel.add(marcajl);
+	    infoPanel.add(marcajt);
+	    infoPanel.add(pesojl);
+	    infoPanel.add(pesojt);
 	    infoPanel.add(preciojl);
 	    infoPanel.add(preciojt);
-	    infoPanel.add(fechajl);
-	    infoPanel.add(fechajt);
-	    infoPanel.add(descuentojl);
-	    infoPanel.add(descuentojt);
-	    infoPanel.add(botonDescuento);
-	    infoPanel.add(botonSinDescuento);
+	    
 
 	    setResizable(false);
 	    setVisible(true);
-
-}
-	
-
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		VentanaGestionCompra v  = new VentanaGestionCompra();
 	}
 	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		VentanaGestionProducto ventanaProducto  = new VentanaGestionProducto();
+	}
+
 }
