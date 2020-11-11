@@ -1,3 +1,4 @@
+package VentanasGestion;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -10,7 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class VentanaCliente extends JFrame {
+public class VentanaGestionCliente extends JFrame {
 	
 
 
@@ -34,7 +35,7 @@ public class VentanaCliente extends JFrame {
 	JPanel panel3=new JPanel();
 	
 	
-	public VentanaCliente() {
+	public VentanaGestionCliente() {
 		setTitle("Ventana Cliente");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(700, 400);
@@ -78,7 +79,7 @@ public class VentanaCliente extends JFrame {
 		
 }
 	public static void main(String[] args) {
-		 new VentanaCliente();
+		 new VentanaGestionCliente();
 		}
 	}
 
