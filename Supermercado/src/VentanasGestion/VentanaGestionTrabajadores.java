@@ -2,6 +2,8 @@ package VentanasGestion;
 
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -11,6 +13,7 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+
 
 public class VentanaGestionTrabajadores<Trabajador> extends JFrame{
 	
@@ -88,6 +91,9 @@ public class VentanaGestionTrabajadores<Trabajador> extends JFrame{
 	    
 		listaTrabajadores.setModel(model);
 	    panel3.add(listaScroll);
+	    
+	    
+	    
 		
 		
 	    setResizable(false);
