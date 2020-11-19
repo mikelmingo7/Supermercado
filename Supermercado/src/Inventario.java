@@ -71,4 +71,5 @@ public class Inventario {
 			throw new DBException("No se pudo guardar el usuario en la BD", e);
 		}
 	}
+	
 }
