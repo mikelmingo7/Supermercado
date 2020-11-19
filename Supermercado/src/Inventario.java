@@ -24,7 +24,7 @@ public class Inventario {
 			System.out.println("Error al conectar a la Base de Datos");
 		}
 	}
-	public void disconnect() {
+	public static void  disconnect() {
 		try {
 			conexion.close();
 		} catch (SQLException e) {

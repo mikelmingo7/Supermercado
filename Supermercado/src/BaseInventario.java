@@ -23,6 +23,7 @@ public class BaseInventario {
 	                Inventario.store(p);
 	                
 	              Inventario.dropProductoTable();
+	              Inventario.disconnect();
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
