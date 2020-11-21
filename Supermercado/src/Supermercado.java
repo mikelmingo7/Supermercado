@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 
+import BD.Inventario;
 import ClasesBase.*;
 
 public class Supermercado {

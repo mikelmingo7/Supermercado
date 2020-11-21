@@ -1,3 +1,4 @@
+package BD;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -7,14 +8,15 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import DBException;
 import ClasesBase.Producto;
 
 public class Inventario {
 	
 	private List listaP=new ArrayList();
-	private static Connection conexion=null;
+	private static Connection conexion = null;
 	
-	public static void connect(String dbPath) {
+	public static void connect(String dbPath) throws DBException {
 		try {
 			Class.forName("org.sqlite.JDBC");
 			conexion = DriverManager.getConnection("jdbc:sqlite:" + dbPath);
@@ -24,14 +26,14 @@ public class Inventario {
 			System.out.println("Error al conectar a la Base de Datos");
 		}
 	}
-	public static void  disconnect() {
+	public static void  disconnect() throws DBException {
 		try {
 			conexion.close();
 		} catch (SQLException e) {
 			System.out.println("Error al cerrar la conexión con la Base de Datos");
 		}
 	}
-	public static void createProductoTable() throws DBException{
+	public static void createProductoTable() throws DBException {
 		// TODO Auto-generated method stub
 		try (Statement s = conexion.createStatement()) {
 			s.executeUpdate("CREA TABLA SI NO EXISTSE producto (codigo INTEGER PRIMARY KEY AUTOINCREMENT, nombre VARCHAR, seccion VARCHAR, marca VARCHAR, peso INTEGER, precio DEC)");
