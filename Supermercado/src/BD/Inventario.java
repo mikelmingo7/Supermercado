@@ -8,7 +8,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import DBException;
 import ClasesBase.Producto;
 
 public class Inventario {

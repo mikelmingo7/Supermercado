@@ -1,4 +1,4 @@
-import BD.Inventario;
+package BD;
 import ClasesBase.Producto;
 
 public class BaseInventario {
