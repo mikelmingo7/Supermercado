@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,7 +52,7 @@ public class Inventario {
 		}
 }
 	public static void store(Producto p) throws DBException {
-		try (PreparedStatement ps = conexion.prepareStatement("INSERT INTO user (nombre,peso,precio,marca,seccion) VALUES (?, ?, ?)");
+		try (PreparedStatement ps = conexion.prepareStatement("INSERT INTO user (nombre,peso,precio,marca,seccion) VALUES (?, ?, ?, ?, ?)");
 			Statement s = conexion.createStatement()) {
 			ps.setString(1, p.getNombre());
 			ps.setString(2, p.getMarca());
@@ -70,6 +71,51 @@ public class Inventario {
 			}
 		} catch (SQLException e) {
 			throw new DBException("No se pudo guardar el usuario en la BD", e);
+		}
+	}
+	public Producto getProducto(int codigo) throws DBException {
+		try (PreparedStatement s = conexion.prepareStatement("SELECT codigo,nombre,peso,precio,marca,seccion FROM producto WHERE id = ?")) {
+			s.setInt(1, codigo);
+			
+			ResultSet rs = s.executeQuery();
+
+			if (rs.next()) {
+				Producto p = new Producto();
+				p.setCodigo(rs.getInt("codigo"));
+				p.setNombre(rs.getString("nombre"));
+				p.setPeso(rs.getFloat("peso"));
+				p.setPrecio(rs.getFloat("precio"));
+				p.setMarca(rs.getString("marca"));
+				p.setSeccion(rs.getString("seccion"));
+				
+				return p;
+			} else {
+				return new Producto();
+			}
+		} catch (SQLException | DateTimeParseException e) {
+			throw new DBException("Error obteniendo el producto con codigo " + codigo, e);
+		}
+	}
+	public void update(Producto p) throws DBException {
+		try (PreparedStatement s = conexion.prepareStatement("UPDATE p SET nombre=?, peso=?, precio=?, marca=?, seccion=?  WHERE codigo=?")) {
+			s.setString(1, p.getNombre());
+			s.setDouble(2, p.getPeso());
+			s.setDouble(3, p.getPrecio());
+			s.setString(4, p.getMarca());
+			s.setString(5, p.getSeccion());
+			s.setInt(6, p.getCodigo());
+			
+			s.executeUpdate();
+		} catch (SQLException e) {
+			throw new DBException("No se pudo guardar el producto en la BD", e);
+		}
+	}
+	public void delete(Producto p) throws DBException {
+		try (PreparedStatement s = conexion.prepareStatement("DELETE FROM p WHERE id=?")) {
+			s.setInt(1, p.getCodigo());
+			s.executeUpdate();
+		} catch (SQLException e) {
+			throw new DBException("No se pudo elimiar el usuario con id " + p.getCodigo(), e);
 		}
 	}
 	
