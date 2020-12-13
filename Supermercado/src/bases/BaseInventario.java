@@ -30,5 +30,7 @@ public class BaseInventario {
 			// TODO: handle exception
 		}
 	}
+	
+	//
 
 }

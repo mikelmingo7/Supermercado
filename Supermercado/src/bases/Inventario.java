@@ -118,5 +118,5 @@ public class Inventario {
 			throw new DBException("No se pudo elimiar el usuario con id " + p.getCodigo(), e);
 		}
 	}
-	
+	//
 }
