@@ -1,4 +1,4 @@
-package VentanasGestion;
+package gestion;
 
 import java.awt.FlowLayout;
 import java.awt.GridLayout;

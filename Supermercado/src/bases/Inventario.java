@@ -1,4 +1,4 @@
-package BD;
+package bases;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -9,7 +9,7 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 
-import ClasesBase.Producto;
+import clases.Producto;
 
 public class Inventario {
 	

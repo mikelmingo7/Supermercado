@@ -1,4 +1,4 @@
-package VentanasGestion;
+package gestion;
 
 import java.awt.GridLayout;
 
@@ -12,7 +12,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
-import ClasesBase.Producto;
+import clases.Producto;
 
 public class VentanaGestionProducto extends JFrame{
 	

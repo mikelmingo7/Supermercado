@@ -1,4 +1,4 @@
-package ClasesBase;
+package clases;
 
 public class Cliente {
 	protected String nombre;

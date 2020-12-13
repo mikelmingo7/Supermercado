@@ -1,7 +1,9 @@
 import java.util.ArrayList;
 
-import BD.Inventario;
-import ClasesBase.*;
+import bases.Inventario;
+import clases.Cliente;
+import clases.Producto;
+import clases.Trabajador;
 
 public class Supermercado {
 

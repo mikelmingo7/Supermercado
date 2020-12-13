@@ -1,4 +1,4 @@
-package BD;
+package bases;
 
 public class DBException extends Exception{
 

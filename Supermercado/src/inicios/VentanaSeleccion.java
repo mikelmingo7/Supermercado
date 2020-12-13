@@ -1,4 +1,4 @@
-package Inicio;
+package inicios;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;

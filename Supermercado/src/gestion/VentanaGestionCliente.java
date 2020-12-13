@@ -1,4 +1,4 @@
-package VentanasGestion;
+package gestion;
 
 import java.awt.BorderLayout;
 import java.awt.Color;

@@ -1,4 +1,4 @@
-package ClasesBase;
+package clases;
 import java.util.ArrayList;
 
 public class Compra {

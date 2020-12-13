@@ -1,5 +1,5 @@
-package BD;
-import ClasesBase.Producto;
+package bases;
+import clases.Producto;
 
 public class BaseInventario {
 
