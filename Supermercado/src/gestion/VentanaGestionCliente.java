@@ -4,12 +4,20 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+
+
+import clases.Cliente;
 
 public class VentanaGestionCliente extends JFrame {
 	
@@ -29,6 +37,10 @@ public class VentanaGestionCliente extends JFrame {
 	JButton nuevo = new JButton("NUEVO");
 	JButton guardar = new JButton("GUARDAR");
 	JButton eliminar = new JButton("ELIMINAR");
+	
+	JList listaClientes = new JList<>();
+	JScrollPane listaScroll = new JScrollPane(listaClientes);
+	DefaultListModel modeloCliente = new DefaultListModel<Cliente>();
 	
 	JPanel panel1=new JPanel();
 	JPanel panel2=new JPanel();
@@ -71,7 +83,32 @@ public class VentanaGestionCliente extends JFrame {
 	    panel1.setBounds(0,0,700,80);
 	    panel2.setBounds(0,80,700,120);
 	    panel3.setBounds(100,200,400,200);
+	    
+	    
+	    //Botones funcionamiento
+	    
+	    eliminar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //Crear cliente de db
+            }
+        });
 
+        nuevo.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //Crear cliente de db
+            }
+        });
+        
+        guardar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				//Update de cliente en DB
+				
+			}
+		});
 	  
 	    
 	    setResizable(false);

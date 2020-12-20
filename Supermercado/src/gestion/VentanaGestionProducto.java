@@ -1,6 +1,8 @@
 package gestion;
 
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -81,6 +83,31 @@ public class VentanaGestionProducto extends JFrame{
 	    infoPanel.add(pesojt);
 	    infoPanel.add(preciojl);
 	    infoPanel.add(preciojt);
+	    
+//Botones funcionamiento
+	    
+	    eliminar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //Crear cliente de db
+            }
+        });
+
+        nuevo.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //Crear cliente de db
+            }
+        });
+        
+        guardar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				//Update de cliente en DB
+				
+			}
+		});
 	    
 
 	    setResizable(false);

@@ -85,6 +85,32 @@ public class VentanaGestionCompra<Compra> extends JFrame{
 	    infoPanel.add(descuentojt);
 	    infoPanel.add(botonDescuento);
 	    infoPanel.add(botonSinDescuento);
+	    
+	    
+	    //Botones funcionamiento
+	    
+	    eliminar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //Crear cliente de db
+            }
+        });
+
+        nuevo.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //Crear cliente de db
+            }
+        });
+        
+        guardar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				//Update de cliente en DB
+				
+			}
+		});
 
 	    setResizable(false);
 	    setVisible(true);

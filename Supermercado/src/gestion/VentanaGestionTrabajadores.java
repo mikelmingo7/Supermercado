@@ -93,7 +93,30 @@ public class VentanaGestionTrabajadores<Trabajador> extends JFrame{
 	    panel3.add(listaScroll);
 	    
 	    
+	    //Botones funcionamiento
 	    
+	    eliminar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //Crear cliente de db
+            }
+        });
+
+        nuevo.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //Crear cliente de db
+            }
+        });
+        
+        guardar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				//Update de cliente en DB
+				
+			}
+		});
 		
 		
 	    setResizable(false);
