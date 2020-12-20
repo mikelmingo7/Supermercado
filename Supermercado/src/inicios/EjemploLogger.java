@@ -12,10 +12,12 @@ import java.io.IOException;
 //utilizar esta opción para proporcionar información del programa en vez
 //de utilizar la salida directa por consola con System.out.
 
-public class Logger {
+
+
+public class EjemploLogger {
 	
-	 // Creamos el logger con el pasando como parámetro el nombre de la clase actual
-    private static Logger logger = Logger.getLogger(Logger.class.getName());
+	// Creamos el logger con el pasando como parámetro el nombre de la clase actual
+    private static Logger logger = Logger.getLogger(EjemploLogger.class.getName());
 
     // Niveles de importancia para el log:
 	// FINEST / FINER / FINE / CONFIG / INFO / WARNING / SEVERE
@@ -56,5 +58,5 @@ public class Logger {
 
         logger.info("Programa finalizado");
     }
-
+	
 }
