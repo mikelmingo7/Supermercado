@@ -98,7 +98,7 @@ public class VentanaGestionTrabajadores<Trabajador> extends JFrame{
 	    eliminar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //Crear cliente de db
+                //Eliminar cliente de db
             }
         });
 
