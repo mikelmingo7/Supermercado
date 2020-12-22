@@ -9,8 +9,8 @@ public class Producto {
 	protected double peso; 
 	protected double precio;
 	
-	public Producto(String nombre, int codigo, String seccion, String marca, double peso, float precio) {
-		super();
+	public Producto(String nombre, int codigo, String seccion, String marca, double peso, double precio) {
+		super(); 
 		this.nombre = nombre;
 		this.codigo = codigo;
 		this.seccion = seccion;
@@ -65,7 +65,7 @@ public class Producto {
 		return peso;
 	}
 
-	public void setPeso(float peso) {
+	public void setPeso(double peso) {
 		this.peso = peso;
 	}
 
@@ -73,7 +73,7 @@ public class Producto {
 		return precio;
 	}
 
-	public void setPrecio(float precio) {
+	public void setPrecio(double precio) {
 		this.precio = precio;
 	}
 

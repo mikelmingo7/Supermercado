@@ -7,19 +7,24 @@ import org.junit.jupiter.api.Test;
 
 class ClienteTest {
 
-	private Cliente c;
-	
-	 @Before
-	    public void setUp() {
-	        c = new Cliente("Pepe","Jimenez","123456789A",true);
-	    }
+	   
+	Cliente  c = new Cliente("mikel","andoni","123456789A",true);
+	    
 	@Test
 	public void testGetNombre() {
-		assertEquals("Pepe", c.getNombre());
+		assertEquals("mikel", c.getNombre()); 
 	}
 	@Test
 	public void testGetApellido() {
-		assertEquals("Jimenez", c.getApellido());
+		assertEquals("andoni", c.getApellido());
+	}
+	@Test
+	public void testGetDni() {
+		assertEquals("123456789A", c.getDni());
+	}
+	@Test
+	public void testGetSocio() {
+		assertEquals(true, c.getSocio());
 	}
 
 }
