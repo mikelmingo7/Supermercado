@@ -24,6 +24,7 @@ public class EjemploLogger {
 	// Por defecto se muestran en consola de error solo INFO-WARNING-SEVERE
     
     public static void main(String[] args) {
+    	
         // Cambios el nivel de salida del log para sacar los mensajes
         // FINE-CONFIG-INFO-WARNING-SEVERE
         // Aunque se puede configurar por código el nivel del logger, lo usual es 
