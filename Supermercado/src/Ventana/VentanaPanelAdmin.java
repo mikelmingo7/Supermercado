@@ -1,4 +1,4 @@
-package panel;
+package Ventana;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -44,12 +44,6 @@ public class VentanaPanelAdmin {
 	
 	public static void main(String[] args) {
 		VentanaPanelAdmin PanelAdmin = new VentanaPanelAdmin();
-	}
-
-
-	public void setVisible(boolean b) {
-		// TODO Auto-generated method stub
-		
 	}
 	
 }
