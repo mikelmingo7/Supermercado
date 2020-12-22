@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -12,7 +14,10 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-public class VentanaPanelAdmin {
+import gestion.VentanaGestionCliente;
+import gestion.VentanaGestionProducto;
+
+public class VentanaPanelAdmin extends Thread{
 	
 	JButton empleados = new JButton("Empleados");
 	JButton clientes = new JButton("Clientes");
@@ -39,6 +44,64 @@ public class VentanaPanelAdmin {
 		panel1.add(inventario);
 		panel1.add(producto);
 		panel1.add(descuento);
+		
+		empleados.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				 Thread threadEmpleados = new Thread();
+				 threadEmpleados.start();
+				
+			}
+		});
+		
+		clientes.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				Thread threadClientes = new Thread() {
+					VentanaGestionCliente v1 = new VentanaGestionCliente();
+				};
+				threadClientes.start();
+				
+			}
+		});
+		
+		inventario.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				Thread threadInventario = new Thread() {
+					
+				};
+				
+				threadInventario.start();
+				
+			}
+		});
+		
+		producto.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				Thread threadProducto = new Thread() {
+					VentanaGestionProducto v2 = new VentanaGestionProducto();
+				};
+				threadProducto.start();
+				
+			}
+		});
+		
+		descuento.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				Thread threadDescuento = new Thread();
+				threadDescuento.start();
+				
+			}
+		});
+		
 	}
 
 	
