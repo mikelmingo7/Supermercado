@@ -15,28 +15,13 @@ public class Cliente {
 		this.socio = socio;
 	}
 	
-	public Cliente() {
-		super();
-		this.nombre = "";
-		this.apellido = "";
-		this.dni = "";
-		this.socio = false;
-	}
-
-
+	
 
 
 	public String getNombre() {
 		return nombre;
 	}
 
-
-
-
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
 
 
 
@@ -50,24 +35,9 @@ public class Cliente {
 
 
 
-	public void setApellido(String apellido) { 
-		this.apellido = apellido;
-	}
-
-
-
-
 
 	public String getDni() {
 		return dni;
-	}
-
-
-
-
-
-	public void setDni(String dni) {
-		this.dni = dni;
 	}
 
 
@@ -82,9 +52,7 @@ public class Cliente {
 
 
 
-	public void setSocio(Boolean socio) {
-		this.socio = socio;
-	}
+
 
 //
 

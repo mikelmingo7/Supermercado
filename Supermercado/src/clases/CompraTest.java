@@ -18,7 +18,7 @@ class CompraTest {
 	}
 	@Test
 	public void testGetProductosComprados() {
-		assertEquals(l1, c.getProductosComprados());
+		assertEquals(l1, c.getProductosComprados()); 
 	}
 	@Test
 	public void testGetPrecio() {
