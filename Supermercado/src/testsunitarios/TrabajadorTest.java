@@ -1,8 +1,10 @@
-package clases;
+package testsunitarios;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
+
+import clases.Trabajador;
 
 class TrabajadorTest {
 
