@@ -19,44 +19,69 @@ public class Producto {
 		this.precio = precio;
 	}
 
-
+	public Producto() {
+		super();
+		this.nombre = "";
+		this.codigo = 0;
+		this.seccion = "";
+		this.marca = "";
+		this.peso = 0;
+		this.precio = 0;
+	}
 
 	public String getNombre() {
 		return nombre;
 	}
 
-
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
 
 	public int getCodigo() {
 		return codigo;
 	}
 
-
+	public void setCodigo(int codigo) {
+		this.codigo = codigo;
+	}
 
 	public String getSeccion() {
 		return seccion;
 	}
 
-
+	public void setSeccion(String seccion) {
+		this.seccion = seccion;
+	}
 
 	public String getMarca() {
 		return marca;
 	}
 
-
+	public void setMarca(String marca) {
+		this.marca = marca;
+	}
 
 	public double getPeso() {
 		return peso;
 	}
 
-
+	public void setPeso(double peso) {
+		this.peso = peso;
+	}
 
 	public double getPrecio() {
 		return precio;
 	}
 
+	public void setPrecio(double precio) {
+		this.precio = precio;
+	}
 
-
+	@Override
+	public String toString() {
+		return "Producto [nombre=" + nombre + ", codigo=" + codigo + ", seccion=" + seccion + ", marca=" + marca
+				+ ", peso=" + peso + ", precio=" + precio + "]";
+	}
 	
 	
 }
