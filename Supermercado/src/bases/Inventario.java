@@ -36,9 +36,9 @@ public class Inventario {
 	public static void createProductoTable() throws DBException {
 		// TODO Auto-generated method stub
 		try (Statement s = conexion.createStatement()) {
-			s.executeUpdate("CREA TABLA SI NO EXISTSE producto (codigo INTEGER PRIMARY KEY AUTOINCREMENT, nombre VARCHAR, seccion VARCHAR, marca VARCHAR, peso INTEGER, precio DEC)");
+			s.executeUpdate("CREATE TABLE IF NOT EXISTS Producto (codigo INTEGER PRIMARY KEY AUTOINCREMENT, nombre VARCHAR, seccion VARCHAR, marca VARCHAR, peso INTEGER, precio DEC)");
 		} catch (SQLException e) {
-			throw new DBException("Error creando la tabla 'producto' en la BD", e);
+			throw new DBException("Error creando la tabla 'Producto' en la BD", e);
 		
 	}
 	
@@ -46,13 +46,13 @@ public class Inventario {
   }
 	public static void dropProductoTable() throws DBException {
 		try (Statement s = conexion.createStatement()) {
-			s.executeUpdate("DROP TABLE IF EXISTS producto");
+			s.executeUpdate("DROP TABLE IF EXISTS Producto");
 		} catch (SQLException e) {
 			throw new DBException("Error borrando la tabla 'user' en la BD", e);
 		}
 }
 	public static void store(Producto p) throws DBException {
-		try (PreparedStatement ps = conexion.prepareStatement("INSERT INTO user (nombre,peso,precio,marca,seccion) VALUES (?, ?, ?, ?, ?)");
+		try (PreparedStatement ps = conexion.prepareStatement("INSERT INTO Producto (nombre,peso,precio,marca,seccion) VALUES (?, ?, ?, ?, ?)");
 			Statement s = conexion.createStatement()) {
 			ps.setString(1, p.getNombre());
 			ps.setString(2, p.getMarca());
@@ -74,7 +74,7 @@ public class Inventario {
 		}
 	}
 	public Producto getProducto(int codigo) throws DBException {
-		try (PreparedStatement s = conexion.prepareStatement("SELECT codigo,nombre,peso,precio,marca,seccion FROM producto WHERE id = ?")) {
+		try (PreparedStatement s = conexion.prepareStatement("SELECT codigo,nombre,peso,precio,marca,seccion FROM Producto WHERE id = ?")) {
 			s.setInt(1, codigo);
 			
 			ResultSet rs = s.executeQuery();
@@ -97,7 +97,7 @@ public class Inventario {
 		}
 	}
 	public void update(Producto p) throws DBException {
-		try (PreparedStatement s = conexion.prepareStatement("UPDATE p SET nombre=?, peso=?, precio=?, marca=?, seccion=?  WHERE codigo=?")) {
+		try (PreparedStatement s = conexion.prepareStatement("UPDATE Producto SET nombre=?, peso=?, precio=?, marca=?, seccion=?  WHERE codigo=?")) {
 			s.setString(1, p.getNombre());
 			s.setDouble(2, p.getPeso());
 			s.setDouble(3, p.getPrecio());
@@ -111,12 +111,12 @@ public class Inventario {
 		}
 	}
 	public void delete(Producto p) throws DBException {
-		try (PreparedStatement s = conexion.prepareStatement("DELETE FROM p WHERE id=?")) {
+		try (PreparedStatement s = conexion.prepareStatement("DELETE FROM Producto WHERE id=?")) {
 			s.setInt(1, p.getCodigo());
+			
 			s.executeUpdate();
 		} catch (SQLException e) {
-			throw new DBException("No se pudo elimiar el usuario con id " + p.getCodigo(), e);
-		}
+			throw new DBException("No se pudo elimiar el usuario con id " + p.getCodigo(), e);		}
 	}
 	//
 }

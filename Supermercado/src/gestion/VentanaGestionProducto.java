@@ -83,8 +83,7 @@ public class VentanaGestionProducto extends JFrame{
 	    infoPanel.add(pesojl);
 	    infoPanel.add(pesojt);
 	    infoPanel.add(preciojl);
-	    infoPanel.add(preciojt);
-	    
+	    infoPanel.add(preciojt); 	    
 //Botones funcionamiento
 	    
 	    eliminar.addActionListener(new ActionListener() {
