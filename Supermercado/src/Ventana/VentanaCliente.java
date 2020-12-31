@@ -14,7 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
-import ClasesBase.Cliente;
+import clases.Cliente;
 
 public class VentanaCliente extends JFrame {
 	JList listaClientes = new JList<>();
