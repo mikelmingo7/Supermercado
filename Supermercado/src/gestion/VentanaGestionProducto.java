@@ -4,6 +4,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
@@ -16,13 +17,15 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
-
+import java.sql.Connection;
 import bases.DBException;
 import bases.Inventario;
 import clases.Producto;
 
 public class VentanaGestionProducto extends JFrame{
 	Inventario i=new Inventario();
+	Connection conexion=i.connect(dbPath); 
+
 	JPanel listaPanel = new JPanel();
 	JPanel infoPanel = new JPanel();
 	JPanel acciones = new JPanel();
@@ -114,9 +117,11 @@ public class VentanaGestionProducto extends JFrame{
 				//Update de cliente en DB
 				
 				try {
+					
 					i.connect("productos.db");
+
+
 					String nomb,cod,sec,mar,pes, prec;
-					Connection conexion=null;
 					nomb=nombrejt.getText();
 					cod=codigojt.getText();
 					sec=seccionjt.getText();
@@ -125,7 +130,7 @@ public class VentanaGestionProducto extends JFrame{
 					prec=preciojt.getText();
 					String sql="";
 					sql="INSERT INTO Producto (nombre,codigo,seccion,marca,precio) VALUES (?, ?, ?, ?, ?, ?)";
-					PreparedStatement ps=conexion.prepareStatement(sql);
+					PreparedStatement ps=;
 					ps.setString(1, nomb);
 					ps.setString(2, cod);
 					ps.setString(3, sec);

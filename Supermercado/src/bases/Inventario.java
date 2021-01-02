@@ -19,7 +19,7 @@ public class Inventario {
 	public static void connect(String dbPath) throws DBException {
 		try {
 			Class.forName("org.sqlite.JDBC");
-			conexion = DriverManager.getConnection("jdbc:sqlite:" + dbPath);
+			conexion = DriverManager.getConnection("jdbc:sqlite:" + dbPath); 
 		} catch (ClassNotFoundException e) {
 			System.out.println("Error al intentar cargar el driver de la Base de Datos "); 
 		} catch (SQLException e) {
