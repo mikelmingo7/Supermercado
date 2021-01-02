@@ -23,8 +23,9 @@ import bases.Inventario;
 import clases.Producto;
 
 public class VentanaGestionProducto extends JFrame{
-	Inventario i=new Inventario();
-	Connection conexion=i.connect(dbPath); 
+	
+	Inventario inventario = new Inventario();
+	
 
 	JPanel listaPanel = new JPanel();
 	JPanel infoPanel = new JPanel();
@@ -118,34 +119,32 @@ public class VentanaGestionProducto extends JFrame{
 				
 				try {
 					
-					i.connect("productos.db");
-
+					inventario.connect("productos.db");
 
 					String nomb,cod,sec,mar,pes, prec;
+					
 					nomb=nombrejt.getText();
 					cod=codigojt.getText();
 					sec=seccionjt.getText();
 					mar=marcajt.getText();
 					pes=pesojt.getText();
 					prec=preciojt.getText();
-					String sql="";
-					sql="INSERT INTO Producto (nombre,codigo,seccion,marca,precio) VALUES (?, ?, ?, ?, ?, ?)";
-					PreparedStatement ps=;
-					ps.setString(1, nomb);
-					ps.setString(2, cod);
-					ps.setString(3, sec);
-					ps.setString(4, mar);
-					ps.setString(5, pes);
-					ps.setString(6, prec);
 					
-					ps.executeUpdate();
+					Producto p = new Producto();
+					
+					p.setCodigo( Integer.parseInt(cod) );
+					p.setMarca(mar);
+					p.setNombre(nomb);
+					p.setPeso(Double.parseDouble(cod));
+					p.setPrecio(Double.parseDouble(prec));
+					p.setSeccion(sec);
+					
+					inventario.store(p);
+					
 				
 				} catch (DBException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
-			} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
 				}
 			
 				nombrejt.setText(null);

@@ -17,8 +17,7 @@ import javax.swing.JTextField;
 import clases.Producto;
 
 public class VentanaGestionInventario extends JFrame{
-	
-	JPanel ventanaPanel = new JPanel();
+		
 	JPanel listaPanel = new JPanel();
 	JPanel infoPanel = new JPanel();
 	
@@ -28,7 +27,6 @@ public class VentanaGestionInventario extends JFrame{
 	JTextField codigojt = new JTextField();
 	JLabel cantidadjl = new JLabel("Cantidad");
 	JSpinner cantidad = new JSpinner();
-	
 	
 	
 	JList listaProductos = new JList<>();
@@ -43,22 +41,21 @@ public class VentanaGestionInventario extends JFrame{
 		setTitle("Gestión productos");
 	    setLocationRelativeTo(null);
 	    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-	   
-	    
-	    add(ventanaPanel);
 	    
 	    
 	    
-	    ventanaPanel.add(listaPanel);
-	    ventanaPanel.add(infoPanel);
-
+		setLayout(new GridLayout(1,2));
+	    
+		add(listaPanel);
+		add(infoPanel);
+	    
+	    
+	    infoPanel.setLayout(new GridLayout(8,2));
+	    listaPanel.setLayout(new GridLayout(8,2));
+	    
 	    listaProductos.setModel(model);
     
 	    listaPanel.add(listaScroll);
-	    
-	    infoPanel.setLayout(new GridLayout(8,2));
-	   
 	    
 	    JPanel panelNombre = new JPanel();
 	    panelNombre.setLayout(new GridLayout(1,2));
