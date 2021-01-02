@@ -44,7 +44,7 @@ public class VentanaGestionInventario extends JFrame{
 	    setLocationRelativeTo(null);
 	    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-	    ventanaPanel.setLayout(new GridLayout(1,2));
+	   
 	    
 	    add(ventanaPanel);
 	    

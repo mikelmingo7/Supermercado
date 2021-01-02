@@ -3,6 +3,9 @@ package gestion;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -14,10 +17,12 @@ import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
+import bases.DBException;
+import bases.Inventario;
 import clases.Producto;
 
 public class VentanaGestionProducto extends JFrame{
-	
+	Inventario i=new Inventario();
 	JPanel listaPanel = new JPanel();
 	JPanel infoPanel = new JPanel();
 	JPanel acciones = new JPanel();
@@ -28,7 +33,7 @@ public class VentanaGestionProducto extends JFrame{
 	JTextField codigojt = new JTextField();
 	JLabel seccionjl = new JLabel("Sección");
 	JTextField seccionjt = new JTextField();
-	JLabel marcajl = new JLabel("Marca");
+	JLabel marcajl = new JLabel("Marca"); 
 	JTextField marcajt = new JTextField();
 	JLabel preciojl = new JLabel("Precio");
 	JLabel pesojl = new JLabel("Peso");
@@ -89,14 +94,16 @@ public class VentanaGestionProducto extends JFrame{
 	    eliminar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //Eliminar cliente de db
+                //Eliminar producto de db
             }
         });
 
         nuevo.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //Crear cliente de db
+                //Crear producto de db
+            	
+            	
             }
         });
         
@@ -106,6 +113,42 @@ public class VentanaGestionProducto extends JFrame{
 			public void actionPerformed(ActionEvent arg0) {
 				//Update de cliente en DB
 				
+				try {
+					i.connect("productos.db");
+					String nomb,cod,sec,mar,pes, prec;
+					Connection conexion=null;
+					nomb=nombrejt.getText();
+					cod=codigojt.getText();
+					sec=seccionjt.getText();
+					mar=marcajt.getText();
+					pes=pesojt.getText();
+					prec=preciojt.getText();
+					String sql="";
+					sql="INSERT INTO Producto (nombre,codigo,seccion,marca,precio) VALUES (?, ?, ?, ?, ?, ?)";
+					PreparedStatement ps=conexion.prepareStatement(sql);
+					ps.setString(1, nomb);
+					ps.setString(2, cod);
+					ps.setString(3, sec);
+					ps.setString(4, mar);
+					ps.setString(5, pes);
+					ps.setString(6, prec);
+					
+					ps.executeUpdate();
+				
+				} catch (DBException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+			} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			
+				nombrejt.setText(null);
+				codigojt.setText(null);
+				seccionjt.setText(null);
+				marcajt.setText(null);
+				pesojt.setText(null);
+				preciojt.setText(null);
 			}
 		});
 	    

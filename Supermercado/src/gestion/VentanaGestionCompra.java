@@ -26,7 +26,7 @@ public class VentanaGestionCompra<Compra> extends JFrame{
 
 	JPanel listaPanel = new JPanel();
 	JPanel infoPanel = new JPanel();
-	JPanel acciones = new JPanel();
+	JPanel acciones = new JPanel(); 
 	
 	JLabel clientejl = new JLabel("Cliente");
 	JTextField clientejt = new JTextField();

@@ -21,7 +21,7 @@ public class Inventario {
 			Class.forName("org.sqlite.JDBC");
 			conexion = DriverManager.getConnection("jdbc:sqlite:" + dbPath);
 		} catch (ClassNotFoundException e) {
-			System.out.println("Error al intentar cargar el driver de la Base de Datos ");
+			System.out.println("Error al intentar cargar el driver de la Base de Datos "); 
 		} catch (SQLException e) {
 			System.out.println("Error al conectar a la Base de Datos");
 		}
@@ -80,7 +80,7 @@ public class Inventario {
 			ResultSet rs = s.executeQuery();
 
 			if (rs.next()) {
-				Producto p = new Producto();
+				Producto p = new Producto(); 
 				p.setCodigo(rs.getInt("codigo"));
 				p.setNombre(rs.getString("nombre"));
 				p.setPeso(rs.getFloat("peso"));
@@ -116,7 +116,7 @@ public class Inventario {
 			
 			s.executeUpdate();
 		} catch (SQLException e) {
-			throw new DBException("No se pudo elimiar el usuario con id " + p.getCodigo(), e);		}
+			throw new DBException("No se pudo eliminar el usuario con id " + p.getCodigo(), e);		}
 	}
 	//
 }

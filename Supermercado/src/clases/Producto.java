@@ -15,7 +15,7 @@ public class Producto {
 		this.codigo = codigo;
 		this.seccion = seccion;
 		this.marca = marca;
-		this.peso = peso;
+		this.peso = peso; 
 		this.precio = precio;
 	}
 
