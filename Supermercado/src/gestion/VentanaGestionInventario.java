@@ -1,9 +1,14 @@
 package gestion;
 
+
+import java.awt.BorderLayout;
+import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -20,6 +25,7 @@ public class VentanaGestionInventario extends JFrame{
 		
 	JPanel listaPanel = new JPanel();
 	JPanel infoPanel = new JPanel();
+	JPanel botonPanel = new JPanel();
 	
 	JLabel nombrejl = new JLabel("Nombre");
 	JTextField nombrejt = new JTextField();
@@ -27,6 +33,8 @@ public class VentanaGestionInventario extends JFrame{
 	JTextField codigojt = new JTextField();
 	JLabel cantidadjl = new JLabel("Cantidad");
 	JSpinner cantidad = new JSpinner();
+	
+	JButton guardar = new JButton("GUARDAR");
 	
 	
 	JList listaProductos = new JList<>();
@@ -36,22 +44,28 @@ public class VentanaGestionInventario extends JFrame{
 	
 	public VentanaGestionInventario() {
 		
-		setLayout(null);
+		setLayout(new GridLayout(3,1));
 		setSize(900,500);
 		setTitle("Gestión productos");
 	    setLocationRelativeTo(null);
 	    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    
 	    
-	    
-		setLayout(new GridLayout(1,2));
-	    
 		add(listaPanel);
 		add(infoPanel);
+		add(botonPanel);
 	    
 	    
-	    infoPanel.setLayout(new GridLayout(8,2));
-	    listaPanel.setLayout(new GridLayout(8,2));
+	    infoPanel.setLayout(new GridLayout(3,2));
+	    listaPanel.setLayout(new GridLayout(1,1));
+	    botonPanel.setLayout(new BorderLayout());
+	    
+	    
+
+	    listaPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+	    infoPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+	    botonPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+	    
 	    
 	    listaProductos.setModel(model);
     
