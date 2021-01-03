@@ -21,9 +21,6 @@ import clases.Cliente;
 
 public class VentanaGestionCliente extends JFrame {
 	
-
-
-	
 	
 	JLabel nombre=new JLabel("     nombre");
 	JTextField nom=new JTextField();
@@ -32,11 +29,11 @@ public class VentanaGestionCliente extends JFrame {
 	JLabel DNI=new JLabel("     DNI");
 	JTextField dni=new JTextField();
 	JLabel socio=new JLabel("  	Socio");
-	JTextField soc=new JTextField();
+	JTextField soc=new JTextField(); 
 	
 	JButton nuevo = new JButton("NUEVO");
 	JButton guardar = new JButton("GUARDAR");
-	JButton eliminar = new JButton("ELIMINAR");
+	JButton eliminar = new JButton("ELIMINAR"); 
 	
 	JList listaClientes = new JList<>();
 	JScrollPane listaScroll = new JScrollPane(listaClientes);

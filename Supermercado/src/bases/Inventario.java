@@ -13,7 +13,7 @@ import clases.Producto;
 
 public class Inventario {
 	
-	private List listaP=new ArrayList();
+	
 	private static Connection conexion = null;
 	
 	public static void connect(String dbPath) throws DBException {
@@ -36,7 +36,7 @@ public class Inventario {
 	public static void createProductoTable() throws DBException {
 		// TODO Auto-generated method stub
 		try (Statement s = conexion.createStatement()) {
-			s.executeUpdate("CREATE TABLE IF NOT EXISTS Producto (codigo INTEGER PRIMARY KEY AUTOINCREMENT, nombre VARCHAR, seccion VARCHAR, marca VARCHAR, peso INTEGER, precio DEC)");
+			s.executeUpdate("CREATE TABLE IF NOT EXISTS Producto (codigo INTEGER PRIMARY KEY , nombre VARCHAR, seccion VARCHAR, marca VARCHAR, peso DEC, precio DEC)");
 		} catch (SQLException e) {
 			throw new DBException("Error creando la tabla 'Producto' en la BD", e);
 		
@@ -52,23 +52,20 @@ public class Inventario {
 		}
 }
 	public static void store(Producto p) throws DBException {
-		try (PreparedStatement ps = conexion.prepareStatement("INSERT INTO Producto (nombre,peso,precio,marca,seccion) VALUES (?, ?, ?, ?, ?)");
+		try (PreparedStatement ps = conexion.prepareStatement("INSERT INTO Producto (codigo,nombre,peso,precio,marca,seccion) VALUES (? ,?, ?, ?, ?, ?)");
 			Statement s = conexion.createStatement()) {
-			ps.setString(1, p.getNombre());
-			ps.setString(2, p.getMarca());
-			ps.setString(3, p.getSeccion());
-			ps.setDouble(4, p.getPeso());
-			ps.setDouble(5, p.getPrecio());
+			ps.setInt(1, p.getCodigo());
+			ps.setString(2, p.getNombre());
+			ps.setDouble(3, p.getPeso());
+			ps.setDouble(4, p.getPrecio());
+			ps.setString(5, p.getMarca());
+			ps.setString(6, p.getSeccion());
+			
+			
 			
 			ps.executeUpdate();
 			
-			ResultSet rs = s.executeQuery("SELECT last_insert_rowid() AS id FROM producto");
-			if (rs.next()) {
-				int newId = rs.getInt("codigo");
-				p.setCodigo(newId);
-			} else {
-				throw new DBException("Error generando el id autoincremental");
-			}
+			
 		} catch (SQLException e) {
 			throw new DBException("No se pudo guardar el usuario en la BD", e);
 		}
@@ -116,7 +113,7 @@ public class Inventario {
 			
 			s.executeUpdate();
 		} catch (SQLException e) {
-			throw new DBException("No se pudo eliminar el usuario con id " + p.getCodigo(), e);		}
+			throw new DBException("No se pudo eliminar el usuario con id " + p.getCodigo(), e);	}
 	}
 	//
 }

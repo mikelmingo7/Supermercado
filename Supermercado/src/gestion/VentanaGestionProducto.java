@@ -7,6 +7,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -26,9 +28,10 @@ public class VentanaGestionProducto extends JFrame{
 	
 	Inventario inventario = new Inventario();
 	
+	private List listaP=new ArrayList();
 
 	JPanel listaPanel = new JPanel();
-	JPanel infoPanel = new JPanel();
+	JPanel infoPanel = new JPanel(); 
 	JPanel acciones = new JPanel();
 	
 	JLabel nombrejl = new JLabel("Nombre");
@@ -99,6 +102,8 @@ public class VentanaGestionProducto extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 //Eliminar producto de db
+            	
+            	
             }
         });
 
@@ -120,6 +125,7 @@ public class VentanaGestionProducto extends JFrame{
 				try {
 					
 					inventario.connect("productos.db");
+					inventario.createProductoTable();
 
 					String nomb,cod,sec,mar,pes, prec;
 					
@@ -133,13 +139,15 @@ public class VentanaGestionProducto extends JFrame{
 					Producto p = new Producto();
 					
 					p.setCodigo( Integer.parseInt(cod) );
-					p.setMarca(mar);
 					p.setNombre(nomb);
 					p.setPeso(Double.parseDouble(cod));
 					p.setPrecio(Double.parseDouble(prec));
+					p.setMarca(mar);
 					p.setSeccion(sec);
 					
+					
 					inventario.store(p);
+					
 					
 				
 				} catch (DBException e1) {
