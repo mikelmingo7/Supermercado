@@ -35,6 +35,7 @@ public class VentanaGestionInventario extends JFrame{
 	JSpinner cantidad = new JSpinner();
 	
 	JButton guardar = new JButton("GUARDAR");
+	JButton exportar= new JButton("EXPORTAR");
 	
 	
 	JList listaProductos = new JList<>();
@@ -58,7 +59,7 @@ public class VentanaGestionInventario extends JFrame{
 	    
 	    infoPanel.setLayout(new GridLayout(3,2));
 	    listaPanel.setLayout(new GridLayout(1,1));
-	    botonPanel.setLayout(new BorderLayout());
+	    botonPanel.setLayout(new GridLayout(1,2));
 	    
 	    
 
@@ -66,7 +67,8 @@ public class VentanaGestionInventario extends JFrame{
 	    infoPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 	    botonPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 	    
-	    botonPanel.add(guardar, BorderLayout.CENTER);
+	    botonPanel.add(guardar);
+	    botonPanel.add(exportar);
 	  
 	    
 	    listaProductos.setModel(model);
