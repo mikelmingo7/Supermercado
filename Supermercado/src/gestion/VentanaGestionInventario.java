@@ -46,7 +46,7 @@ public class VentanaGestionInventario extends JFrame{
 		
 		setLayout(new GridLayout(3,1));
 		setSize(900,500);
-		setTitle("Gestión productos");
+		setTitle("Gestión de Inventario");
 	    setLocationRelativeTo(null);
 	    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    
@@ -66,6 +66,8 @@ public class VentanaGestionInventario extends JFrame{
 	    infoPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 	    botonPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 	    
+	    botonPanel.add(guardar, BorderLayout.CENTER);
+	  
 	    
 	    listaProductos.setModel(model);
     

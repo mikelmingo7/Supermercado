@@ -1,5 +1,6 @@
 package gestion;
 
+import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,6 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -53,30 +55,40 @@ public class VentanaGestionProducto extends JFrame{
 	DefaultListModel model = new DefaultListModel<Producto>();
 	
 	JButton nuevo = new JButton("NUEVO");
+	JButton cargar = new JButton("CARGAR");
 	JButton guardar = new JButton("GUARDAR");
 	JButton eliminar = new JButton("ELIMINAR");
 	
 	public VentanaGestionProducto() {
 		
-		setLayout(null);
+		setLayout(new BorderLayout());
 		setSize(900,500);
 		setTitle("Gestión productos");
 	    setLocationRelativeTo(null);
 	    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    
-		
-
-	    add(acciones);
-	    add(listaPanel);
-	    add(infoPanel);
+	    infoPanel.setLayout(new GridLayout(6,2));
+	    listaPanel.setLayout(new GridLayout(1,1));
+	    acciones.setLayout(new GridLayout(1,4));
+	    
+	    acciones.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+	    listaPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+	    infoPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+	    
+	    add(acciones, BorderLayout.NORTH);
+	    add(listaPanel, BorderLayout.LINE_START);
+	    add(infoPanel, BorderLayout.CENTER);
+	    
+	    
 
 	    acciones.add(nuevo);
+	    acciones.add(cargar);
 	    acciones.add(guardar);
 	    acciones.add(eliminar);
+	    
+	    
 	      
-	    acciones.setBounds(0,0,900,80);
-	    listaPanel.setBounds(0,80,300,440);
-	    infoPanel.setBounds(320,80,500,400);
+	    
 
 	    listaProductos.setModel(model);
     
@@ -163,9 +175,18 @@ public class VentanaGestionProducto extends JFrame{
 				preciojt.setText(null);
 			}
 		});
+        
+	    cargar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //Eliminar producto de db
+            	
+            	
+            }
+        });
 	    
-
-	    setResizable(false);
+	    pack();
+	    setResizable(true);
 	    setVisible(true);
 	}
 	
