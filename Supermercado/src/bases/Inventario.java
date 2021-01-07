@@ -93,25 +93,24 @@ public class Inventario {
 			throw new DBException("Error obteniendo el producto con codigo " + codigo, e);
 		}
 	}
-	public Producto getBaseProducto(int codigo) throws DBException {
-		try (PreparedStatement s = conexion.prepareStatement("SELECT codigo,nombre FROM Producto WHERE id = ?")) {
-			s.setInt(1, codigo);
+	public ArrayList<Integer> getCodigo() throws DBException, SQLException{
+		 PreparedStatement ps = conexion.prepareStatement("SELECT codigo FROM Producto");
+		 ResultSet rs = ps.executeQuery();
+		 ArrayList<Integer> listaCodigos=new ArrayList<>();
+		 while(rs.next()) {
+			 listaCodigos.add(rs.getInt("codigo"));
+		 }
+		return listaCodigos; 
+		
 			
-			ResultSet rs = s.executeQuery();
-
-			if (rs.next()) {
-				Producto p = new Producto(); 
-				p.setCodigo(rs.getInt("codigo"));
-				p.setNombre(rs.getString("nombre"));
-				
-				return p;
-			} else {
-				return new Producto();
-			}
-		} catch (SQLException | DateTimeParseException e) {
-			throw new DBException("Error obteniendo el producto con codigo " + codigo, e);
-		}
+			
+						
+		
+		
+			
 	}
+	
+
 	public void update(Producto p) throws DBException {
 		try (PreparedStatement s = conexion.prepareStatement("UPDATE Producto SET nombre=?, peso=?, precio=?, marca=?, seccion=?  WHERE codigo=?")) {
 			s.setString(1, p.getNombre());

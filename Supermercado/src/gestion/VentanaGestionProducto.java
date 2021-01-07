@@ -21,6 +21,8 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
+
 import java.sql.Connection;
 import bases.DBException;
 import bases.Inventario;
@@ -66,6 +68,9 @@ public class VentanaGestionProducto extends JFrame{
 		setTitle("Gestión productos");
 	    setLocationRelativeTo(null);
 	    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	    try {
+	        UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+	} catch (Exception e) {}
 	    
 	    infoPanel.setLayout(new GridLayout(6,2));
 	    listaPanel.setLayout(new GridLayout(1,1));
@@ -166,7 +171,8 @@ public class VentanaGestionProducto extends JFrame{
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-			
+				
+				
 				nombrejt.setText(null);
 				codigojt.setText(null);
 				seccionjt.setText(null);
@@ -181,6 +187,21 @@ public class VentanaGestionProducto extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 //Eliminar producto de db
             	
+            	try {
+            		inventario.connect("productos.db");
+            		
+            		
+					
+            	
+            			
+				System.out.println(inventario.getCodigo());
+				
+					
+					
+				} catch (DBException | SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
             	
             }
         });
