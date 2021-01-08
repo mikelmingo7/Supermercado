@@ -54,7 +54,7 @@ public class VentanaGestionProducto extends JFrame{
 	
 	JList listaProductos = new JList<>();
 	JScrollPane listaScroll = new JScrollPane(listaProductos);
-	DefaultListModel model = new DefaultListModel<Producto>();
+	DefaultListModel<Producto> model = new DefaultListModel<Producto>();
 	
 	JButton nuevo = new JButton("NUEVO");
 	JButton cargar = new JButton("CARGAR");
@@ -189,7 +189,14 @@ public class VentanaGestionProducto extends JFrame{
             	
             	try {
             		inventario.connect("productos.db");
+            		ArrayList<Integer> codigos = inventario.getCodigo();
             		
+            		for (int i = 0; i < codigos.size() - 1; i++) {
+            			Integer cod = codigos.get(i);
+            			Producto p = inventario.getProducto(cod);
+            			model.addElement(p);
+						
+					}
             		
 					
             	
