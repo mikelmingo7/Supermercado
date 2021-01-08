@@ -119,6 +119,15 @@ public class VentanaGestionProducto extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 //Eliminar producto de db
+            	Producto p = (Producto) listaProductos.getSelectedValue();
+            	model.removeElement(p);
+            	try {
+					inventario.connect("productos.db");
+					inventario.delete(p);
+				} catch (DBException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
             	
             	
             }
@@ -191,7 +200,7 @@ public class VentanaGestionProducto extends JFrame{
             		inventario.connect("productos.db");
             		ArrayList<Integer> codigos = inventario.getCodigo();
             		
-            		for (int i = 0; i < codigos.size() - 1; i++) {
+            		for (int i = 0; i < codigos.size(); i++) {
             			Integer cod = codigos.get(i);
             			Producto p = inventario.getProducto(cod);
             			model.addElement(p);
