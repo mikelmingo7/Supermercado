@@ -89,6 +89,6 @@ public class Supermercado {
 				+ ", trabajadores=" + trabajadores + ", productos=" + productos + ", inventario=" + inventario + "]";
 	}
 	
-	//
+	
 	
 }

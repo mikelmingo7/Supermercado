@@ -74,5 +74,5 @@ public class VentanaPanelTrabajador extends Thread{
 	public static void main(String[] args) {
 		VentanaPanelTrabajador PanelTrabajador = new VentanaPanelTrabajador();
 	}
-
+//
 }
