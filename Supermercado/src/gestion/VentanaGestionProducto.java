@@ -207,7 +207,7 @@ public class VentanaGestionProducto extends JFrame{
 						
 					}
             		
-					
+					//Test
             	
             			
 				System.out.println(inventario.getCodigo());
