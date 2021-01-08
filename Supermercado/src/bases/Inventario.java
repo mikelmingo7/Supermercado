@@ -71,7 +71,7 @@ public class Inventario {
 		}
 	}
 	public Producto getProducto(int codigo) throws DBException {
-		try (PreparedStatement s = conexion.prepareStatement("SELECT codigo,nombre,peso,precio,marca,seccion FROM Producto WHERE id = ?")) {
+		try (PreparedStatement s = conexion.prepareStatement("SELECT codigo,nombre,peso,precio,marca,seccion FROM Producto WHERE codigo = ?")) {
 			s.setInt(1, codigo);
 			
 			ResultSet rs = s.executeQuery();
@@ -126,7 +126,7 @@ public class Inventario {
 		}
 	}
 	public void delete(Producto p) throws DBException {
-		try (PreparedStatement s = conexion.prepareStatement("DELETE FROM Producto WHERE id=?")) {
+		try (PreparedStatement s = conexion.prepareStatement("DELETE FROM Producto WHERE codigo=?")) {
 			s.setInt(1, p.getCodigo());
 			
 			s.executeUpdate();
