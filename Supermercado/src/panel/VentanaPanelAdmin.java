@@ -17,6 +17,7 @@ import javax.swing.JTextField;
 import gestion.VentanaGestionCliente;
 import gestion.VentanaGestionProducto;
 
+
 public class VentanaPanelAdmin extends Thread{
 	
 	JButton empleados = new JButton("Empleados");

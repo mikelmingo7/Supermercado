@@ -10,7 +10,7 @@ import clases.Cliente;
 class ClienteTest {
 
 	   
-	Cliente  c = new Cliente("mikel","andoni","123456789A",true);
+	Cliente  c = new Cliente("mikel","andoni","123456789A","si");
 	    
 	@Test
 	public void testGetNombre() {

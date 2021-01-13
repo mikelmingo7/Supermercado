@@ -4,6 +4,9 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -32,7 +35,6 @@ public class VentanaGestionProducto extends JFrame{
 	
 	Inventario inventario = new Inventario();
 	
-	private List listaP=new ArrayList();
 
 	JPanel listaPanel = new JPanel();
 	JPanel infoPanel = new JPanel(); 
@@ -40,9 +42,9 @@ public class VentanaGestionProducto extends JFrame{
 	
 	JLabel nombrejl = new JLabel("Nombre");
 	JTextField nombrejt = new JTextField();
-	JLabel codigojl = new JLabel("C�digo");
+	JLabel codigojl = new JLabel("Código");
 	JTextField codigojt = new JTextField();
-	JLabel seccionjl = new JLabel("Secci�n");
+	JLabel seccionjl = new JLabel("Sección");
 	JTextField seccionjt = new JTextField();
 	JLabel marcajl = new JLabel("Marca"); 
 	JTextField marcajt = new JTextField();
@@ -65,7 +67,7 @@ public class VentanaGestionProducto extends JFrame{
 		
 		setLayout(new BorderLayout());
 		setSize(900,500);
-		setTitle("Gesti�n productos");
+		setTitle("Gestión productos");
 	    setLocationRelativeTo(null);
 	    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    try {
@@ -137,21 +139,10 @@ public class VentanaGestionProducto extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 //Crear producto de db
-            	
-            	
-            }
-        });
-        
-        guardar.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				//Update de cliente en DB
-				
-				try {
-					
+            	try {
+            		inventario.createProductoTable();
 					inventario.connect("productos.db");
-					inventario.createProductoTable();
+					
 
 					String nomb,cod,sec,mar,pes, prec;
 					
@@ -172,7 +163,7 @@ public class VentanaGestionProducto extends JFrame{
 					p.setSeccion(sec);
 					
 					
-					inventario.store(p);
+					inventario.storeP(p);
 					
 					
 				
@@ -188,13 +179,58 @@ public class VentanaGestionProducto extends JFrame{
 				marcajt.setText(null);
 				pesojt.setText(null);
 				preciojt.setText(null);
+            	
+            }
+        });
+        
+        guardar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				//Update de cliente en DB
+				
+				try {
+					inventario.connect("productos.db");
+					
+					String nomb,cod,sec,mar,pes, prec;
+					
+					nomb=nombrejt.getText();
+					cod=codigojt.getText();
+					sec=seccionjt.getText();
+					mar=marcajt.getText();
+					pes=pesojt.getText();
+					prec=preciojt.getText();
+					
+					Producto p = new Producto();
+					
+					p.setCodigo( Integer.parseInt(cod) );
+					p.setNombre(nomb);
+					p.setPeso(Double.parseDouble(cod));
+					p.setPrecio(Double.parseDouble(prec));
+					p.setMarca(mar);
+					p.setSeccion(sec);
+					
+					inventario.update(p);
+					
+					
+				} catch (DBException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				
 			}
 		});
         
+        
+        
+        //Boton para cargar informacion de la BD a la tabla
 	    cargar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //Eliminar producto de db
+            	
+            	model.clear();
             	
             	try {
             		inventario.connect("productos.db");
@@ -206,21 +242,38 @@ public class VentanaGestionProducto extends JFrame{
             			model.addElement(p);
 						
 					}
-            		
-					//Test
-            	
-            			
-				System.out.println(inventario.getCodigo());
-				
-					
-					
+	
 				} catch (DBException | SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
             	
+            	
+            	
             }
         });
+	    
+	    
+	    
+	    //Ver valores del producto seleccionado en el TextField correspondiente
+	    MouseListener seleccionar = new MouseAdapter() {
+            public void mouseClicked(MouseEvent mouseEvent) {
+            	Producto p = (Producto) listaProductos.getSelectedValue();
+            	nombrejt.setText(p.getNombre());
+            	codigojt.setText(""+p.getCodigo());
+            	seccionjt.setText(p.getSeccion());
+            	marcajt.setText(p.getMarca());
+            	pesojt.setText(""+p.getPeso());
+            	preciojt.setText(""+p.getPrecio());
+         }
+           
+            
+          
+	    
+		};
+		
+		//Añadimos la funcion del mouselistener a la lista 
+		listaProductos.addMouseListener(seleccionar);
 	    
 	    pack();
 	    setResizable(true);

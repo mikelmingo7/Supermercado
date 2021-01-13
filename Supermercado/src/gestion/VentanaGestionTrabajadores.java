@@ -23,7 +23,7 @@ public class VentanaGestionTrabajadores<Trabajador> extends JFrame{
 	
 	DefaultListModel model = new DefaultListModel<Trabajador>();
 	
-	JPanel panel1=new JPanel();
+	JPanel panel1=new JPanel(); 
 	JPanel panel2=new JPanel();
 	JPanel panel3=new JPanel();
 	

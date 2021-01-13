@@ -9,6 +9,7 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 
+import clases.Cliente;
 import clases.Producto;
 
 public class Inventario {
@@ -30,7 +31,7 @@ public class Inventario {
 		try {
 			conexion.close();
 		} catch (SQLException e) {
-			System.out.println("Error al cerrar la conexión con la Base de Datos");
+			System.out.println("Error al cerrar la conexiï¿½n con la Base de Datos");
 		}
 	}
 	public static void createProductoTable() throws DBException {
@@ -48,10 +49,10 @@ public class Inventario {
 		try (Statement s = conexion.createStatement()) {
 			s.executeUpdate("DROP TABLE IF EXISTS Producto");
 		} catch (SQLException e) {
-			throw new DBException("Error borrando la tabla 'user' en la BD", e);
+			throw new DBException("Error borrando la tabla 'user' en la BD", e); 
 		}
 }
-	public static void store(Producto p) throws DBException {
+	public static void storeP(Producto p) throws DBException {
 		try (PreparedStatement ps = conexion.prepareStatement("INSERT INTO Producto (codigo,nombre,peso,precio,marca,seccion) VALUES (? ,?, ?, ?, ?, ?)");
 			Statement s = conexion.createStatement()) {
 			ps.setInt(1, p.getCodigo());
@@ -102,12 +103,6 @@ public class Inventario {
 		 }
 		return listaCodigos; 
 		
-			
-			
-						
-		
-		
-			
 	}
 	
 
@@ -133,5 +128,92 @@ public class Inventario {
 		} catch (SQLException e) {
 			throw new DBException("No se pudo eliminar el usuario con id " + p.getCodigo(), e);	}
 	}
-	//
+	
+	public static void createClienteTable() throws DBException {
+		// TODO Auto-generated method stub
+		try (Statement s = conexion.createStatement()) {
+			s.executeUpdate("CREATE TABLE IF NOT EXISTS Cliente (dni VARCHAR PRIMARY KEY, nombre VARCHAR, apellido VARCHAR, socio VARCHAR)");
+		} catch (SQLException e) {
+			throw new DBException("Error creando la tabla 'Cliente' en la BD", e);
+		}
+	}
+	public static void dropClienteTable() throws DBException {
+		try (Statement s = conexion.createStatement()) {
+			s.executeUpdate("DROP TABLE IF EXISTS Cliente");
+		} catch (SQLException e) {
+			throw new DBException("Error borrando la tabla 'Cliente' en la BD", e); 
+		}
+	}
+	public static void storeC(Cliente c) throws DBException {
+		try (PreparedStatement ps = conexion.prepareStatement("INSERT INTO Cliente (dni,nombre,apellido,socio) VALUES (? ,?, ?, ?)");
+			Statement s = conexion.createStatement()) {
+			
+			ps.setString(1, c.getDni());
+			ps.setString(2, c.getNombre());
+			ps.setString(3, c.getApellido());
+			ps.setString(4, c.getSocio());
+					
+		
+			ps.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			throw new DBException("No se pudo guardar el usuario en la BD", e);
+		}
+	}
+	public Cliente getCliente(String dni) throws DBException {
+		try (PreparedStatement s = conexion.prepareStatement("SELECT dni,nombre,apellido,socio FROM Cliente WHERE dni = ?")) {
+			s.setString(1, dni);
+			
+			ResultSet rs = s.executeQuery();
+
+			if (rs.next()) {
+				Cliente c = new Cliente(); 
+				c.setDni(rs.getString("dni"));
+				c.setNombre(rs.getString("nombre"));
+				c.setApellido(rs.getString("apellido"));
+				c.setSocio(rs.getString("socio"));
+				
+				
+				return c;
+			} else {
+				return new Cliente();
+			}
+		} catch (SQLException | DateTimeParseException e) {
+			throw new DBException("Error obteniendo el cliente con dni " + dni, e);
+		}
+	}
+	public ArrayList<String> getDni() throws DBException, SQLException{
+		 PreparedStatement ps = conexion.prepareStatement("SELECT dni FROM Cliente");
+		 ResultSet rs = ps.executeQuery();
+		 ArrayList<String> listaDnis=new ArrayList<>();
+		 while(rs.next()) {
+			 listaDnis.add(rs.getString("dni"));
+		 }
+		return listaDnis; 
+		
+	}
+	public void update(Cliente c) throws DBException {
+		try (PreparedStatement s = conexion.prepareStatement("UPDATE Cliente SET nombre=?, apellido=?, socio=?  WHERE dni=?")) {
+			s.setString(1, c.getDni());
+			s.setString(2, c.getNombre());
+			s.setString(3, c.getApellido());
+			s.setString(4, c.getSocio());
+			
+			
+			
+			s.executeUpdate();
+		} catch (SQLException e) {
+			throw new DBException("No se pudo guardar el cliente en la BD", e);
+		}
+	}
+	public void delete(Cliente c) throws DBException {
+		try (PreparedStatement s = conexion.prepareStatement("DELETE FROM Cliente WHERE dni=?")) {
+			s.setString(1, c.getDni());
+			
+			s.executeUpdate();
+		} catch (SQLException e) {
+			throw new DBException("No se pudo eliminar el usuario con id " + c.getDni(), e);	}
+	}
+	
 }

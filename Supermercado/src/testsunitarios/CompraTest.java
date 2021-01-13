@@ -12,7 +12,7 @@ import clases.Producto;
 
 class CompraTest {
 
-	Cliente  cl = new Cliente("mikel","andoni","123456789A",true);
+	Cliente  cl = new Cliente("mikel","andoni","123456789A","si");
 	ArrayList<Producto> l1 = new ArrayList<Producto>();
 	
 	Compra c= new Compra(cl,l1,11,"2020-10-20",false);

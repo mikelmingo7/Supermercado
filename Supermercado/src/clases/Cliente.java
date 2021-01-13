@@ -4,10 +4,10 @@ public class Cliente {
 	protected String nombre;
 	protected String apellido;
 	protected String dni;
-	protected Boolean socio;
+	protected String socio;
 		
 	
-	public Cliente(String nombre, String apellido, String dni, Boolean socio) {
+	public Cliente(String nombre, String apellido, String dni, String socio) {
 		super();
 		this.nombre = nombre;
 		this.apellido = apellido;
@@ -20,7 +20,7 @@ public class Cliente {
 		this.nombre = "";
 		this.apellido = "";
 		this.dni = "";
-		this.socio = false;
+		this.socio = "";
 	}
 
 
@@ -74,7 +74,7 @@ public class Cliente {
 
 
 
-	public Boolean getSocio() {
+	public String getSocio() {
 		return socio;
 	}
 
@@ -82,7 +82,7 @@ public class Cliente {
 
 
 
-	public void setSocio(Boolean socio) {
+	public void setSocio(String socio) {
 		this.socio = socio;
 	}
 
