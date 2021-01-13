@@ -140,7 +140,11 @@ public class VentanaGestionProducto extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 //Crear producto de db
             	try {
+
             		inventario.createProductoTable();
+
+					
+
 					inventario.connect("productos.db");
 					
 
@@ -272,7 +276,10 @@ public class VentanaGestionProducto extends JFrame{
 	    
 		};
 		
+
 		//Añadimos la funcion del mouselistener a la lista 
+
+
 		listaProductos.addMouseListener(seleccionar);
 	    
 	    pack();
