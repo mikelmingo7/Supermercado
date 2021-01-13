@@ -173,7 +173,7 @@ public class VentanaGestionCliente extends JFrame {
             	
             }
         });
-        
+	  //Boton para guardar la  informacion del textfield la base de datos
         guardar.addActionListener(new ActionListener() {
 			
 			@Override
