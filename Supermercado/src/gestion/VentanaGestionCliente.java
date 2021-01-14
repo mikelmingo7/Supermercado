@@ -22,14 +22,15 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
+import bases.BaseCliente;
 import bases.DBException;
 import bases.Inventario;
 import clases.Cliente;
 import clases.Producto;
 
 public class VentanaGestionCliente extends JFrame {
-	
-	Inventario inventario = new Inventario();
+	BaseCliente bc=new BaseCliente();
+
 	JLabel nombre=new JLabel("     nombre");
 	JTextField nombrejt=new JTextField();
 	JLabel apellidos=new JLabel("      apellidos");
@@ -107,8 +108,8 @@ public class VentanaGestionCliente extends JFrame {
             	Cliente c = (Cliente) listaClientes.getSelectedValue();
             	modeloCliente.removeElement(c);
             	try {
-					inventario.connect("productos.db");
-					inventario.delete(c);
+					bc.connect("cliente.db");
+					bc.delete(c);
 				} catch (DBException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -123,8 +124,11 @@ public class VentanaGestionCliente extends JFrame {
             	
             	try {
             		
-					inventario.connect("productos.db");
-					inventario.createClienteTable();
+					
+					
+            		
+					bc.connect("cliente.db");
+					bc.createClienteTable();
 					
 					String nomb,dni,ap,soc;
 					
@@ -140,7 +144,7 @@ public class VentanaGestionCliente extends JFrame {
 					c.setApellido(ap);
 					c.setSocio(soc);
 					
-					inventario.storeC(c);
+					bc.storeC(c);
 					
 				} catch (DBException e1) {
 					// TODO Auto-generated catch block
@@ -161,12 +165,12 @@ public class VentanaGestionCliente extends JFrame {
             	modeloCliente.clear();
             	
             	try {
-            		inventario.connect("productos.db");
-            		ArrayList<String> dnis = inventario.getDni();
+            		bc.connect("cliente.db");
+            		ArrayList<String> dnis = bc.getDni();
             		
-            		for (int i = 0; i < dnis.size(); i++) {
-            			String dni = dnis.get(i);
-            			Cliente c = inventario.getCliente(dni);
+            		for (int j = 0; j < dnis.size(); j++) {
+            			String dni = dnis.get(j);
+            			Cliente c =bc.getCliente(dni);
             			modeloCliente.addElement(c);
 						
 					}
@@ -187,8 +191,8 @@ public class VentanaGestionCliente extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				//Update de cliente en DB
 				try {
-					inventario.connect("productos.db");
-					inventario.dropClienteTable();
+					bc.connect("cliente.db");
+					bc.dropClienteTable();
 					
 					
 					String nomb,ap,dni,soc;
@@ -205,7 +209,7 @@ public class VentanaGestionCliente extends JFrame {
 					c.setApellido(ap);
 					c.setSocio(soc);
 					
-					inventario.update(c);
+					bc.update(c);
 					
 				} catch (DBException e) {
 					// TODO Auto-generated catch block

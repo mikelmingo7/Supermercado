@@ -1,4 +1,6 @@
 package bases;
+import java.util.logging.Logger;
+import java.util.logging.Level;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -14,8 +16,25 @@ import clases.Producto;
 
 public class Inventario {
 	
+	// conexión con la base de datos
+	
+	private static Logger logger = null;
+	private static boolean LOGGING = true;
 	
 	private static Connection conexion = null;
+	 
+	private static void log( Level level, String msg, Throwable excepcion ) {
+		if (!LOGGING) return;
+		if (logger==null) {  // Logger por defecto local:
+			logger = Logger.getLogger( Inventario.class.getName() );  // Nombre del logger - el de la clase
+			logger.setLevel( Level.ALL );  // Loguea todos los niveles
+		}
+		if (excepcion==null)
+			logger.log( level, msg );
+		else
+			logger.log( level, msg, excepcion );
+	}
+	
 	
 	public static void connect(String dbPath) throws DBException {
 		try {
@@ -128,7 +147,6 @@ public class Inventario {
 		} catch (SQLException e) {
 			throw new DBException("No se pudo eliminar el usuario con id " + p.getCodigo(), e);	}
 	}
-	
 	public static void createClienteTable() throws DBException {
 		// TODO Auto-generated method stub
 		try (Statement s = conexion.createStatement()) {
@@ -215,5 +233,6 @@ public class Inventario {
 		} catch (SQLException e) {
 			throw new DBException("No se pudo eliminar el usuario con id " + c.getDni(), e);	}
 	}
+	
 	
 }
