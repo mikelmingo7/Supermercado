@@ -12,6 +12,7 @@ import java.awt.event.MouseListener;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -47,16 +48,16 @@ public class VentanaGestionCliente extends JFrame {
 	JScrollPane listaScroll = new JScrollPane(listaClientes);
 	DefaultListModel modeloCliente = new DefaultListModel<Cliente>();
 	
-	JPanel panel1=new JPanel();
-	JPanel panel2=new JPanel();
-	JPanel panel3=new JPanel();
+	JPanel listaPanel = new JPanel();
+	JPanel infoPanel = new JPanel(); 
+	JPanel acciones = new JPanel();
 	
 	
 	public VentanaGestionCliente() {
 		setTitle("Ventana Cliente");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(700, 400);
-		 Font fuente = new Font("Times new roman", Font.CENTER_BASELINE, 15);
+		Font fuente = new Font("Times new roman", Font.CENTER_BASELINE, 15);
 		 
 		 
 		 JPanel pnlCentral = new JPanel();
@@ -64,31 +65,37 @@ public class VentanaGestionCliente extends JFrame {
 			
 		getContentPane().add(pnlCentral, BorderLayout.CENTER);
 		setLocationRelativeTo(null);
-		setLayout(null); 
+		setLayout(new BorderLayout()); 
 		
+		 infoPanel.setLayout(new GridLayout(6,2));
+		 listaPanel.setLayout(new GridLayout(1,1));
+		 acciones.setLayout(new GridLayout(1,4));
+		 
+		 acciones.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+		 listaPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+		 infoPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+		    
 
-		add(panel1);
-		add(panel2);
-		add(panel3);
+		 add(acciones, BorderLayout.NORTH);
+		 add(listaPanel, BorderLayout.LINE_START);
+		 add(infoPanel, BorderLayout.CENTER);
 		
-		panel1.add(nuevo);
-	    panel1.add(guardar);
-	    panel1.add(eliminar);
-	    panel1.add(cargar);
+		 acciones.add(nuevo);
+		 acciones.add(guardar);
+		 acciones.add(eliminar);
+		 acciones.add(cargar);
 	    
-	    panel2.setLayout(new GridLayout(2,0));
-	    panel2.add(nombre);
-	    panel2.add(nombrejt);
-	    panel2.add(apellidos);
-	    panel2.add(apellidojt);
-	    panel2.add(DNI);
-	    panel2.add(dnijt);
-	    panel2.add(socio);
-	    panel2.add(sociojt);
-	    panel3.add(listaClientes);
-	    panel1.setBounds(0,0,700,80);
-	    panel2.setBounds(0,80,700,120);
-	    panel3.setBounds(100,200,400,200);
+		 infoPanel.setLayout(new GridLayout(2,0));
+		 infoPanel.add(nombre);
+		 infoPanel.add(nombrejt);
+		 infoPanel.add(apellidos);
+		 infoPanel.add(apellidojt);
+		 infoPanel.add(DNI);
+		 infoPanel.add(dnijt);
+		 infoPanel.add(socio);
+	     infoPanel.add(sociojt);
+	     listaPanel.add(listaScroll);
+	     
 	    
 	    
 	    //Botones funcionamiento
@@ -180,8 +187,9 @@ public class VentanaGestionCliente extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				//Update de cliente en DB
 				try {
-					inventario.dropClienteTable();
 					inventario.connect("productos.db");
+					inventario.dropClienteTable();
+					
 					
 					String nomb,ap,dni,soc;
 					
@@ -224,7 +232,8 @@ public class VentanaGestionCliente extends JFrame {
 		//Añadimos la funcion del mouselistener a la lista 
 		listaClientes.addMouseListener(seleccionar);
 	    
-	    
+		pack();
+		setResizable(true);
 		setVisible(true);
 		
 }
