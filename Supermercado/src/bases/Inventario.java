@@ -121,7 +121,7 @@ public class Inventario {
 	public ArrayList<Integer> getCodigo() throws DBException, SQLException{
 		 PreparedStatement ps = conexion.prepareStatement("SELECT codigo FROM Producto");
 		 ResultSet rs = ps.executeQuery();
-		 ArrayList<Integer> listaCodigos=new ArrayList<>();
+		 ArrayList<Integer> listaCodigos=new ArrayList<Integer>();
 		 while(rs.next()) {
 			 listaCodigos.add(rs.getInt("codigo"));
 		 }

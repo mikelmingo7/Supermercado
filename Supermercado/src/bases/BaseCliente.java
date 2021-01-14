@@ -79,7 +79,6 @@ private static Connection con = null;
 				c.setApellido(rs.getString("apellido"));
 				c.setSocio(rs.getString("socio"));
 				
-				
 				return c;
 			} else {
 				return new Cliente();
@@ -91,7 +90,7 @@ private static Connection con = null;
 	public ArrayList<String> getDni() throws DBException, SQLException{
 		 PreparedStatement ps = con.prepareStatement("SELECT dni FROM TablaCliente");
 		 ResultSet rs = ps.executeQuery();
-		 ArrayList<String> listaDnis=new ArrayList<>();
+		 ArrayList<String> listaDnis=new ArrayList<String>();
 		 while(rs.next()) {
 			 listaDnis.add(rs.getString("dni"));
 		 }

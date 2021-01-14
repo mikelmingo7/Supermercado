@@ -141,10 +141,6 @@ public class VentanaGestionProducto extends JFrame{
                 //Crear producto de db
             	try {
 
-            		
-
-					
-
 					inventario.connect("productos.db");
 					inventario.createProductoTable();
 

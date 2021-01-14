@@ -47,7 +47,7 @@ public class VentanaGestionCliente extends JFrame {
 	
 	JList listaClientes = new JList<>();
 	JScrollPane listaScroll = new JScrollPane(listaClientes);
-	DefaultListModel modeloCliente = new DefaultListModel<Cliente>();
+	DefaultListModel<Cliente> model = new DefaultListModel<Cliente>();
 	
 	JPanel listaPanel = new JPanel();
 	JPanel infoPanel = new JPanel(); 
@@ -85,6 +85,10 @@ public class VentanaGestionCliente extends JFrame {
 		 acciones.add(guardar);
 		 acciones.add(eliminar);
 		 acciones.add(cargar);
+		 
+		 listaClientes.setModel(model);
+		    
+		 listaPanel.add(listaScroll);
 	    
 		 infoPanel.setLayout(new GridLayout(2,0));
 		 infoPanel.add(nombre);
@@ -106,7 +110,7 @@ public class VentanaGestionCliente extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 //Eliminar cliente de db
             	Cliente c = (Cliente) listaClientes.getSelectedValue();
-            	modeloCliente.removeElement(c);
+            	model.removeElement(c);
             	try {
 					bc.connect("cliente.db");
 					bc.delete(c);
@@ -123,10 +127,7 @@ public class VentanaGestionCliente extends JFrame {
                 //Crear cliente de db
             	
             	try {
-            		
-					
-					
-            		
+            	
 					bc.connect("cliente.db");
 					bc.createClienteTable();
 					
@@ -150,6 +151,7 @@ public class VentanaGestionCliente extends JFrame {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
+            	
             	nombrejt.setText(null);
 				apellidojt.setText(null);
 				dnijt.setText(null);
@@ -162,7 +164,7 @@ public class VentanaGestionCliente extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 //Eliminar producto de db
             	
-            	modeloCliente.clear();
+            	model.clear();
             	
             	try {
             		bc.connect("cliente.db");
@@ -170,8 +172,8 @@ public class VentanaGestionCliente extends JFrame {
             		
             		for (int j = 0; j < dnis.size(); j++) {
             			String dni = dnis.get(j);
-            			Cliente c =bc.getCliente(dni);
-            			modeloCliente.addElement(c);
+            			Cliente c = bc.getCliente(dni);
+            			model.addElement(c);
 						
 					}
 	
@@ -192,17 +194,13 @@ public class VentanaGestionCliente extends JFrame {
 				//Update de cliente en DB
 				try {
 					bc.connect("cliente.db");
-					bc.dropClienteTable();
 					
-					
-					String nomb,ap,dni,soc;
-					
-					nomb=nombrejt.getText();
-					ap=apellidojt.getText();
-					dni=dnijt.getText();
-					soc=sociojt.getText();
-					
-					Cliente c=new Cliente();
+					String nomb = nombrejt.getText();
+					String ap = apellidojt.getText();
+					String dni = dnijt.getText();
+					String soc = sociojt.getText();
+					 
+					Cliente c = new Cliente();
 					
 					c.setDni(dni);
 					c.setNombre(nomb);

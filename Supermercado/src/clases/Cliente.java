@@ -86,8 +86,14 @@ public class Cliente {
 		this.socio = socio;
 	}
 
+	@Override
+	public String toString() {
+		return  nombre + " " + apellido + " " + dni;
+	}
+
 //
 
+	
 
 
 }
