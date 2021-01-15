@@ -70,6 +70,7 @@ public class Inventario {
 	public static void dropProductoTable() throws DBException {
 		try (Statement s = conexion.createStatement()) {
 			s.executeUpdate("DROP TABLE IF EXISTS Producto");
+			log( Level.INFO, "Borrado la tabla correctamente", null );
 		} catch (SQLException e) {
 			throw new DBException("Error borrando la tabla 'user' en la BD", e); 
 		}

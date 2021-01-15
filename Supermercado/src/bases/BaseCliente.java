@@ -8,6 +8,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import clases.Cliente;
 
@@ -15,12 +17,26 @@ public class BaseCliente {
 private static Connection con = null;
 	 
 	
-	
+private static Logger logger = null;
+private static boolean LOGGING = true;	
+
+private static void log( Level level, String msg, Throwable excepcion ) {
+	if (!LOGGING) return;
+	if (logger==null) {  // Logger por defecto local:
+		logger = Logger.getLogger( Inventario.class.getName() );  // Nombre del logger - el de la clase
+		logger.setLevel( Level.ALL );  // Loguea todos los niveles
+	}
+	if (excepcion==null)
+		logger.log( level, msg );
+	else
+		logger.log( level, msg, excepcion );
+}
 	
 	public static void connect(String dbPath) throws DBException {
 		try {
 			Class.forName("org.sqlite.JDBC");
 			con = DriverManager.getConnection("jdbc:sqlite:" + dbPath); 
+			log( Level.INFO, "Conectada a la base de datos ", null );
 		} catch (ClassNotFoundException e) {
 			System.out.println("Error al intentar cargar el driver de la Base de Datos "); 
 		} catch (SQLException e) {
@@ -30,6 +46,7 @@ private static Connection con = null;
 	public static void  disconnect() throws DBException {
 		try {
 			con.close();
+			log( Level.INFO, "Cerrada la conexion con la base de datos", null );
 		} catch (SQLException e) {
 			System.out.println("Error al cerrar la conexi�n con la Base de Datos");
 		}
@@ -45,6 +62,7 @@ private static Connection con = null;
 	public static void dropClienteTable() throws DBException {
 		try (Statement s = con.createStatement()) {
 			s.executeUpdate("DROP TABLE IF EXISTS Cliente");
+			log( Level.INFO, "Borrado la tabla correctamente", null );
 		} catch (SQLException e) {
 			throw new DBException("Error borrando la tabla 'Cliente' en la BD", e); 
 		}
@@ -61,6 +79,7 @@ private static Connection con = null;
 		
 			ps.executeUpdate();
 			
+			log( Level.INFO, "Instertado el cliente correctamente", null );
 			
 		} catch (SQLException e) {
 			throw new DBException("No se pudo guardar el usuario en la BD", e);
@@ -107,6 +126,7 @@ private static Connection con = null;
 			
 			
 			s.executeUpdate();
+			log( Level.INFO, "Actualizado el cliente correctamente", null );
 		} catch (SQLException e) {
 			throw new DBException("No se pudo guardar el cliente en la BD", e);
 		}
@@ -116,6 +136,7 @@ private static Connection con = null;
 			s.setString(1, c.getDni());
 			
 			s.executeUpdate();
+			log( Level.INFO, "Borrado el cliente correctamente", null );
 		} catch (SQLException e) {
 			throw new DBException("No se pudo eliminar el usuario con id " + c.getDni(), e);	}
 	}
