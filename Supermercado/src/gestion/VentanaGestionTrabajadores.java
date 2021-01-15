@@ -1,10 +1,12 @@
 package gestion;
 
+import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -14,18 +16,21 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
+import bases.DBException;
+import clases.Producto;
+import clases.Trabajador;
 
-public class VentanaGestionTrabajadores<Trabajador> extends JFrame{
+
+public class VentanaGestionTrabajadores extends JFrame{
 	
 	
 	JList listaTrabajadores = new JList<>();
 	JScrollPane listaScroll = new JScrollPane(listaTrabajadores);
+	DefaultListModel<Trabajador> model = new DefaultListModel<Trabajador>();
 	
-	DefaultListModel model = new DefaultListModel<Trabajador>();
-	
-	JPanel panel1=new JPanel(); 
-	JPanel panel2=new JPanel();
-	JPanel panel3=new JPanel();
+	JPanel listaPanel = new JPanel();
+	JPanel infoPanel = new JPanel(); 
+	JPanel acciones = new JPanel();
 	
 	JLabel nombre=new JLabel("     nombre");
 	JTextField nom=new JTextField();
@@ -45,6 +50,7 @@ public class VentanaGestionTrabajadores<Trabajador> extends JFrame{
 	JTextField dis=new JTextField();
 	
 	JButton nuevo = new JButton("NUEVO");
+	JButton cargar = new JButton("CARGAR");
 	JButton guardar = new JButton("GUARDAR");
 	JButton eliminar = new JButton("ELIMINAR");
 	
@@ -57,40 +63,46 @@ public class VentanaGestionTrabajadores<Trabajador> extends JFrame{
 		setTitle("Ventana de Gesti�n de Trabajadores");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
-		setLayout(null); 
+		setLayout(new BorderLayout());
 		
-		add(panel1);
-		add(panel2);
-		add(panel3);
+		infoPanel.setLayout(new GridLayout(8,2));
+	    listaPanel.setLayout(new GridLayout(1,1));
+	    acciones.setLayout(new GridLayout(1,4));
+	    
+	    acciones.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+	    listaPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+	    infoPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+	    
+	    add(acciones, BorderLayout.NORTH);
+	    add(listaPanel, BorderLayout.LINE_START);
+	    add(infoPanel, BorderLayout.CENTER);
 		
-		panel1.add(nuevo);
-	    panel1.add(guardar);
-	    panel1.add(eliminar);
+	    acciones.add(nuevo);
+	    acciones.add(guardar);
+	    acciones.add(cargar);
+	    acciones.add(eliminar);
 	    
-	    panel2.setLayout(new GridLayout(8,2));
-	    panel2.add(nombre);
-	    panel2.add(nom);
-	    panel2.add(apellidos);
-	    panel2.add(ap);
-	    panel2.add(DNI);
-	    panel2.add(dni);
-	    panel2.add(salario);
-	    panel2.add(sal);
-	    panel2.add(horario);
-	    panel2.add(hor);
-	    panel2.add(puesto);
-	    panel2.add(pues);
-	    panel2.add(horasTrabajadas);
-	    panel2.add(horT);
-	    panel2.add(disponibilidad);
-	    panel2.add(dis);
 	    
-	    panel1.setBounds(0,0,700,80);
-	    panel2.setBounds(0,80,700,120);
-	    panel3.setBounds(100,200,400,200);
+	    infoPanel.add(nombre);
+	    infoPanel.add(nom);
+	    infoPanel.add(apellidos);
+	    infoPanel.add(ap);
+	    infoPanel.add(DNI);
+	    infoPanel.add(dni);
+	    infoPanel.add(salario);
+	    infoPanel.add(sal);
+	    infoPanel.add(horario);
+	    infoPanel.add(hor);
+	    infoPanel.add(puesto);
+	    infoPanel.add(pues);
+	    infoPanel.add(horasTrabajadas);
+	    infoPanel.add(horT);
+	    infoPanel.add(disponibilidad);
+	    infoPanel.add(dis);
+	    
 	    
 		listaTrabajadores.setModel(model);
-	    panel3.add(listaScroll);
+		listaPanel.add(listaScroll);
 	    
 	    
 	    //Botones funcionamiento
@@ -99,13 +111,71 @@ public class VentanaGestionTrabajadores<Trabajador> extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 //Eliminar cliente de db
+            	Trabajador t = (Trabajador) listaTrabajadores.getSelectedValue();
+            	model.removeElement(t);
+            	try {
+					bt.connect("productos.db");
+					bt.delete(t);
+				} catch (DBException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
             }
         });
 
         nuevo.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //Crear cliente de db
+                //Crear trabajador de db
+            	try {
+
+					bt.connect("productos.db");
+					bt.createProductoTable();
+
+					String nomb,apel,dnis,sala,hora, puest, htraba, dispo;
+					
+					nomb = nom.getText();
+					apel = ap.getText();
+					dnis = dni.getText();
+					sala = sal.getText();
+					hora = hor.getText();
+					puest = pues.getText();
+					htraba = horT.getText();
+					dispo = dis.getText();
+					
+					
+					Trabajador t = new Trabajador();
+					
+					
+					t.setNombre(nomb);
+					t.setApellidos(apel);
+					t.setDni(dnis);
+					t.setSalario(Integer.parseInt(sala));
+					t.setHorario(hora);
+					t.setPuesto(puest);
+					t.setHoras_trabajadas(Integer.parseInt(htraba));
+					t.setDisponibilidad(dispo);					
+					
+					bt.storeP(t);
+					
+					
+				
+				} catch (DBException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+				
+            	nom.setText(null);
+				ap.setText(null);
+				dni.setText(null);
+				sal.setText(null);
+				hor.setText(null);
+				pues.setText(null);
+				hor.setText(null);
+				dis.setText(null);
+				
+            	
             }
         });
         
@@ -114,6 +184,34 @@ public class VentanaGestionTrabajadores<Trabajador> extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				//Update de cliente en DB
+				
+
+				bt.connect("productos.db");
+				bt.createProductoTable();
+
+				String nomb,apel,dnis,sala,hora, puest, htraba, dispo;
+				
+				nomb = nom.getText();
+				apel = ap.getText();
+				dnis = dni.getText();
+				sala = sal.getText();
+				hora = hor.getText();
+				puest = pues.getText();
+				htraba = horT.getText();
+				dispo = dis.getText();
+
+				Trabajador t = new Trabajador();
+				
+				t.setNombre(nomb);
+				t.setApellidos(apel);
+				t.setDni(dnis);
+				t.setSalario(Integer.parseInt(sala));
+				t.setHorario(hora);
+				t.setPuesto(puest);
+				t.setHoras_trabajadas(Integer.parseInt(htraba));
+				t.setDisponibilidad(dispo);				
+				
+				bt.update(t);
 				
 			}
 		});

@@ -96,9 +96,6 @@ public class VentanaGestionProducto extends JFrame{
 	    acciones.add(eliminar);
 	    
 	    
-	      
-	    
-
 	    listaProductos.setModel(model);
     
 	    listaPanel.add(listaScroll);
