@@ -27,13 +27,15 @@ import javax.swing.JTextField;
 import javax.swing.UIManager;
 
 import java.sql.Connection;
+
+import bases.BaseProducto;
 import bases.DBException;
-import bases.Inventario;
+
 import clases.Producto;
 
 public class VentanaGestionProducto extends JFrame{
 	
-	Inventario inventario = new Inventario();
+	BaseProducto bp=new BaseProducto();
 	
 
 	JPanel listaPanel = new JPanel();
@@ -124,8 +126,8 @@ public class VentanaGestionProducto extends JFrame{
             	Producto p = (Producto) listaProductos.getSelectedValue();
             	model.removeElement(p);
             	try {
-					inventario.connect("productos.db");
-					inventario.delete(p);
+					bp.connect("productos.db");
+					bp.delete(p);
 				} catch (DBException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -141,8 +143,8 @@ public class VentanaGestionProducto extends JFrame{
                 //Crear producto de db
             	try {
 
-					inventario.connect("productos.db");
-					inventario.createProductoTable();
+					bp.connect("productos.db");
+					bp.createProductoTable();
 
 					String nomb,cod,sec,mar,pes, prec;
 					
@@ -163,7 +165,7 @@ public class VentanaGestionProducto extends JFrame{
 					p.setSeccion(sec);
 					
 					
-					inventario.storeP(p);
+					bp.storeP(p);
 					
 					
 				
@@ -190,7 +192,7 @@ public class VentanaGestionProducto extends JFrame{
 				//Update de cliente en DB
 				
 				try {
-					inventario.connect("productos.db");
+					bp.connect("productos.db");
 					
 					String nomb,cod,sec,mar,pes, prec;
 					
@@ -210,7 +212,7 @@ public class VentanaGestionProducto extends JFrame{
 					p.setMarca(mar);
 					p.setSeccion(sec);
 					
-					inventario.update(p);
+					bp.update(p);
 					
 					
 				} catch (DBException e) {
@@ -233,12 +235,12 @@ public class VentanaGestionProducto extends JFrame{
             	model.clear();
             	
             	try {
-            		inventario.connect("productos.db");
-            		ArrayList<Integer> codigos = inventario.getCodigo();
+            		bp.connect("productos.db");
+            		ArrayList<Integer> codigos = bp.getCodigo();
             		
             		for (int i = 0; i < codigos.size(); i++) {
             			Integer cod = codigos.get(i);
-            			Producto p = inventario.getProducto(cod);
+            			Producto p = bp.getProducto(cod);
             			model.addElement(p);
 						
 					}

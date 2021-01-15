@@ -9,10 +9,10 @@ public class Trabajador {
 		protected String horario;
 		protected String puesto;
 		protected Integer horas_trabajadas;
-		protected Boolean disponibilidad;
+		protected String disponibilidad;
 		
 		public Trabajador(String nombre, String apellidos, String dni, Integer salario, String horario, String puesto,
-				Integer horas_trabajadas, Boolean disponibilidad) {
+				Integer horas_trabajadas, String disponibilidad) {
 			super();
 			this.nombre = nombre;
 			this.apellidos = apellidos;
@@ -33,7 +33,7 @@ public class Trabajador {
 			this.horario = "";
 			this.puesto = "";
 			this.horas_trabajadas = 0;
-			this.disponibilidad = false;
+			this.disponibilidad = "";
 		}
 
 		public String getNombre() {
@@ -92,11 +92,11 @@ public class Trabajador {
 			this.horas_trabajadas = horas_trabajadas;
 		}
 
-		public Boolean getDisponibilidad() {
+		public String getDisponibilidad() {
 			return disponibilidad;
 		}
 
-		public void setDisponibilidad(Boolean disponibilidad) {
+		public void setDisponibilidad(String disponibilidad) {
 			this.disponibilidad = disponibilidad;
 		}
 

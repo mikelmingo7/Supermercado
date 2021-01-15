@@ -54,7 +54,7 @@ public class VentanaGestionTrabajadores<Trabajador> extends JFrame{
 		
 
 		setSize(700,400);
-		setTitle("Ventana de Gestión de Trabajadores");
+		setTitle("Ventana de Gestiï¿½n de Trabajadores");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
 		setLayout(null); 
@@ -119,7 +119,7 @@ public class VentanaGestionTrabajadores<Trabajador> extends JFrame{
 		});
 		
 		
-	    setResizable(false);
+	    
 	    setVisible(true);
 				
 		}
