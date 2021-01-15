@@ -23,7 +23,7 @@ private static boolean LOGGING = true;
 private static void log( Level level, String msg, Throwable excepcion ) {
 	if (!LOGGING) return;
 	if (logger==null) {  // Logger por defecto local:
-		logger = Logger.getLogger( Inventario.class.getName() );  // Nombre del logger - el de la clase
+		logger = Logger.getLogger( BaseTrabajador.class.getName() );  // Nombre del logger - el de la clase
 		logger.setLevel( Level.ALL );  // Loguea todos los niveles
 	}
 	if (excepcion==null)
@@ -48,7 +48,7 @@ private static void log( Level level, String msg, Throwable excepcion ) {
 			con.close();
 			log( Level.INFO, "Cerrada la conexion con la base de datos", null );
 		} catch (SQLException e) {
-			System.out.println("Error al cerrar la conexi�n con la Base de Datos");
+			System.out.println("Error al cerrar la conexion con la Base de Datos");
 		}
 	}
 	public static void createClienteTable() throws DBException {
@@ -103,18 +103,22 @@ private static void log( Level level, String msg, Throwable excepcion ) {
 				t.setDni(rs.getString("dni"));
 				t.setNombre(rs.getString("nombre"));
 				t.setApellidos(rs.getString("apellidos"));
-				t.setSocio(rs.getString("socio"));
+				t.setSalario(rs.getInt("salario"));
+				t.setHorario(rs.getString("horario"));
+				t.setPuesto(rs.getString("puesto"));
+				t.setHoras_trabajadas(rs.getInt("horas_trabajadas"));
+				t.setDisponibilidad(rs.getString("disponibilidad"));
 				
-				return c;
+				return t;
 			} else {
-				return new Cliente();
+				return new Trabajador();
 			}
 		} catch (SQLException | DateTimeParseException e) {
-			throw new DBException("Error obteniendo el cliente con dni " + dni, e);
+			throw new DBException("Error obteniendo el trabajador con dni " + dni, e);
 		}
 	}
 	public ArrayList<String> getDni() throws DBException, SQLException{
-		 PreparedStatement ps = con.prepareStatement("SELECT dni FROM TablaCliente");
+		 PreparedStatement ps = con.prepareStatement("SELECT dni FROM TablaTrabajador");
 		 ResultSet rs = ps.executeQuery();
 		 ArrayList<String> listaDnis=new ArrayList<String>();
 		 while(rs.next()) {
@@ -123,28 +127,31 @@ private static void log( Level level, String msg, Throwable excepcion ) {
 		return listaDnis; 
 		
 	}
-	public void update(Cliente c) throws DBException {
-		try (PreparedStatement s = con.prepareStatement("UPDATE TablaCliente SET nombre=?, apellido=?, socio=?  WHERE dni=?")) {
-			s.setString(1, c.getDni());
-			s.setString(2, c.getNombre());
-			s.setString(3, c.getApellido());
-			s.setString(4, c.getSocio());
-			
+	public void update(Trabajador t) throws DBException {
+		try (PreparedStatement s = con.prepareStatement("UPDATE TablaTrabajador SET nombre=?, apellido=?, salario=?, horario=?, puesto=?, horas_trabajadas=?, disponibilidad=?  WHERE dni=?")) {
+			s.setString(1, t.getDni());
+			s.setString(2, t.getNombre());
+			s.setString(3, t.getApellidos());
+			s.setInt(4, t.getSalario());
+			s.setString(5, t.getHorario());
+			s.setString(6, t.getPuesto());
+			s.setInt(7, t.getHoras_trabajadas());
+			s.setString(8, t.getDisponibilidad());
 			
 			
 			s.executeUpdate();
-			log( Level.INFO, "Actualizado el cliente correctamente", null );
+			log( Level.INFO, "Actualizado el trabajador correctamente", null );
 		} catch (SQLException e) {
-			throw new DBException("No se pudo guardar el cliente en la BD", e);
+			throw new DBException("No se pudo actualizar el trabajador en la BD", e);
 		}
 	}
-	public void delete(Cliente c) throws DBException {
-		try (PreparedStatement s = con.prepareStatement("DELETE FROM TablaCliente WHERE dni=?")) {
-			s.setString(1, c.getDni());
+	public void delete(Trabajador t) throws DBException {
+		try (PreparedStatement s = con.prepareStatement("DELETE FROM TablaTrabajador WHERE dni=?")) {
+			s.setString(1, t.getDni());
 			
 			s.executeUpdate();
-			log( Level.INFO, "Borrado el cliente correctamente", null );
+			log( Level.INFO, "Borrado el trabajador correctamente", null );
 		} catch (SQLException e) {
-			throw new DBException("No se pudo eliminar el usuario con id " + c.getDni(), e);	}
+			throw new DBException("No se pudo eliminar el trabajador con id " + t.getDni(), e);	}
 	}
 }

@@ -23,7 +23,7 @@ private static boolean LOGGING = true;
 private static void log( Level level, String msg, Throwable excepcion ) {
 	if (!LOGGING) return;
 	if (logger==null) {  // Logger por defecto local:
-		logger = Logger.getLogger( Inventario.class.getName() );  // Nombre del logger - el de la clase
+		logger = Logger.getLogger( BaseCliente.class.getName() );  // Nombre del logger - el de la clase
 		logger.setLevel( Level.ALL );  // Loguea todos los niveles
 	}
 	if (excepcion==null)
