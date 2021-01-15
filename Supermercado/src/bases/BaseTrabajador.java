@@ -51,15 +51,15 @@ private static void log( Level level, String msg, Throwable excepcion ) {
 			System.out.println("Error al cerrar la conexion con la Base de Datos");
 		}
 	}
-	public static void createClienteTable() throws DBException {
+	public static void createTrabajadorTable() throws DBException {
 		// TODO Auto-generated method stub
 		try (Statement s = con.createStatement()) {
-			s.executeUpdate("CREATE TABLE IF NOT EXISTS TablaTrabajador (dni VARCHAR PRIMARY KEY, nombre VARCHAR, apellidos VARCHAR, salario INTEGER, horario STRING, puesto STRING, horas_trabajadores INTEGER, disponibiladad STRING )");
+			s.executeUpdate("CREATE TABLE IF NOT EXISTS TablaTrabajador (dni VARCHAR PRIMARY KEY, nombre VARCHAR, apellidos VARCHAR, salario INTEGER, horario STRING, puesto STRING, horas_trabajadas INTEGER, disponibiladad STRING )");
 		} catch (SQLException e) {
 			throw new DBException("Error creando la tabla 'TablaTrabajador' en la BD", e);
 		}
 	}
-	public static void dropClienteTable() throws DBException {
+	public static void dropTrabajadorTable() throws DBException {
 		try (Statement s = con.createStatement()) {
 			s.executeUpdate("DROP TABLE IF EXISTS TabalaTrabajador");
 			log( Level.INFO, "Borrado la tabla correctamente", null );
@@ -67,7 +67,7 @@ private static void log( Level level, String msg, Throwable excepcion ) {
 			throw new DBException("Error borrando la tabla 'TablaTrabajador' en la BD", e); 
 		}
 	}
-	public static void storeC(Trabajador t) throws DBException {
+	public static void storeT(Trabajador t) throws DBException {
 		try (PreparedStatement ps = con.prepareStatement("INSERT INTO TablaTrabajador (dni,nombre,apellidos,salario,horario,puesto,horas_trabajadas,disponibilidad) VALUES (? ,?, ?, ?, ?, ?, ?, ?)");
 			Statement s = con.createStatement()) {
 			

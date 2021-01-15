@@ -16,6 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
+import bases.BaseTrabajador;
 import bases.DBException;
 import clases.Producto;
 import clases.Trabajador;
@@ -23,7 +24,7 @@ import clases.Trabajador;
 
 public class VentanaGestionTrabajadores extends JFrame{
 	
-	
+	BaseTrabajador bt=new BaseTrabajador();
 	JList listaTrabajadores = new JList<>();
 	JScrollPane listaScroll = new JScrollPane(listaTrabajadores);
 	DefaultListModel<Trabajador> model = new DefaultListModel<Trabajador>();
@@ -114,7 +115,7 @@ public class VentanaGestionTrabajadores extends JFrame{
             	Trabajador t = (Trabajador) listaTrabajadores.getSelectedValue();
             	model.removeElement(t);
             	try {
-					bt.connect("productos.db");
+					bt.connect("trabajador.db");
 					bt.delete(t);
 				} catch (DBException e1) {
 					// TODO Auto-generated catch block
@@ -129,8 +130,8 @@ public class VentanaGestionTrabajadores extends JFrame{
                 //Crear trabajador de db
             	try {
 
-					bt.connect("productos.db");
-					bt.createProductoTable();
+					bt.connect("trabajador.db");
+					bt.createTrabajadorTable();
 
 					String nomb,apel,dnis,sala,hora, puest, htraba, dispo;
 					
@@ -156,7 +157,7 @@ public class VentanaGestionTrabajadores extends JFrame{
 					t.setHoras_trabajadas(Integer.parseInt(htraba));
 					t.setDisponibilidad(dispo);					
 					
-					bt.storeP(t);
+					bt.storeT(t);
 					
 					
 				
@@ -186,8 +187,10 @@ public class VentanaGestionTrabajadores extends JFrame{
 				//Update de cliente en DB
 				
 
-				bt.connect("productos.db");
-				bt.createProductoTable();
+				try {
+					bt.connect("trabajador.db");
+				
+				
 
 				String nomb,apel,dnis,sala,hora, puest, htraba, dispo;
 				
@@ -212,6 +215,11 @@ public class VentanaGestionTrabajadores extends JFrame{
 				t.setDisponibilidad(dispo);				
 				
 				bt.update(t);
+				
+				}catch (DBException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				
 			}
 		});

@@ -24,7 +24,6 @@ import javax.swing.JTextField;
 
 import bases.BaseCliente;
 import bases.DBException;
-
 import clases.Cliente;
 import clases.Producto;
 

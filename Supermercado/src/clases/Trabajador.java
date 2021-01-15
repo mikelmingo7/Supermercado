@@ -21,7 +21,7 @@ public class Trabajador {
 			this.horario = horario;
 			this.puesto = puesto;
 			this.horas_trabajadas = horas_trabajadas;
-			this.disponibilidad = disponibilidad;
+			this.disponibilidad = disponibilidad;	
 		}
 		
 		public Trabajador() {
