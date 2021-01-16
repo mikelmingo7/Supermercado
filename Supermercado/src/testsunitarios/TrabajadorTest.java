@@ -8,7 +8,7 @@ import clases.Trabajador;
 
 class TrabajadorTest {
 
-	Trabajador t= new Trabajador("Pepe","Jimenez Ramirez","123456789A",1000,"tarde","dependiente",1,true);
+	Trabajador t= new Trabajador("Pepe","Jimenez Ramirez","123456789A",1000,"tarde","dependiente",1,"Si");
 	
 	@Test
 	public void testGetNombre() {
@@ -40,6 +40,6 @@ class TrabajadorTest {
 	}
 	@Test
 	public void testGetDisponibilidad() {
-		assertEquals(true, t.getDisponibilidad());
+		assertEquals("Si", t.getDisponibilidad());
 	}
 }
