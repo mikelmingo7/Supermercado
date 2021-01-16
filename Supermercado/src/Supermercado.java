@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-import bases.Inventario;
+import bases.*;
 import clases.Cliente;
 import clases.Producto;
 import clases.Trabajador;
