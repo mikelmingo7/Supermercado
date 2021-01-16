@@ -6,7 +6,7 @@ package bases;
 //Importamos clases que se usaran
 import java.io.File;
 import java.io.FileWriter;
-import bases.Inventario;
+import bases.BaseProducto;
 import clases.Producto;
 
 public class ExportarInventario {
@@ -16,11 +16,11 @@ public class ExportarInventario {
 		try {
 			
 			Producto p = new Producto();
-			Inventario invent = new Inventario();
+			BaseProducto bp = new BaseProducto();
 			File archivo = new File("texto.txt");
 			FileWriter escribir = new FileWriter(archivo,true);
 			for (int i = 0; i < args.length; i++) {
-				escribir.write(invent.getProducto(i).toString());		
+				escribir.write(bp.getProducto(i).toString());		
 			}
 			escribir.close();
 		}
