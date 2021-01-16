@@ -54,7 +54,7 @@ private static void log( Level level, String msg, Throwable excepcion ) {
 	public static void createTrabajadorTable() throws DBException {
 		// TODO Auto-generated method stub
 		try (Statement s = con.createStatement()) {
-			s.executeUpdate("CREATE TABLE IF NOT EXISTS TablaTrabajador (dni VARCHAR PRIMARY KEY, nombre VARCHAR, apellidos VARCHAR, salario INTEGER, horario STRING, puesto STRING, horas_trabajadas INTEGER, disponibiladad STRING )");
+			s.executeUpdate("CREATE TABLE IF NOT EXISTS TablaTrabajador (dni VARCHAR PRIMARY KEY, nombre VARCHAR, apellidos VARCHAR, salario INTEGER, horario STRING, puesto STRING, horas_trabajadas INTEGER, disponibilidad STRING )");
 		} catch (SQLException e) {
 			throw new DBException("Error creando la tabla 'TablaTrabajador' en la BD", e);
 		}

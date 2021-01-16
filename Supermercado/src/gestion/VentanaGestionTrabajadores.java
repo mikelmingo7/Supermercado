@@ -5,6 +5,11 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
@@ -33,21 +38,21 @@ public class VentanaGestionTrabajadores extends JFrame{
 	JPanel infoPanel = new JPanel(); 
 	JPanel acciones = new JPanel();
 	
-	JLabel nombre=new JLabel("     nombre");
+	JLabel nombre=new JLabel("Nombre");
 	JTextField nom=new JTextField();
-	JLabel apellidos=new JLabel("      apellidos");
+	JLabel apellidos=new JLabel("Apellidos");
 	JTextField ap=new JTextField();
-	JLabel DNI=new JLabel("     DNI");
+	JLabel DNI=new JLabel("DNI");
 	JTextField dni=new JTextField();
-	JLabel salario=new JLabel("     salario");
+	JLabel salario=new JLabel("Salario");
 	JTextField sal=new JTextField();
-	JLabel horario=new JLabel("     horario");
+	JLabel horario=new JLabel("Horario");
 	JTextField hor=new JTextField();
-	JLabel puesto=new JLabel("     puesto");
+	JLabel puesto=new JLabel("Puesto");
 	JTextField pues=new JTextField();
-	JLabel horasTrabajadas=new JLabel("     horas trabajadas");
+	JLabel horasTrabajadas=new JLabel("Horas trabajadas");
 	JTextField horT=new JTextField();
-	JLabel disponibilidad=new JLabel("     disponibilidad");
+	JLabel disponibilidad=new JLabel("Disponibilidad");
 	JTextField dis=new JTextField();
 	
 	JButton nuevo = new JButton("NUEVO");
@@ -61,7 +66,7 @@ public class VentanaGestionTrabajadores extends JFrame{
 		
 
 		setSize(700,400);
-		setTitle("Ventana de Gesti�n de Trabajadores");
+		setTitle("Ventana de Gestión de Trabajadores");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
 		setLayout(new BorderLayout());
@@ -223,7 +228,52 @@ public class VentanaGestionTrabajadores extends JFrame{
 				
 			}
 		});
+        
+        //Boton para cargar informacion de la BD a la tabla
+	    cargar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //Eliminar producto de db
+            	
+            	model.clear();
+            	
+            	try {
+            		bt.connect("trabajador.db");
+            		ArrayList<String> dnis = bt.getDni();
+            		
+            		for (int i = 0; i < dnis.size(); i++) {
+            			String cod = dnis.get(i);
+            			Trabajador t = bt.getTrabajador(cod);
+            			model.addElement(t);
+						
+					}
+	
+				} catch (DBException | SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+            	
+            	
+            	
+            }
+        });
+	    
+	    //Ver valores del producto seleccionado en el TextField correspondiente
+	    MouseListener seleccionar = new MouseAdapter() {
+            public void mouseClicked(MouseEvent mouseEvent) {
+            	Trabajador t = (Trabajador) listaTrabajadores.getSelectedValue();
+            	nom.setText(t.getNombre());
+            	ap.setText(t.getApellidos());
+            	dni.setText(t.getDni());
+            	sal.setText(""+t.getSalario());
+            	hor.setText(t.getHorario());
+            	pues.setText(t.getPuesto());
+            	horT.setText(""+t.getHoras_trabajadas());
+            	dis.setText(t.getDisponibilidad());
+         }
+		};
 		
+		listaTrabajadores.addMouseListener(seleccionar);
 		
 	    
 	    setVisible(true);

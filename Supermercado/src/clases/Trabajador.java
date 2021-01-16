@@ -102,9 +102,7 @@ public class Trabajador {
 
 		@Override
 		public String toString() {
-			return "Trabajador [nombre=" + nombre + ", apellidos=" + apellidos + ", dni=" + dni + ", salario=" + salario
-					+ ", horario=" + horario + ", puesto=" + puesto + ", horas_trabajadas=" + horas_trabajadas
-					+ ", disponibilidad=" + disponibilidad + "]";
+			return nombre + " " + apellidos + " " + dni;
 		}
 		
 	//

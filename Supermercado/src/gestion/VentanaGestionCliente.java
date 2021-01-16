@@ -30,13 +30,13 @@ import clases.Producto;
 public class VentanaGestionCliente extends JFrame {
 	BaseCliente bc=new BaseCliente();
 
-	JLabel nombre=new JLabel("     nombre");
+	JLabel nombre=new JLabel("Nombre");
 	JTextField nombrejt=new JTextField();
-	JLabel apellidos=new JLabel("      apellidos");
+	JLabel apellidos=new JLabel("Apellidos");
 	JTextField apellidojt=new JTextField();
-	JLabel DNI=new JLabel("     DNI");
+	JLabel DNI=new JLabel("DNI");
 	JTextField dnijt=new JTextField();
-	JLabel socio=new JLabel("  	Socio");
+	JLabel socio=new JLabel("¿Socio?");
 	JTextField sociojt=new JTextField(); 
 	
 	JButton nuevo = new JButton("NUEVO");
@@ -67,7 +67,7 @@ public class VentanaGestionCliente extends JFrame {
 		setLocationRelativeTo(null);
 		setLayout(new BorderLayout()); 
 		
-		 infoPanel.setLayout(new GridLayout(6,2));
+		 infoPanel.setLayout(new GridLayout(8,2));
 		 listaPanel.setLayout(new GridLayout(1,1));
 		 acciones.setLayout(new GridLayout(1,4));
 		 
