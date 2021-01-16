@@ -1,5 +1,6 @@
 package gestion;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -9,7 +10,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
+import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -21,9 +25,15 @@ import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
+import clases.Producto;
+import bases.BaseProducto;
+import bases.DBException;
+
 
 public class VentanaGestionCompra<Compra> extends JFrame{
 
+	BaseProducto bp=new BaseProducto();
+	
 	JPanel listaPanel = new JPanel();
 	JPanel infoPanel = new JPanel();
 	JPanel acciones = new JPanel(); 
@@ -35,12 +45,12 @@ public class VentanaGestionCompra<Compra> extends JFrame{
 	JLabel fechajl = new JLabel("Fecha");
 	JTextField fechajt = new JTextField();
 
-	
-	
+
 	JList listaCompras = new JList<>();
 	JScrollPane listaScroll = new JScrollPane(listaCompras);
 	DefaultListModel model = new DefaultListModel<Compra>();
-	JComboBox productosDisponibles;
+	JComboBox productosDisponibles = new JComboBox();;
+	
 	JButton nuevo = new JButton("NUEVO");
 	JButton guardar = new JButton("GUARDAR");
 	JButton eliminar = new JButton("ELIMINAR");
@@ -49,23 +59,49 @@ public class VentanaGestionCompra<Compra> extends JFrame{
 	
 	public VentanaGestionCompra() {
 		
-		setLayout(null);
+		setLayout(new BorderLayout());
 		setSize(900,500);
 		setTitle("Gesti�n compras");
 	    setLocationRelativeTo(null);
 	    
+	    infoPanel.setLayout(new GridLayout(6,2));
+	    listaPanel.setLayout(new GridLayout(1,1));
+	    acciones.setLayout(new GridLayout(1,4));
+	    
+	    acciones.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+	    listaPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+	    infoPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+	    
+	    add(acciones, BorderLayout.NORTH);
+	    add(listaPanel, BorderLayout.LINE_START);
+	    add(infoPanel, BorderLayout.CENTER);
+	    
+	    try {
+			bp.connect("productos.db");
+			ArrayList<Integer> codigos;
+			try {
+				codigos = bp.getCodigo();
+				for (int i = 0; i < codigos.size(); i++) {
+					Integer cod = codigos.get(i);
+        			Producto p = bp.getProducto(cod);
+        			String nombreP = p.getNombre();
+        			productosDisponibles.addItem(nombreP);
+					
+				}
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}  
+		} catch (DBException e1) {
+			
+		}
+	    
+	    
 
-	    add(acciones);
-	    add(listaPanel);
-	    add(infoPanel);
-	    acciones.add(productosDisponibles);
 	    acciones.add(nuevo);
 	    acciones.add(guardar);
 	    acciones.add(eliminar);
-	    
-	    acciones.setBounds(0,0,900,80);
-	    listaPanel.setBounds(0,80,300,440);
-	    infoPanel.setBounds(320,80,500,400);
+	    acciones.add(productosDisponibles);
 
 	    listaCompras.setModel(model);
     
