@@ -27,7 +27,7 @@ public class Supermercado {
 	
 	public Supermercado() {
 		super();
-		this.nom-bre = "";
+		this.nombre = "";
 		this.direccion = "";
 		this.clientes = null;
 		this.trabajadores = null;
