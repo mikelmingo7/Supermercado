@@ -54,6 +54,8 @@ public class VentanaGestionProducto extends JFrame{
 	JLabel pesojl = new JLabel("Peso");
 	JTextField pesojt = new JTextField();
 	JTextField preciojt = new JTextField();
+	JLabel stockjl = new JLabel("Stock");
+	JTextField stockjt = new JTextField();
 	
 	
 	JList listaProductos = new JList<>();
@@ -100,7 +102,7 @@ public class VentanaGestionProducto extends JFrame{
     
 	    listaPanel.add(listaScroll);
 	    
-	    infoPanel.setLayout(new GridLayout(8,2));
+	    infoPanel.setLayout(new GridLayout(9,2));
 	   
 	    infoPanel.add(nombrejl);
 	    infoPanel.add(nombrejt);
@@ -113,7 +115,9 @@ public class VentanaGestionProducto extends JFrame{
 	    infoPanel.add(pesojl);
 	    infoPanel.add(pesojt);
 	    infoPanel.add(preciojl);
-	    infoPanel.add(preciojt); 	    
+	    infoPanel.add(preciojt); 
+	    infoPanel.add(stockjl);
+	    infoPanel.add(stockjt);
 //Botones funcionamiento
 	    
 	    eliminar.addActionListener(new ActionListener() {
@@ -123,7 +127,8 @@ public class VentanaGestionProducto extends JFrame{
             	Producto p = (Producto) listaProductos.getSelectedValue();
             	model.removeElement(p);
             	try {
-					bp.connect("productos.db");
+					bp.connect("producto.db");
+					
 					bp.delete(p);
 				} catch (DBException e1) {
 					// TODO Auto-generated catch block
@@ -140,10 +145,11 @@ public class VentanaGestionProducto extends JFrame{
                 //Crear producto de db
             	try {
 
-					bp.connect("productos.db");
+					bp.connect("producto.db");
+					
 					bp.createProductoTable();
 
-					String nomb,cod,sec,mar,pes, prec;
+					String nomb,cod,sec,mar,pes, prec,stk;
 					
 					nomb=nombrejt.getText();
 					cod=codigojt.getText();
@@ -151,6 +157,7 @@ public class VentanaGestionProducto extends JFrame{
 					mar=marcajt.getText();
 					pes=pesojt.getText();
 					prec=preciojt.getText();
+					stk=stockjt.getText();
 					
 					Producto p = new Producto();
 					
@@ -160,6 +167,7 @@ public class VentanaGestionProducto extends JFrame{
 					p.setPrecio(Double.parseDouble(prec));
 					p.setMarca(mar);
 					p.setSeccion(sec);
+					p.setStock(Integer.parseInt(stk));
 					
 					
 					bp.storeP(p);
@@ -178,7 +186,7 @@ public class VentanaGestionProducto extends JFrame{
 				marcajt.setText(null);
 				pesojt.setText(null);
 				preciojt.setText(null);
-            	
+            	stockjt.setText(null);
             }
         });
         
@@ -189,9 +197,9 @@ public class VentanaGestionProducto extends JFrame{
 				//Update de cliente en DB
 				
 				try {
-					bp.connect("productos.db");
-					
-					String nomb,cod,sec,mar,pes, prec;
+					bp.connect("producto.db");
+				
+					String nomb,cod,sec,mar,pes, prec, stk;
 					
 					nomb=nombrejt.getText();
 					cod=codigojt.getText();
@@ -199,7 +207,7 @@ public class VentanaGestionProducto extends JFrame{
 					mar=marcajt.getText();
 					pes=pesojt.getText();
 					prec=preciojt.getText();
-					
+					stk=stockjt.getText();
 					Producto p = new Producto();
 					
 					p.setCodigo( Integer.parseInt(cod) );
@@ -208,7 +216,7 @@ public class VentanaGestionProducto extends JFrame{
 					p.setPrecio(Double.parseDouble(prec));
 					p.setMarca(mar);
 					p.setSeccion(sec);
-					
+					p.setStock(Integer.parseInt(stk));
 					bp.update(p);
 					
 					
@@ -232,7 +240,8 @@ public class VentanaGestionProducto extends JFrame{
             	model.clear();
             	
             	try {
-            		bp.connect("productos.db");
+            		bp.connect("producto.db");
+            		
             		ArrayList<Integer> codigos = bp.getCodigo();
             		
             		for (int i = 0; i < codigos.size(); i++) {

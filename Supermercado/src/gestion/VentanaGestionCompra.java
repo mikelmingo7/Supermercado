@@ -77,7 +77,9 @@ public class VentanaGestionCompra<Compra> extends JFrame{
 	    add(infoPanel, BorderLayout.CENTER);
 	    
 	    try {
-			bp.connect("productos.db");
+			bp.connect("producto.db");
+			
+			
 			ArrayList<Integer> codigos;
 			try {
 				codigos = bp.getCodigo();

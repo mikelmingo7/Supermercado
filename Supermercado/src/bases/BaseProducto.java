@@ -52,13 +52,13 @@ public class BaseProducto {
 			conexion.close();
 			log( Level.INFO, "Cerrada la conexion con la base de datos", null );
 		} catch (SQLException e) {
-			System.out.println("Error al cerrar la conexi�n con la Base de Datos");
+			System.out.println("Error al cerrar la conexión con la Base de Datos");
 		}
 	}
 	public static void createProductoTable() throws DBException {
 		// TODO Auto-generated method stub
 		try (Statement s = conexion.createStatement()) {
-			s.executeUpdate("CREATE TABLE IF NOT EXISTS Producto (codigo INTEGER PRIMARY KEY , nombre VARCHAR, seccion VARCHAR, marca VARCHAR, peso DEC, precio DEC)");
+			s.executeUpdate("CREATE TABLE IF NOT EXISTS Producto (codigo INTEGER PRIMARY KEY , nombre VARCHAR, seccion VARCHAR, marca VARCHAR, peso DEC, precio DEC, stock INTEGER)");
 			log( Level.INFO, "Tabla creada correctamente", null );
 		} catch (SQLException e) {
 			throw new DBException("Error creando la tabla 'Producto' en la BD", e);
@@ -76,7 +76,7 @@ public class BaseProducto {
 		}
 }
 	public static void storeP(Producto p) throws DBException {
-		try (PreparedStatement ps = conexion.prepareStatement("INSERT INTO Producto (codigo,nombre,peso,precio,marca,seccion) VALUES (? ,?, ?, ?, ?, ?)");
+		try (PreparedStatement ps = conexion.prepareStatement("INSERT INTO Producto (codigo,nombre,peso,precio,marca,seccion,stock) VALUES (? ,?, ?, ?, ?, ?, ?)");
 			Statement s = conexion.createStatement()) {
 			ps.setInt(1, p.getCodigo());
 			ps.setString(2, p.getNombre());
@@ -84,6 +84,7 @@ public class BaseProducto {
 			ps.setDouble(4, p.getPrecio());
 			ps.setString(5, p.getMarca());
 			ps.setString(6, p.getSeccion());
+			ps.setInt(7,p.getStock());
 			
 			
 			
@@ -95,7 +96,7 @@ public class BaseProducto {
 		}
 	}
 	public Producto getProducto(int codigo) throws DBException {
-		try (PreparedStatement s = conexion.prepareStatement("SELECT codigo,nombre,peso,precio,marca,seccion FROM Producto WHERE codigo = ?")) {
+		try (PreparedStatement s = conexion.prepareStatement("SELECT codigo,nombre,peso,precio,marca,seccion,stock FROM Producto WHERE codigo = ?")) {
 			s.setInt(1, codigo);
 			
 			ResultSet rs = s.executeQuery();
@@ -108,6 +109,7 @@ public class BaseProducto {
 				p.setPrecio(rs.getFloat("precio"));
 				p.setMarca(rs.getString("marca"));
 				p.setSeccion(rs.getString("seccion"));
+				p.setStock(rs.getInt("stock"));
 				
 				return p;
 			} else {
