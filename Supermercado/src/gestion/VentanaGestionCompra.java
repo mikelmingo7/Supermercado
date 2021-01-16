@@ -34,16 +34,13 @@ public class VentanaGestionCompra<Compra> extends JFrame{
 	JTextField preciojt = new JTextField();
 	JLabel fechajl = new JLabel("Fecha");
 	JTextField fechajt = new JTextField();
-	JLabel descuentojl = new JLabel("Descuento");
-	JRadioButton botonDescuento = new JRadioButton("Si");
-	JRadioButton botonSinDescuento = new JRadioButton("No");
-	JTextField descuentojt = new JTextField();
+
 	
 	
 	JList listaCompras = new JList<>();
 	JScrollPane listaScroll = new JScrollPane(listaCompras);
 	DefaultListModel model = new DefaultListModel<Compra>();
-	
+	JComboBox productosDisponibles;
 	JButton nuevo = new JButton("NUEVO");
 	JButton guardar = new JButton("GUARDAR");
 	JButton eliminar = new JButton("ELIMINAR");
@@ -54,18 +51,18 @@ public class VentanaGestionCompra<Compra> extends JFrame{
 		
 		setLayout(null);
 		setSize(900,500);
-		setTitle("Gestión compras");
+		setTitle("Gestiï¿½n compras");
 	    setLocationRelativeTo(null);
 	    
 
 	    add(acciones);
 	    add(listaPanel);
 	    add(infoPanel);
-
+	    acciones.add(productosDisponibles);
 	    acciones.add(nuevo);
 	    acciones.add(guardar);
 	    acciones.add(eliminar);
-	      
+	    
 	    acciones.setBounds(0,0,900,80);
 	    listaPanel.setBounds(0,80,300,440);
 	    infoPanel.setBounds(320,80,500,400);
@@ -81,10 +78,7 @@ public class VentanaGestionCompra<Compra> extends JFrame{
 	    infoPanel.add(preciojt);
 	    infoPanel.add(fechajl);
 	    infoPanel.add(fechajt);
-	    infoPanel.add(descuentojl);
-	    infoPanel.add(descuentojt);
-	    infoPanel.add(botonDescuento);
-	    infoPanel.add(botonSinDescuento);
+	    
 	    
 	    
 	    //Botones funcionamiento
