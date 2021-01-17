@@ -63,7 +63,7 @@ private static void log( Level level, String msg, Throwable excepcion ) {
 		try (Statement s = con.createStatement()) {
 			s.executeUpdate("DROP TABLE IF EXISTS Cliente");
 			log( Level.INFO, "Borrado la tabla correctamente", null );
-		} catch (SQLException e) {
+		} catch (SQLException e) {  
 			throw new DBException("Error borrando la tabla 'Cliente' en la BD", e); 
 		}
 	}
@@ -117,7 +117,7 @@ private static void log( Level level, String msg, Throwable excepcion ) {
 		
 	}
 	public void update(Cliente c) throws DBException {
-		try (PreparedStatement s = con.prepareStatement("UPDATE TablaCliente SET nombre=?, apellido=?, socio=?  WHERE dni=?")) {
+		try (PreparedStatement s = con.prepareStatement("UPDATE TablaCliente SET dni=?, nombre=?, apellido=?, socio=?  WHERE dni=?")) {
 			s.setString(1, c.getDni());
 			s.setString(2, c.getNombre());
 			s.setString(3, c.getApellido());

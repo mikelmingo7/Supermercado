@@ -54,8 +54,7 @@ public class VentanaGestionProducto extends JFrame{
 	JLabel pesojl = new JLabel("Peso");
 	JTextField pesojt = new JTextField();
 	JTextField preciojt = new JTextField();
-	JLabel stockjl = new JLabel("Stock");
-	JTextField stockjt = new JTextField();
+	
 	
 	
 	JList listaProductos = new JList<>();
@@ -70,8 +69,8 @@ public class VentanaGestionProducto extends JFrame{
 	public VentanaGestionProducto() {
 		
 		setLayout(new BorderLayout());
-		setSize(900,500);
-		setTitle("Gestión productos");
+		setSize(900,500); 
+		setTitle("Gestión productos"); 
 	    setLocationRelativeTo(null);
 	    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    try {
@@ -102,7 +101,7 @@ public class VentanaGestionProducto extends JFrame{
     
 	    listaPanel.add(listaScroll);
 	    
-	    infoPanel.setLayout(new GridLayout(9,2));
+	    infoPanel.setLayout(new GridLayout(8,2));
 	   
 	    infoPanel.add(nombrejl);
 	    infoPanel.add(nombrejt);
@@ -116,8 +115,7 @@ public class VentanaGestionProducto extends JFrame{
 	    infoPanel.add(pesojt);
 	    infoPanel.add(preciojl);
 	    infoPanel.add(preciojt); 
-	    infoPanel.add(stockjl);
-	    infoPanel.add(stockjt);
+	   
 //Botones funcionamiento
 	    
 	    eliminar.addActionListener(new ActionListener() {
@@ -149,7 +147,7 @@ public class VentanaGestionProducto extends JFrame{
 					
 					bp.createProductoTable();
 
-					String nomb,cod,sec,mar,pes, prec,stk;
+					String nomb,cod,sec,mar,pes, prec;
 					
 					nomb=nombrejt.getText();
 					cod=codigojt.getText();
@@ -157,7 +155,7 @@ public class VentanaGestionProducto extends JFrame{
 					mar=marcajt.getText();
 					pes=pesojt.getText();
 					prec=preciojt.getText();
-					stk=stockjt.getText();
+				
 					
 					Producto p = new Producto();
 					
@@ -167,7 +165,7 @@ public class VentanaGestionProducto extends JFrame{
 					p.setPrecio(Double.parseDouble(prec));
 					p.setMarca(mar);
 					p.setSeccion(sec);
-					p.setStock(Integer.parseInt(stk));
+
 					
 					
 					bp.storeP(p);
@@ -186,7 +184,7 @@ public class VentanaGestionProducto extends JFrame{
 				marcajt.setText(null);
 				pesojt.setText(null);
 				preciojt.setText(null);
-            	stockjt.setText(null);
+            
             }
         });
         
@@ -199,7 +197,7 @@ public class VentanaGestionProducto extends JFrame{
 				try {
 					bp.connect("producto.db");
 				
-					String nomb,cod,sec,mar,pes, prec, stk;
+					String nomb,cod,sec,mar,pes, prec;
 					
 					nomb=nombrejt.getText();
 					cod=codigojt.getText();
@@ -207,7 +205,7 @@ public class VentanaGestionProducto extends JFrame{
 					mar=marcajt.getText();
 					pes=pesojt.getText();
 					prec=preciojt.getText();
-					stk=stockjt.getText();
+
 					Producto p = new Producto();
 					
 					p.setCodigo( Integer.parseInt(cod) );
@@ -216,7 +214,7 @@ public class VentanaGestionProducto extends JFrame{
 					p.setPrecio(Double.parseDouble(prec));
 					p.setMarca(mar);
 					p.setSeccion(sec);
-					p.setStock(Integer.parseInt(stk));
+					
 					bp.update(p);
 					
 					

@@ -94,7 +94,7 @@ public class VentanaGestionTrabajadores extends JFrame{
 	    infoPanel.add(apellidos);
 	    infoPanel.add(ap);
 	    infoPanel.add(DNI);
-	    infoPanel.add(dni);
+	    infoPanel.add(dni); 
 	    infoPanel.add(salario);
 	    infoPanel.add(sal);
 	    infoPanel.add(horario);

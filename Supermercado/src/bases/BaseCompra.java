@@ -85,7 +85,7 @@ public class BaseCompra {
 			ps.setDouble(4, co.getPrecio());
 			ps.setString(5, co.getFecha());
 			
-			
+			 
 		
 			ps.executeUpdate();
 			
