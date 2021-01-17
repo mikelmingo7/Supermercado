@@ -274,10 +274,7 @@ public class VentanaGestionProducto extends JFrame{
             	pesojt.setText(""+p.getPeso());
             	preciojt.setText(""+p.getPrecio());
          }
-           
-            
-          
-	    
+
 		};
 		
 

@@ -7,6 +7,11 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
@@ -19,49 +24,55 @@ import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
 
+import bases.BaseProducto;
+import bases.DBException;
 import clases.Producto;
 
 public class VentanaGestionInventario extends JFrame{
-		
+	BaseProducto bp=new BaseProducto();
+	
 	JPanel listaPanel = new JPanel();
 	JPanel infoPanel = new JPanel();
 	JPanel botonPanel = new JPanel();
 	
 	JLabel nombrejl = new JLabel("Nombre");
 	JTextField nombrejt = new JTextField();
-	JLabel codigojl = new JLabel("Código");
+	JLabel codigojl = new JLabel("CÃ³digo");
 	JTextField codigojt = new JTextField();
 	JLabel cantidadjl = new JLabel("Cantidad");
-	JSpinner cantidad = new JSpinner();
+	JTextField cantidadjt = new JTextField();
+	
 	
 	JButton guardar = new JButton("GUARDAR");
 	JButton exportar= new JButton("EXPORTAR");
 	
 	
-	JList listaProductos = new JList<>();
+	JList listaProductos = new JList<Producto>();
 	JScrollPane listaScroll = new JScrollPane(listaProductos);
 	DefaultListModel model = new DefaultListModel<Producto>();
 	
 	
 	public VentanaGestionInventario() {
 		
-		setLayout(new GridLayout(3,1));
+		setLayout(new BorderLayout());
 		setSize(900,500);
-		setTitle("Gestión de Inventario");
+		setTitle("GestiÃ³n de Inventario");
 	    setLocationRelativeTo(null);
 	    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    
+	    botonPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+	    listaPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+	    infoPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 	    
-		add(listaPanel);
-		add(infoPanel);
-		add(botonPanel);
-	    
-	    
+	    botonPanel.setLayout(new GridLayout(1,2));
 	    infoPanel.setLayout(new GridLayout(3,2));
 	    listaPanel.setLayout(new GridLayout(1,1));
-	    botonPanel.setLayout(new GridLayout(1,2));
 	    
+	    add(botonPanel, BorderLayout.NORTH);
+	    add(listaPanel, BorderLayout.LINE_START);
+	    add(infoPanel, BorderLayout.CENTER);
 	    
+		
 
 	    listaPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 	    infoPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
@@ -75,26 +86,80 @@ public class VentanaGestionInventario extends JFrame{
     
 	    listaPanel.add(listaScroll);
 	    
-	    JPanel panelNombre = new JPanel();
-	    panelNombre.setLayout(new GridLayout(1,2));
-	    panelNombre.add(nombrejl);
-	    panelNombre.add(nombrejt);
-	    infoPanel.add(panelNombre);
+
+	    infoPanel.add(nombrejl);
+	    infoPanel.add(nombrejt);
+	    infoPanel.add(codigojl);
+	    infoPanel.add(codigojt);
+	    infoPanel.add(cantidadjl);
+	    infoPanel.add(cantidadjt);
+
 	    
-	    JPanel panelCodigo = new JPanel();
-	    panelCodigo.setLayout(new GridLayout(1,2));
-	    panelCodigo.add(codigojl);
-	    panelCodigo.add(codigojt);
-	    infoPanel.add(panelCodigo);
-	    
-	    JPanel panelSpinner = new JPanel();
-	    panelSpinner.setLayout(new GridLayout(1,2));
-	    panelSpinner.add(cantidadjl);
-	    panelSpinner.add(cantidad);
-	    infoPanel.add(panelSpinner);
+	    model.clear();
+    	
+    	try {
+    		bp.connect("producto.db");
+    		
+    		ArrayList<Integer> codigos = bp.getCodigo();
+    		
+    		for (int i = 0; i < codigos.size(); i++) {
+    			Integer cod = codigos.get(i);
+    			Producto p = bp.getProducto(cod);
+    			model.addElement(p);
+				
+			}
+
+		} catch (DBException | SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+    	
+    	MouseListener seleccionar = new MouseAdapter() {
+            public void mouseClicked(MouseEvent mouseEvent) {
+            	Producto p = (Producto) listaProductos.getSelectedValue();
+            	nombrejt.setText(p.getNombre());
+            	codigojt.setText(""+p.getCodigo());
+            	cantidadjt.setText(""+p.getStock());
+         }
+
+		};
 	  
-	    
-	    setResizable(false);
+    	listaProductos.addMouseListener(seleccionar);
+    	
+guardar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				//Update de cliente en DB
+				
+				try {
+					bp.connect("producto.db");
+				
+					String nomb,cod,can;
+					
+					nomb=nombrejt.getText();
+					cod=codigojt.getText();
+					can=(String) cantidadjt.getText();
+					Producto p = new Producto();
+					
+					p.setCodigo( Integer.parseInt(cod) );
+					p.setNombre(nomb);
+					p.setStock(Integer.parseInt(can));
+					
+					bp.update(p);
+					
+					
+				} catch (DBException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				
+			}
+		});
+        
+    	
+	  
 	    setVisible(true);
 	}
 	
