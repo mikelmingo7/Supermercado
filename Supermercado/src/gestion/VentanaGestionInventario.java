@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.sql.SQLException;
@@ -179,11 +180,11 @@ public class VentanaGestionInventario extends JFrame{
 	    	try {
 				
 	    		//Abro stream, crea el fichero si no existe
-	            FileWriter fw = new FileWriter("G:\\productos.txt");
+	            FileWriter fw = new FileWriter("productos.txt");
 	            //Escribimos en el fichero un String y un caracter 97 (a)
 	            for (int i = 0; i < model.getSize(); i++) {
 					Producto p = (Producto) model.getElementAt(i);  
-					fw.write(p.toString());		
+					fw.write(p.toString()+ "\r\n");		
 				}
 	            //Cierro el stream
 	            fw.close();
