@@ -15,16 +15,17 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import gestion.VentanaGestionCliente;
+import gestion.VentanaGestionInventario;
 import gestion.VentanaGestionProducto;
+import gestion.VentanaGestionTrabajadores;
 
 
 public class VentanaPanelAdmin extends Thread{
 	
-	JButton empleados = new JButton("Empleados");
+	JButton empleados = new JButton("Trabajadores");
 	JButton clientes = new JButton("Clientes");
 	JButton inventario = new JButton("Inventario");
 	JButton producto = new JButton("Productos");
-	JButton descuento = new JButton("Descuento");
 	
 	
 	
@@ -36,7 +37,7 @@ public class VentanaPanelAdmin extends Thread{
 		ventanapaneladmin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		ventanapaneladmin.setSize(500,300);
 		ventanapaneladmin.setTitle("Panel Administrador");
-		panel1.setLayout(new GridLayout(5,1));
+		panel1.setLayout(new GridLayout(4,1));
 		ventanapaneladmin.add(panel1);
 		ventanapaneladmin.setVisible(true);
 		
@@ -44,13 +45,15 @@ public class VentanaPanelAdmin extends Thread{
 		panel1.add(clientes);	
 		panel1.add(inventario);
 		panel1.add(producto);
-		panel1.add(descuento);
 		
 		empleados.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				 Thread threadEmpleados = new Thread();
+				 Thread threadEmpleados = new Thread() {
+					VentanaGestionTrabajadores vt= new VentanaGestionTrabajadores(); 
+				 };
+				 
 				 threadEmpleados.start();
 				
 			}
@@ -73,7 +76,7 @@ public class VentanaPanelAdmin extends Thread{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				Thread threadInventario = new Thread() {
-					
+					VentanaGestionInventario vi = new VentanaGestionInventario();
 				};
 				
 				threadInventario.start();
@@ -93,15 +96,6 @@ public class VentanaPanelAdmin extends Thread{
 			}
 		});
 		
-		descuento.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				Thread threadDescuento = new Thread();
-				threadDescuento.start();
-				
-			}
-		});
 		
 	}
 
