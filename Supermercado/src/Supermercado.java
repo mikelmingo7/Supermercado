@@ -83,7 +83,7 @@ public class Supermercado {
 	@Override
 	public String toString() {
 		return "Supermercado [nombre=" + nombre + ", direccion=" + direccion + ", clientes=" + clientes
-				+ ", trabajadores=" + trabajadores + ", productos=" + productos + "]";
+				+ ", trabajadores=" + trabajadores + ", productos =" + productos + "]";
 	}
 
 
