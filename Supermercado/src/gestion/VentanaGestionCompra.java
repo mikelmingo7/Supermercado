@@ -67,6 +67,7 @@ public class VentanaGestionCompra extends JFrame{
 	JButton nuevo = new JButton("NUEVO");
 	JButton cargar = new JButton("CARGAR");
 	JButton sumar = new JButton("+");
+	JButton restar = new JButton("-");
 	JButton eliminar = new JButton("ELIMINAR");
 	
 	
@@ -121,12 +122,14 @@ public class VentanaGestionCompra extends JFrame{
 	    acciones.add(eliminar);
 	    acciones.add(productosDisponibles);
 	    acciones.add(sumar);
+	    acciones.add(restar);
 	    
 	    
 	    productosPanel.add(listaP, BorderLayout.PAGE_START);
 	    productosPanel.add(listaScrollP, BorderLayout.CENTER);
 
 	    listaCompras.setModel(model);
+	    listaProductos.setModel(modeloP);
     
 	    listaPanel.add(listaC, BorderLayout.PAGE_START);
 	    listaPanel.add(listaScroll, BorderLayout.CENTER);
@@ -255,10 +258,21 @@ public class VentanaGestionCompra extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 //Sumar producto a la lista de la compra
-            	
-           
+            	Producto p = (Producto) productosDisponibles.getSelectedItem();
+            	modeloP.addElement(p);
             }
         });
+	    
+	    restar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //Sumar producto a la lista de la compra
+            	Producto p = (Producto) productosDisponibles.getSelectedItem();
+            	modeloP.removeElement(p);
+            }
+        });
+	    
+	    
 	    
 	  //Ver valores del producto seleccionado en el TextField correspondiente
 	    MouseListener seleccionar = new MouseAdapter() {
@@ -273,6 +287,13 @@ public class VentanaGestionCompra extends JFrame{
            
 		};
 		
+		MouseListener seleccionP = new MouseAdapter() {
+			public void mouseClicked(MouseEvent mouseEvent) {
+				Producto p = (Producto) listaProductos.getSelectedValue();
+			}
+		};
+		
+		listaCompras.addMouseListener(seleccionP);
 		listaCompras.addMouseListener(seleccionar);
 
 	    setResizable(false);
