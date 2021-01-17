@@ -226,6 +226,24 @@ public class VentanaGestionTrabajadores extends JFrame{
 						e.printStackTrace();
 					}
 				
+				model.clear();
+            	
+            	try {
+            		bt.connect("trabajador.db");
+            		ArrayList<String> dnis = bt.getDni();
+            		
+            		for (int i = 0; i < dnis.size(); i++) {
+            			String cod = dnis.get(i);
+            			Trabajador t = bt.getTrabajador(cod);
+            			model.addElement(t);
+						
+					}
+	
+				} catch (DBException | SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
 			}
 		});
         

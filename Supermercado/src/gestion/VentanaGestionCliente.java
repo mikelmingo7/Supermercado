@@ -212,6 +212,24 @@ public class VentanaGestionCliente extends JFrame {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+				
+				model.clear();
+            	
+            	try {
+            		bc.connect("cliente.db");
+            		ArrayList<String> dnis = bc.getDni();
+            		
+            		for (int j = 0; j < dnis.size(); j++) {
+            			String dni = dnis.get(j);
+            			Cliente c = bc.getCliente(dni);
+            			model.addElement(c);
+						
+					}
+	
+				} catch (DBException | SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
       //Ver valores del producto seleccionado en el TextField correspondiente
