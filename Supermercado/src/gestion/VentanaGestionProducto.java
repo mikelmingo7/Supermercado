@@ -210,7 +210,7 @@ public class VentanaGestionProducto extends JFrame{
 					
 					p.setCodigo( Integer.parseInt(cod) );
 					p.setNombre(nomb);
-					p.setPeso(Double.parseDouble(cod));
+					p.setPeso(Double.parseDouble(pes));
 					p.setPrecio(Double.parseDouble(prec));
 					p.setMarca(mar);
 					p.setSeccion(sec);
