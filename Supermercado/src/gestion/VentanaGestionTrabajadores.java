@@ -217,7 +217,7 @@ public class VentanaGestionTrabajadores extends JFrame{
 				t.setHorario(hora);
 				t.setPuesto(puest);
 				t.setHoras_trabajadas(Integer.parseInt(htraba));
-				t.setDisponibilidad(dispo);				
+				t.setDisponibilidad(dispo);	 			
 				
 				bt.update(t);
 				

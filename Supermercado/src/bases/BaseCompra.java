@@ -132,7 +132,7 @@ public class BaseCompra {
 	
 
 	public void update(Compra c) throws DBException {
-		try (PreparedStatement s = conexion.prepareStatement("UPDATE TablaCompra SET codigoCompra=?,nombreProducto=?, dniCliente=?, precio=?, fecha=?  WHERE codigoCompra=?")) {
+		try (PreparedStatement s = conexion.prepareStatement("UPDATE TablaCompra SET nombreProducto=?, dniCliente=?, precio=?, fecha=?  WHERE codigoCompra=?")) {
 			s.setInt(1, c.getCodigoCompra());
 			s.setString(2, c.getNombreProducto());
 			s.setString(3, c.getDniCliente());

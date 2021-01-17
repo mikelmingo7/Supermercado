@@ -117,7 +117,7 @@ private static void log( Level level, String msg, Throwable excepcion ) {
 		
 	}
 	public void update(Cliente c) throws DBException {
-		try (PreparedStatement s = con.prepareStatement("UPDATE TablaCliente SET dni=?, nombre=?, apellido=?, socio=?  WHERE dni=?")) {
+		try (PreparedStatement s = con.prepareStatement("UPDATE TablaCliente SET  nombre=?, apellido=?, socio=?  WHERE dni=?")) {
 			s.setString(1, c.getDni());
 			s.setString(2, c.getNombre());
 			s.setString(3, c.getApellido());

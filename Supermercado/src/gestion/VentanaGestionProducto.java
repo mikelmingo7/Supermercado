@@ -222,6 +222,24 @@ public class VentanaGestionProducto extends JFrame{
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+ model.clear();
+            	
+            	try {
+            		bp.connect("producto.db");
+            		
+            		ArrayList<Integer> codigos = bp.getCodigo();
+            		
+            		for (int i = 0; i < codigos.size(); i++) {
+            			Integer cod = codigos.get(i);
+            			Producto p = bp.getProducto(cod);
+            			model.addElement(p);
+						
+					}
+	
+				} catch (DBException | SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				
 				
 			}
@@ -251,7 +269,7 @@ public class VentanaGestionProducto extends JFrame{
 	
 				} catch (DBException | SQLException e1) {
 					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					e1.printStackTrace(); 
 				}
             	
             	

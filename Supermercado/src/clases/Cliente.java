@@ -12,7 +12,7 @@ public class Cliente {
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.dni = dni;
-		this.socio = socio;
+		this.socio = socio; 
 	}
 	
 	public Cliente() {

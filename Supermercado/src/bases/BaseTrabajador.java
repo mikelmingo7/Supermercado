@@ -109,7 +109,7 @@ private static void log( Level level, String msg, Throwable excepcion ) {
 				t.setHoras_trabajadas(rs.getInt("horas_trabajadas"));
 				t.setDisponibilidad(rs.getString("disponibilidad"));
 				
-				return t;
+				return t; 
 			} else {
 				return new Trabajador();
 			}
@@ -128,7 +128,7 @@ private static void log( Level level, String msg, Throwable excepcion ) {
 		
 	}
 	public void update(Trabajador t) throws DBException {
-		try (PreparedStatement s = con.prepareStatement("UPDATE TablaTrabajador SET nombre=?, apellido=?, salario=?, horario=?, puesto=?, horas_trabajadas=?, disponibilidad=?  WHERE dni=?")) {
+		try (PreparedStatement s = con.prepareStatement("UPDATE TablaTrabajador SET nombre=?, apellidos=?, salario=?, horario=?, puesto=?, horas_trabajadas=?, disponibilidad=?  WHERE dni=?")) {
 			s.setString(1, t.getDni());
 			s.setString(2, t.getNombre());
 			s.setString(3, t.getApellidos());
