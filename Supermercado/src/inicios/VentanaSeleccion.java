@@ -3,7 +3,7 @@ package inicios;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import java.util.logging.Logger;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -13,7 +13,7 @@ import javax.swing.JPanel;
 
 public class VentanaSeleccion extends JFrame{
 
-	public VentanaSeleccion() {
+	public VentanaSeleccion(Logger LOGGER) {
 		JPanel panel=new JPanel();	
 		setSize(600,300);
 		setTitle("Ventana de Seleccion");
@@ -21,57 +21,41 @@ public class VentanaSeleccion extends JFrame{
 		add(panel);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
+		
 		panel.setBackground(new Color(117, 162, 214));
 		
 		panel.setLayout(null);
 		
 		JButton administrador=new JButton("Administrador");
-			administrador.setBounds(40, 100, 150, 30);
+			administrador.setBounds(90, 100, 150, 30);
 			panel.add(administrador);
 		
 		administrador.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				new VentanaLogin("admin");
+				new VentanaLoginAdministrador("admin", LOGGER);
 				dispose();
 				
 			}
 		});	
 		
-		JButton usuario=new JButton("Usuario");
-			usuario.setBounds(210, 100, 150, 30);
-			panel.add(usuario);	
-
-		usuario.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				new VentanaLogin("cliente");
-				dispose();
-				
-			}
-		});
+		
 
 		JButton trabajador = new JButton("Trabajador");
-		trabajador.setBounds(390, 100, 150, 30);
+		trabajador.setBounds(300, 100, 150, 30);
 		panel.add(trabajador);	
 
 		trabajador.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				new VentanaLogin("trabajador");
+				new VentanaLoginTrabajador("trabajador", null);
 				
 			}
 		});
 		
 		}
 
-	
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		new VentanaSeleccion();
-		
-	}
+
 }
