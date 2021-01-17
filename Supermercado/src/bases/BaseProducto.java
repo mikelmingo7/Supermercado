@@ -144,8 +144,7 @@ public class BaseProducto {
 			s.setInt(7, p.getCodigo());
 			
 			s.executeUpdate();
-			int i = s.executeUpdate();
-			System.out.println(i);
+
 			log( Level.INFO, "Actualizado el producto especificado", null );
 		} catch (SQLException e) {
 			throw new DBException("No se pudo guardar el producto en la BD", e);
