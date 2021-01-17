@@ -173,7 +173,7 @@ public class VentanaGestionInventario extends JFrame{
 	    	try {
 	    		bp.connect("producto.db");
 	    		
-	    		ArrayList<Integer> codigos = bp.getCodigo();
+	    		ArrayList<Integer> codigos = bp.getCodigo(); 
 	    		
 	    		for (int i = 0; i < codigos.size(); i++) {
 	    			Integer cod = codigos.get(i);

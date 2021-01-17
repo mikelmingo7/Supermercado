@@ -24,7 +24,7 @@ public class BaseProducto {
 	private static Connection conexion = null;
 	 
 	private static void log( Level level, String msg, Throwable excepcion ) {
-		if (!LOGGING) return;
+		if (!LOGGING) return; 
 		if (logger==null) {  // Logger por defecto local:
 			logger = Logger.getLogger( BaseProducto.class.getName() );  // Nombre del logger - el de la clase
 			logger.setLevel( Level.ALL );  // Loguea todos los niveles

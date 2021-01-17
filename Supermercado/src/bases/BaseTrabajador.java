@@ -28,7 +28,7 @@ private static void log( Level level, String msg, Throwable excepcion ) {
 	}
 	if (excepcion==null)
 		logger.log( level, msg );
-	else
+	else 
 		logger.log( level, msg, excepcion );
 }
 	

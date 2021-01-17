@@ -30,6 +30,7 @@ import javax.swing.event.*;
 
 import org.sqlite.core.DB;
 
+import bases.BaseTrabajador;
 import gestion.VentanaGestionCliente;
 import panel.VentanaPanelTrabajador;
 
@@ -199,7 +200,20 @@ public class VentanaLoginTrabajador extends JFrame {
 
 		setVisible(true);		
 	}
-
+	private Logger logger = null;
+	private boolean LOGGING = true;	
+    //Método para loggear en la clase
+	private void log( Level level, String msg, Throwable excepcion ) {
+		if (!LOGGING) return;
+		if (logger==null) {  // Logger por defecto local:
+			logger = Logger.getLogger( BaseTrabajador.class.getName() );  // Nombre del logger - el de la clase
+			logger.setLevel( Level.ALL );  // Loguea todos los niveles
+		}
+		if (excepcion==null)
+			logger.log( level, msg );
+		else 
+			logger.log( level, msg, excepcion );
+	}
 
 	public void changed() {
 		if (contraseña.getText().equals("") || contraseña.getText().contains(" ") || usuario.getText().equals("") || usuario.getText().contains(" ")){
@@ -268,6 +282,7 @@ public class VentanaLoginTrabajador extends JFrame {
 				directorioPersonal.mkdirs();
 				JOptionPane.showMessageDialog(null, "Usuario creado con éxito");
 				int rs2 = stmt.executeUpdate(instruccion);
+				log( Level.INFO, "Trabajador creado con exito", null );
 			} else {
 				JOptionPane.showMessageDialog(null, "Este usuario ya existe");
 			}
