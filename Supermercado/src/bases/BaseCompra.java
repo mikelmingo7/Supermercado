@@ -77,7 +77,7 @@ public class BaseCompra {
 		}
 }
 	public static void storeCo(Compra co) throws DBException {
-		try (PreparedStatement ps = conexion.prepareStatement("INSERT INTO TablaCompra (codigoCompra, nombreProducto, dniCliente, precio, fecha) VALUES (? ,?, ?, ?)");
+		try (PreparedStatement ps = conexion.prepareStatement("INSERT INTO TablaCompra (codigoCompra, nombreProducto, dniCliente, precio, fecha) VALUES (? ,?, ?, ?, ?)");
 			Statement s = conexion.createStatement()) {
 			ps.setInt(1, co.getCodigoCompra());
 			ps.setString(2, co.getNombreProducto());
