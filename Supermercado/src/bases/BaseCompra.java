@@ -59,7 +59,7 @@ public class BaseCompra {
 	public static void createCompraTable() throws DBException {
 		// TODO Auto-generated method stub
 		try (Statement s = conexion.createStatement()) {
-			s.executeUpdate("CREATE TABLE IF NOT EXISTS TablaCompra (nombreProducto VARCHAR PRIMARY KEY, dniCliente VARCHAR, precio DEC, fecha DATE)");
+			s.executeUpdate("CREATE TABLE IF NOT EXISTS TablaCompra (codigoCompra INTEGER PRIMARY KEY, nombreProducto VARCHAR , dniCliente VARCHAR, precio DEC, fecha DATE)");
 			log( Level.INFO, "Tabla creada correctamente", null );
 		} catch (SQLException e) {
 			throw new DBException("Error creando la tabla 'TablaCompra' en la BD", e);
@@ -77,12 +77,14 @@ public class BaseCompra {
 		}
 }
 	public static void storeCo(Compra co) throws DBException {
-		try (PreparedStatement ps = conexion.prepareStatement("INSERT INTO TablaCompra (nombreProducto, dniCliente, precio, fecha) VALUES (? ,?, ?, ?)");
+		try (PreparedStatement ps = conexion.prepareStatement("INSERT INTO TablaCompra (codigoCompra, nombreProducto, dniCliente, precio, fecha) VALUES (? ,?, ?, ?)");
 			Statement s = conexion.createStatement()) {
-			ps.setString(1, co.getNombreProducto());
-			ps.setString(2, co.getDniCliente());
-			ps.setDouble(3, co.getPrecio());
-			ps.setString(4, co.getFecha());
+			ps.setInt(1, co.getCodigoCompra());
+			ps.setString(2, co.getNombreProducto());
+			ps.setString(3, co.getDniCliente());
+			ps.setDouble(4, co.getPrecio());
+			ps.setString(5, co.getFecha());
+			
 			
 		
 			ps.executeUpdate();
@@ -92,14 +94,15 @@ public class BaseCompra {
 			throw new DBException("No se pudo guardar el usuario en la BD", e);
 		}
 	}
-	public Compra getCompra(String nombreProducto) throws DBException {
-		try (PreparedStatement s = conexion.prepareStatement("SELECT nombreProducto, dniCliente, precio, fecha FROM TablaCompra WHERE nombreProducto = ?")) {
-			s.setString(1, nombreProducto);
+	public Compra getCompra(Integer codigoCompra) throws DBException {
+		try (PreparedStatement s = conexion.prepareStatement("SELECT codigoCompra, nombreProducto, dniCliente, precio, fecha FROM TablaCompra WHERE nombreProducto = ?")) {
+			s.setInt(1, codigoCompra);
 			
 			ResultSet rs = s.executeQuery();
 
 			if (rs.next()) {
 				Compra c=new Compra();
+				c.setCodigoCompra(rs.getInt("codigoCompra"));
 				c.setNombreProducto(rs.getString("nombreProducto"));
 				c.setDniCliente(rs.getString("dniCliente"));
 				c.setPrecio(rs.getDouble("precio"));
@@ -113,27 +116,28 @@ public class BaseCompra {
 			}
 			
 		} catch (SQLException | DateTimeParseException e) {
-			throw new DBException("Error obteniendo la compra con nombreCliente " + nombreProducto, e);
+			throw new DBException("Error obteniendo la compra con codigoCompra " +codigoCompra, e);
 		}
 	}
-	public ArrayList<String> getNombreProducto() throws DBException, SQLException{
-		 PreparedStatement ps = conexion.prepareStatement("SELECT nombreProducto FROM TablaCompra");
+	public ArrayList<Integer> getCodigoCompra() throws DBException, SQLException{
+		 PreparedStatement ps = conexion.prepareStatement("SELECT codigoCompra, nombreProducto, FROM TablaCompra ");
 		 ResultSet rs = ps.executeQuery();
-		 ArrayList<String> listaNombresP=new ArrayList<String>();
+		 ArrayList<Integer> listaCodigosC=new ArrayList<Integer>();
 		 while(rs.next()) {
-			 listaNombresP.add(rs.getString("nombreProducto"));
+			 listaCodigosC.add(rs.getInt("codigoCompra"));
 		 }
-		return listaNombresP; 
+		return listaCodigosC; 
 		
 	}
 	
 
 	public void update(Compra c) throws DBException {
-		try (PreparedStatement s = conexion.prepareStatement("UPDATE Compra SET nombreProducto=?, dniCliente=?, precio=?, fecha=?  WHERE nombreProducto=?")) {
-			s.setString(1, c.getNombreProducto());
-			s.setString(2, c.getDniCliente());
-			s.setDouble(3, c.getPrecio());
-			s.setString(4, c.getFecha());
+		try (PreparedStatement s = conexion.prepareStatement("UPDATE TablaCompra SET codigoCompra=?,nombreProducto=?, dniCliente=?, precio=?, fecha=?  WHERE codigoCompra=?")) {
+			s.setInt(1, c.getCodigoCompra());
+			s.setString(2, c.getNombreProducto());
+			s.setString(3, c.getDniCliente());
+			s.setDouble(4, c.getPrecio());
+			s.setString(5, c.getFecha());
 		
 			
 			s.executeUpdate();
@@ -143,13 +147,13 @@ public class BaseCompra {
 		}
 	}
 	public void delete(Compra c) throws DBException {
-		try (PreparedStatement s = conexion.prepareStatement("DELETE FROM TablaCompra WHERE nombreProducto=?")) {
-			s.setString(1, c.getNombreProducto());
+		try (PreparedStatement s = conexion.prepareStatement("DELETE FROM TablaCompra WHERE codigoCompra=?")) {
+			s.setInt(1, c.getCodigoCompra());
 			
 			s.executeUpdate();
 			log( Level.INFO, "Borrado la compra correctamente", null );
 		} catch (SQLException e) {
-			throw new DBException("No se pudo eliminar la compra con nombreProducto " + c.getNombreProducto(), e);	}
+			throw new DBException("No se pudo eliminar la compra con codigoCompra " + c.getCodigoCompra(), e);	}
 	}
 
 		

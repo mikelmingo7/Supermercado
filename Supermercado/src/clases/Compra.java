@@ -2,12 +2,18 @@ package clases;
 import java.util.ArrayList;
 
 public class Compra {
+	protected int codigoCompra;
 	protected String nombreProducto;
 	protected String dniCliente;
 	protected Double precio;
 	protected String fecha;
-	public Compra(String nombreProducto, String dniCliente, Double precio, String fecha) {
+	
+	
+	
+	
+	public Compra(int codigoCompra, String nombreProducto, String dniCliente, Double precio, String fecha) {
 		super();
+		this.codigoCompra = codigoCompra;
 		this.nombreProducto = nombreProducto;
 		this.dniCliente = dniCliente;
 		this.precio = precio;
@@ -15,11 +21,18 @@ public class Compra {
 	}
 	public Compra() {
 		super();
-		this.nombreProducto = "";
+		this.codigoCompra = 0;
+		this.nombreProducto ="";
 		this.dniCliente = "";
 		this.precio = 0.0;
 		this.fecha = "";
+	}
 	
+	public int getCodigoCompra() {
+		return codigoCompra;
+	}
+	public void setCodigoCompra(int codigoCompra) {
+		this.codigoCompra = codigoCompra;
 	}
 	public String getNombreProducto() {
 		return nombreProducto;
@@ -47,10 +60,11 @@ public class Compra {
 	}
 	@Override
 	public String toString() {
-		return "Compra [nombreProducto=" + nombreProducto + ", dniCliente=" + dniCliente + ", precio=" + precio
-				+ ", fecha=" + fecha + "]";
+		return "Compra [codigoCompra=" + codigoCompra + ", nombreProducto=" + nombreProducto + ", dniCliente="
+				+ dniCliente + ", precio=" + precio + ", fecha=" + fecha + "]";
 	}
 	
+
 	
 	
 	
