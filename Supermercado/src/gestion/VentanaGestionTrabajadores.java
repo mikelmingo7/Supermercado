@@ -293,7 +293,8 @@ public class VentanaGestionTrabajadores extends JFrame{
 		
 		listaTrabajadores.addMouseListener(seleccionar);
 		
-	    
+		pack();
+	    setResizable(true);
 	    setVisible(true);
 				
 		}

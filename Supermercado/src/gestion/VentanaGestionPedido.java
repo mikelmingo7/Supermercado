@@ -305,7 +305,9 @@ public class VentanaGestionPedido extends JFrame{
 		listaPedidos.addMouseListener(seleccionP);
 		listaPedidos.addMouseListener(seleccionar);
 
-	    setResizable(false);
+		 
+	    pack();
+	    setResizable(true);
 	    setVisible(true);
 
 }

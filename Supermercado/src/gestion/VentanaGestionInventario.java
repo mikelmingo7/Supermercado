@@ -217,7 +217,9 @@ public class VentanaGestionInventario extends JFrame{
 	    }
 	});
     	
-	  
+	 
+    	pack();
+    	setResizable(true);
 	    setVisible(true);
 	}
 	

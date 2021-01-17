@@ -325,7 +325,9 @@ public class VentanaGestionCompra extends JFrame{
 		listaCompras.addMouseListener(seleccionP);
 		listaCompras.addMouseListener(seleccionar);
 
-	    setResizable(false);
+		 
+	    pack();
+	    setResizable(true);
 	    setVisible(true);
 
 }
