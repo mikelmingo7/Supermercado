@@ -57,10 +57,10 @@ public class BasePedido {
 			System.out.println("Error al cerrar la conexion con la Base de Datos");
 		}
 	}
-	public static void createPedidoTable() throws DBException {
-		// TODO Auto-generated method stub1
+	public static void createCompraTable() throws DBException {
+		// TODO Auto-generated method stub
 		try (Statement s = conexion.createStatement()) {
-			s.executeUpdate("CREATE TABLE IF NOT EXISTS TablaPedido (nombreProducto VARCHAR PRIMARY KEY, dniCliente VARCHAR, precio DEC, fecha DATE, direccion VARCHAR)");
+			s.executeUpdate("CREATE TABLE IF NOT EXISTS TablaPedido (codigoCompra INTEGER PRIMARY KEY, nombreProducto VARCHAR , dniCliente VARCHAR, precio DEC, fecha DATE, direccion VARCHAR)");
 			log( Level.INFO, "Tabla creada correctamente", null );
 		} catch (SQLException e) {
 			throw new DBException("Error creando la tabla 'TablaPedido' en la BD", e);
@@ -71,88 +71,93 @@ public class BasePedido {
   }
 	public static void dropProductoTable() throws DBException {
 		try (Statement s = conexion.createStatement()) {
-			s.executeUpdate("DROP TABLE IF EXISTS TablaCompra");
+			s.executeUpdate("DROP TABLE IF EXISTS TablaPedido");
 			log( Level.INFO, "Borrado la tabla correctamente", null );
 		} catch (SQLException e) {
-			throw new DBException("Error borrando la tabla 'TablaCompra' en la BD", e); 
+			throw new DBException("Error borrando la tabla 'TablaPedido' en la BD", e); 
 		}
 }
 	public static void storeCo(Pedido p) throws DBException {
-		try (PreparedStatement ps = conexion.prepareStatement("INSERT INTO TablaCompra (nombreProducto, dniCliente, precio, fecha) VALUES (? ,?, ?, ?)");
+		try (PreparedStatement ps = conexion.prepareStatement("INSERT INTO TablaPedido (codigoCompra, nombreProducto, dniCliente, precio, fecha, direccion) VALUES (? ,?, ?, ?, ?, ?)");
 			Statement s = conexion.createStatement()) {
-			ps.setString(1, p.getNombreProducto());
-			ps.setString(2, p.getDniCliente());
-			ps.setDouble(3, p.getPrecio());
-			ps.setString(4, p.getFecha());
+			ps.setInt(1, p.getCodigoCompra());
+			ps.setString(2, p.getNombreProducto());
+			ps.setString(3, p.getDniCliente());
+			ps.setDouble(4, p.getPrecio());
+			ps.setString(5, p.getFecha());
 			ps.setString(5, p.getDireccion());
+			
+			
 			
 		
 			ps.executeUpdate();
 			
-			log( Level.INFO, "Instertado la compra correctamente", null );
+			log( Level.INFO, "Instertado el pedido correctamente", null );
 		} catch (SQLException e) {
-			throw new DBException("No se pudo guardar el usuario en la BD", e);
+			throw new DBException("No se pudo guardar el pedido en la BD", e);
 		}
 	}
-	public Compra getCompra(String nombreProducto) throws DBException {
-		try (PreparedStatement s = conexion.prepareStatement("SELECT nombreProducto, dniCliente, precio, fecha, direccion FROM TablaPedido WHERE nombreProducto = ?")) {
-			s.setString(1, nombreProducto);
+	public Compra getPedido(Integer codigoCompra) throws DBException {
+		try (PreparedStatement s = conexion.prepareStatement("SELECT codigoCompra, nombreProducto, dniCliente, precio, fecha, direccion FROM TablaPedido WHERE codigoCompra = ?")) {
+			s.setInt(1, codigoCompra);
 			
 			ResultSet rs = s.executeQuery();
 
 			if (rs.next()) {
 				Pedido p=new Pedido();
+				p.setCodigoCompra(rs.getInt("codigoCompra"));
 				p.setNombreProducto(rs.getString("nombreProducto"));
 				p.setDniCliente(rs.getString("dniCliente"));
 				p.setPrecio(rs.getDouble("precio"));
 				p.setFecha(rs.getString("fecha"));
-				p.setDireccion("direccion");
-				
+				p.setFecha(rs.getString("direccion"));
+			
 				
 				return p;
 			} else {
-				return new Compra();
+				return new Pedido();
 				
 			}
 			
 		} catch (SQLException | DateTimeParseException e) {
-			throw new DBException("Error obteniendo la compra con nombreCliente " + nombreProducto, e);
+			throw new DBException("Error obteniendo la compra con codigoCompra " +codigoCompra, e);
 		}
 	}
-	public ArrayList<String> getNombreProducto() throws DBException, SQLException{
-		 PreparedStatement ps = conexion.prepareStatement("SELECT nombreProducto FROM TablaCompra");
+	public ArrayList<Integer> getCodigoCompra() throws DBException, SQLException{
+		 PreparedStatement ps = conexion.prepareStatement("SELECT codigoCompra FROM TablaPedido ");
 		 ResultSet rs = ps.executeQuery();
-		 ArrayList<String> listaNombresP=new ArrayList<String>();
+		 ArrayList<Integer> listaCodigosP=new ArrayList<Integer>();
 		 while(rs.next()) {
-			 listaNombresP.add(rs.getString("nombreProducto"));
+			 listaCodigosP.add(rs.getInt("codigoCompra"));
 		 }
-		return listaNombresP; 
+		return listaCodigosP; 
 		
 	}
 	
 
-	public void update(Compra c) throws DBException {
-		try (PreparedStatement s = conexion.prepareStatement("UPDATE Compra SET nombreProducto=?, dniCliente=?, precio=?, fecha=?  WHERE nombreProducto=?")) {
-			s.setString(1, c.getNombreProducto());
-			s.setString(2, c.getDniCliente());
-			s.setDouble(3, c.getPrecio());
-			s.setString(4, c.getFecha());
-		
+	public void update(Pedido p) throws DBException {
+		try (PreparedStatement s = conexion.prepareStatement("UPDATE TablaCompra SET codigoCompra=?,nombreProducto=?, dniCliente=?, precio=?, fecha=?  WHERE codigoCompra=?")) {
+			s.setInt(1, p.getCodigoCompra());
+			s.setString(2, p.getNombreProducto());
+			s.setString(3, p.getDniCliente());
+			s.setDouble(4, p.getPrecio());
+			s.setString(5, p.getFecha());
+			s.setString(6, p.getDireccion());
 			
 			s.executeUpdate();
-			log( Level.INFO, "Actualizado la compra especificado", null );
+			log( Level.INFO, "Actualizado el pedido especificado", null );
 		} catch (SQLException e) {
 			throw new DBException("No se pudo guardar la compra en la BD", e);
 		}
 	}
-	public void delete(Compra c) throws DBException {
-		try (PreparedStatement s = conexion.prepareStatement("DELETE FROM TablaCompra WHERE nombreProducto=?")) {
-			s.setString(1, c.getNombreProducto());
+	public void delete(Pedido p) throws DBException {
+		try (PreparedStatement s = conexion.prepareStatement("DELETE FROM TablaCompra WHERE codigoCompra=?")) {
+			s.setInt(1, p.getCodigoCompra());
 			
 			s.executeUpdate();
 			log( Level.INFO, "Borrado la compra correctamente", null );
 		} catch (SQLException e) {
-			throw new DBException("No se pudo eliminar la compra con nombreProducto " + c.getNombreProducto(), e);	}
+			throw new DBException("No se pudo eliminar el pedido con codigoCompra " + p.getCodigoCompra(), e);	}
 	}
 
 		
