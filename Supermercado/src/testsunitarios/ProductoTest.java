@@ -9,7 +9,7 @@ import clases.Producto;
 
 class ProductoTest {
 
-      Producto p = new Producto("patata",1212,"1","2",12.1,1.1);
+      Producto p = new Producto("patata",1212,"1","2",12.1,1.1,10);
   
 	@Test
 	public void testGetNombre() {
@@ -37,4 +37,8 @@ class ProductoTest {
 		assertEquals(1.1, p.getPrecio()); 
 
 	}
+	@Test
+	public void testGetStock() {
+		assertEquals(10, p.getStock()); 
+}
 }
