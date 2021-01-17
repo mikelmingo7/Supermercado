@@ -120,7 +120,7 @@ public class BaseCompra {
 		}
 	}
 	public ArrayList<Integer> getCodigoCompra() throws DBException, SQLException{
-		 PreparedStatement ps = conexion.prepareStatement("SELECT codigoCompra, nombreProducto, FROM TablaCompra ");
+		 PreparedStatement ps = conexion.prepareStatement("SELECT codigoCompra FROM TablaCompra ");
 		 ResultSet rs = ps.executeQuery();
 		 ArrayList<Integer> listaCodigosC=new ArrayList<Integer>();
 		 while(rs.next()) {

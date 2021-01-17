@@ -27,13 +27,15 @@ import javax.swing.JTextField;
 
 import clases.Compra;
 import clases.Producto;
+import bases.BaseCompra;
 import bases.BaseProducto;
 import bases.DBException;
 
 
 public class VentanaGestionCompra extends JFrame{
 
-	BaseProducto bp=new BaseProducto();
+	BaseCompra bc = new BaseCompra();
+	BaseProducto bp = new BaseProducto();
 	
 	JPanel listaPanel = new JPanel();
 	JPanel infoPanel = new JPanel();
@@ -42,6 +44,8 @@ public class VentanaGestionCompra extends JFrame{
 	
 	JLabel clientejl = new JLabel("Cliente");
 	JTextField clientejt = new JTextField();
+	JLabel codigojl = new JLabel("Código");
+	JTextField codigojt = new JTextField();
 	JLabel preciojl = new JLabel("Precio");
 	JTextField preciojt = new JTextField();
 	JLabel fechajl = new JLabel("Fecha");
@@ -56,14 +60,13 @@ public class VentanaGestionCompra extends JFrame{
 	JComboBox productosDisponibles = new JComboBox();;
 	
 	JLabel listaP = new JLabel("Productos comprados");
-	JList listaProductos = new JList<>();
+	JList listaProductos = new JList<Producto>();
 	JScrollPane listaScrollP = new JScrollPane(listaProductos);
 	DefaultListModel modeloP = new DefaultListModel<Producto>();
 	
 	JButton nuevo = new JButton("NUEVO");
 	JButton cargar = new JButton("CARGAR");
 	JButton sumar = new JButton("+");
-	JButton guardar = new JButton("GUARDAR");
 	JButton eliminar = new JButton("ELIMINAR");
 	
 	
@@ -114,7 +117,6 @@ public class VentanaGestionCompra extends JFrame{
 	    
 
 	    acciones.add(nuevo);
-	    acciones.add(guardar);
 	    acciones.add(cargar);
 	    acciones.add(eliminar);
 	    acciones.add(productosDisponibles);
@@ -131,6 +133,8 @@ public class VentanaGestionCompra extends JFrame{
 	    
 	    
 	    infoPanel.setLayout(new GridLayout(8,2));
+	    infoPanel.add(codigojl);
+	    infoPanel.add(codigojt);
 	    infoPanel.add(clientejl);
 	    infoPanel.add(clientejt);
 	    infoPanel.add(preciojl);
@@ -148,9 +152,9 @@ public class VentanaGestionCompra extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 //Eliminar compra de db
             	Compra c = (Compra) listaCompras.getSelectedValue();
-            	model.removeElement(p);
+            	model.removeElement(c);
             	try {
-					bc.connect("compras.db");
+					bc.connect("compra.db");
 					bc.delete(c);
 				} catch (DBException e1) {
 					// TODO Auto-generated catch block
@@ -167,8 +171,8 @@ public class VentanaGestionCompra extends JFrame{
             	
             	try {
 
-					bc.connect("compras.db");
-					bc.createProductoTable();
+					bc.connect("compra.db");
+					bc.createCompraTable();
 
 					String cliente, fecha;
 					
@@ -182,15 +186,23 @@ public class VentanaGestionCompra extends JFrame{
 					
 					Double precioP = 0.0;
 					
-					for(int i=0; i < modeloP.getSize(); i++){	
+					for(int i=0; i < listaProductos.getModel().getSize(); i++){	
 				        Producto p = (Producto) modeloP.getElementAt(i);
 				        precioP = precioP + p.getPrecio();
 					} 
 					
 					c.setPrecio(precioP);
 					
+					String productosDeCompra = "";
 					
-					bc.storeP(c);
+					for (int i = 0; i < listaProductos.getModel().getSize(); i++) {
+						Producto p = (Producto) modeloP.getElementAt(i);
+						productosDeCompra = productosDeCompra + ";" + p;
+					}
+					
+					c.setNombreProducto(productosDeCompra);
+					
+					bc.storeCo(c);
 					
 					
 				
@@ -200,23 +212,49 @@ public class VentanaGestionCompra extends JFrame{
 				}
 				
 				
-				nombrejt.setText(null);
-				codigojt.setText(null);
-				seccionjt.setText(null);
-				marcajt.setText(null);
-				pesojt.setText(null);
-				preciojt.setText(null);
+				clientejt.setText(null);
+				fechajt.setText(null);
             }
         });
         
-        guardar.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				//Update de cliente en DB
-				
-			}
-		});
+      //Boton para cargar informacion de la BD a la tabla
+	    cargar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //Eliminar producto de db
+            	
+            	model.clear();
+            	
+            	try {
+            		bp.connect("producto.db");
+            		
+            		ArrayList<Integer> codigos = bc.getCodigoCompra();
+            		
+            		for (int i = 0; i < codigos.size(); i++) {
+            			Integer cod = codigos.get(i);
+            			Compra c = bc.getCompra(cod);
+            			model.addElement(c);
+						
+					}
+	
+				} catch (DBException | SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+            	
+            	
+            	
+            }
+        });
+	    
+	    sumar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //Sumar producto a la lista de la compra
+            	
+           
+            }
+        });
 
 	    setResizable(false);
 	    setVisible(true);
