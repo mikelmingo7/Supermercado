@@ -141,6 +141,7 @@ public class BaseProducto {
 			s.setString(4, p.getMarca());
 			s.setString(5, p.getSeccion());
 			s.setInt(6, p.getCodigo());
+			s.setInt(7,p.getStock());
 			
 			s.executeUpdate();
 			log( Level.INFO, "Actualizado el producto especificado", null );
