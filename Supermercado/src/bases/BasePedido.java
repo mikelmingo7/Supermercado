@@ -57,7 +57,7 @@ public class BasePedido {
 			System.out.println("Error al cerrar la conexion con la Base de Datos");
 		}
 	}
-	public static void createCompraTable() throws DBException {
+	public static void createPedidoTable() throws DBException {
 		// TODO Auto-generated method stub
 		try (Statement s = conexion.createStatement()) {
 			s.executeUpdate("CREATE TABLE IF NOT EXISTS TablaPedido (codigoCompra INTEGER PRIMARY KEY, nombreProducto VARCHAR , dniCliente VARCHAR, precio DEC, fecha DATE, direccion VARCHAR)");
@@ -77,7 +77,7 @@ public class BasePedido {
 			throw new DBException("Error borrando la tabla 'TablaPedido' en la BD", e); 
 		}
 }
-	public static void storeCo(Pedido p) throws DBException {
+	public static void storeP(Pedido p) throws DBException {
 		try (PreparedStatement ps = conexion.prepareStatement("INSERT INTO TablaPedido (codigoCompra, nombreProducto, dniCliente, precio, fecha, direccion) VALUES (? ,?, ?, ?, ?, ?)");
 			Statement s = conexion.createStatement()) {
 			ps.setInt(1, p.getCodigoCompra());
@@ -115,7 +115,7 @@ public class BasePedido {
 				
 				return p;
 			} else {
-				return new Pedido();
+				return new Pedido(); 
 				
 			}
 			

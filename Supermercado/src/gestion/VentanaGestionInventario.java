@@ -30,7 +30,7 @@ import clases.Producto;
 
 public class VentanaGestionInventario extends JFrame{
 	BaseProducto bp=new BaseProducto();
-	
+	 
 	JPanel listaPanel = new JPanel();
 	JPanel infoPanel = new JPanel();
 	JPanel botonPanel = new JPanel();

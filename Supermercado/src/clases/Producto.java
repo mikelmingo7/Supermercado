@@ -30,7 +30,7 @@ public class Producto {
 		this.marca = "";
 		this.peso = 0.0;
 		this.precio = 0.0;
-		this.stock = 0;
+		this.stock = 0;    
 	}
 	public String getNombre() {
 		return nombre;

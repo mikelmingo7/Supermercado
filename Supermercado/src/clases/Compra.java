@@ -16,7 +16,7 @@ public class Compra {
 		this.codigoCompra = codigoCompra;
 		this.nombreProducto = nombreProducto;
 		this.dniCliente = dniCliente;
-		this.precio = precio;
+		this.precio = precio; 
 		this.fecha = fecha;
 	}
 	public Compra() {

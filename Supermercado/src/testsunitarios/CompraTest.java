@@ -14,26 +14,27 @@ class CompraTest {
 
 	
 	
-	Compra c= new Compra(142,"patata","123456789A",10.0,"2020-10-20");
+	Compra co= new Compra(142,"patata","123456789A",10.0,"2020-10-20");
+	
 	@Test
 	public void testGetCodigoCompra() {
-		assertEquals(142, c.getCodigoCompra()); 
+		assertEquals(142, co.getCodigoCompra()); 
 	}
 	@Test
 	public void testGetNombrePorducto() {
-		assertEquals("patata", c.getNombreProducto()); 
+		assertEquals("patata", co.getNombreProducto()); 
 	}
 	@Test
 	public void testGetDniCliente() {
-		assertEquals("123456789A", c.getDniCliente());
+		assertEquals("123456789A", co.getDniCliente());
 	}
 	@Test
 	public void testGetPrecio() {
-		assertEquals(10.0, c.getPrecio());
+		assertEquals(10.0, co.getPrecio());
 	}
 	@Test
 	public void testGetFecha() {
-		assertEquals("2020-10-20", c.getFecha());
+		assertEquals("2020-10-20", co.getFecha());
 	
 	}
 }

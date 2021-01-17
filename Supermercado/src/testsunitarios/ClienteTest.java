@@ -11,7 +11,7 @@ class ClienteTest {
 
 	   
 	Cliente  c = new Cliente("mikel","andoni","123456789A","si");
-	Cliente c1=new Cliente("","","","");
+	
 	    
 	@Test
 	public void testGetNombre() {
@@ -27,7 +27,7 @@ class ClienteTest {
 	}
 	@Test
 	public void testGetSocio() {
-		assertEquals(true, c.getSocio());
+		assertEquals("si", c.getSocio());
 	}
 
 }

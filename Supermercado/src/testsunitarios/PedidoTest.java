@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 
-import clases.Cliente;
+import clases.Cliente; 
 import clases.Compra;
 import clases.Pedido;
 import clases.Producto;

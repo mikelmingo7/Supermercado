@@ -134,7 +134,7 @@ public class BaseProducto {
 	
 
 	public void update(Producto p) throws DBException {
-		try (PreparedStatement s = conexion.prepareStatement("UPDATE Producto SET nombre=?, peso=?, precio=?, marca=?, seccion=?  WHERE codigo=?")) {
+		try (PreparedStatement s = conexion.prepareStatement("UPDATE Producto SET nombre=?, peso=?, precio=?, marca=?, seccion=?, stock=?  WHERE codigo=?")) {
 			s.setString(1, p.getNombre());
 			s.setDouble(2, p.getPeso());
 			s.setDouble(3, p.getPrecio());
@@ -156,7 +156,7 @@ public class BaseProducto {
 			log( Level.INFO, "Borrado el producto correctamente", null );
 		} catch (SQLException e) {
 			throw new DBException("No se pudo eliminar el usuario con id " + p.getCodigo(), e);	}
-	}
+	} 
 
 		
 }
