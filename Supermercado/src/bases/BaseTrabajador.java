@@ -129,15 +129,15 @@ private static void log( Level level, String msg, Throwable excepcion ) {
 	}
 	public void update(Trabajador t) throws DBException {
 		try (PreparedStatement s = con.prepareStatement("UPDATE TablaTrabajador SET nombre=?, apellidos=?, salario=?, horario=?, puesto=?, horas_trabajadas=?, disponibilidad=?  WHERE dni=?")) {
-			s.setString(1, t.getDni());
-			s.setString(2, t.getNombre());
-			s.setString(3, t.getApellidos());
-			s.setInt(4, t.getSalario());
-			s.setString(5, t.getHorario());
-			s.setString(6, t.getPuesto());
-			s.setInt(7, t.getHoras_trabajadas());
-			s.setString(8, t.getDisponibilidad());
 			
+			s.setString(1, t.getNombre());
+			s.setString(2, t.getApellidos());
+			s.setInt(3, t.getSalario());
+			s.setString(4, t.getHorario());
+			s.setString(5, t.getPuesto());
+			s.setInt(6, t.getHoras_trabajadas());
+			s.setString(7, t.getDisponibilidad());
+			s.setString(8, t.getDni());
 			
 			s.executeUpdate();
 			log( Level.INFO, "Actualizado el trabajador correctamente", null );

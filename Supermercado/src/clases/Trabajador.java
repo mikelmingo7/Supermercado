@@ -15,7 +15,7 @@ public class Trabajador {
 				Integer horas_trabajadas, String disponibilidad) {
 			super();
 			this.nombre = nombre;
-			this.apellidos = apellidos;
+			this.apellidos = apellidos; 
 			this.dni = dni;
 			this.salario = salario;
 			this.horario = horario;
