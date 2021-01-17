@@ -1,28 +1,34 @@
 import java.util.ArrayList;
+import java.util.logging.FileHandler;
+import java.util.logging.Handler;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 
 import bases.*;
 import clases.Cliente;
 import clases.Producto;
 import clases.Trabajador;
+import inicios.VentanaSeleccion;
 
 public class Supermercado {
+
+	private static final Logger LOGGER = Logger.getLogger(Supermercado.class.getName());
+	private static VentanaSeleccion vs;
 
 	protected String nombre;
 	protected String direccion;
 	protected ArrayList<Cliente> clientes;
 	protected ArrayList<Trabajador> trabajadores;
 	protected ArrayList<Producto> productos;
-	protected ArrayList<Inventario> inventario;
 	
 	public Supermercado(String nombre, String direccion, ArrayList<Cliente> clientes,
-			ArrayList<Trabajador> trabajadores, ArrayList<Producto> productos, ArrayList<Inventario> inventario) {
+			ArrayList<Trabajador> trabajadores, ArrayList<Producto> productos) {
 		super();
 		this.nombre = nombre;
 		this.direccion = direccion;
 		this.clientes = clientes;
 		this.trabajadores = trabajadores;
 		this.productos = productos;
-		this.inventario = inventario;
 	}
 	
 	public Supermercado() {
@@ -32,7 +38,6 @@ public class Supermercado {
 		this.clientes = null;
 		this.trabajadores = null;
 		this.productos = null;
-		this.inventario = null;
 	}
 
 	public String getNombre() {
@@ -75,20 +80,36 @@ public class Supermercado {
 		this.productos = productos;
 	}
 
-	public ArrayList<Inventario> getInventario() {
-		return inventario;
-	}
-
-	public void setInventario(ArrayList<Inventario> inventario) {
-		this.inventario = inventario;
-	}
-
 	@Override
 	public String toString() {
 		return "Supermercado [nombre=" + nombre + ", direccion=" + direccion + ", clientes=" + clientes
-				+ ", trabajadores=" + trabajadores + ", productos=" + productos + ", inventario=" + inventario + "]";
+				+ ", trabajadores=" + trabajadores + ", productos=" + productos + "]";
 	}
-	
-	
-	
+
+
+
+
+
+	public static void main(String[] args) {
+		
+	try {
+			FileHandler fH = new FileHandler("MyLogFile.log", 8096, 1, false);
+			for (Handler handler : LOGGER.getHandlers()) {
+				LOGGER.removeHandler(handler);
+			}
+			SimpleFormatter formatter = new SimpleFormatter();  
+			fH.setFormatter(formatter);
+			LOGGER.addHandler(fH);
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	vs = new VentanaSeleccion(LOGGER);
+
+
+
+
+	}
 }
