@@ -174,15 +174,17 @@ public class VentanaGestionCompra extends JFrame{
 					bc.connect("compra.db");
 					bc.createCompraTable();
 
-					String cliente, fecha;
+					String cod, cliente, fecha;
 					
+					cod = codigojt.getText();
 					cliente = clientejt.getText();
-					fecha = preciojt.getText();
+					fecha = fechajt.getText();
 					
 					Compra c = new Compra();
 					
-					c.setDniCliente(cliente);;
-					c.setFecha(fecha);;
+					c.setCodigoCompra(Integer.parseInt(cod));
+					c.setDniCliente(cliente);
+					c.setFecha(fecha);
 					
 					Double precioP = 0.0;
 					
@@ -203,17 +205,19 @@ public class VentanaGestionCompra extends JFrame{
 					c.setNombreProducto(productosDeCompra);
 					
 					bc.storeCo(c);
-					
-					
 				
+
 				} catch (DBException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				
-				
-				clientejt.setText(null);
+            	clientejt.setText(null);
 				fechajt.setText(null);
+				preciojt.setText(null);
+				codigojt.setText(null);
+				
+				
             }
         });
         
@@ -226,13 +230,13 @@ public class VentanaGestionCompra extends JFrame{
             	model.clear();
             	
             	try {
-            		bp.connect("producto.db");
+            		bc.connect("compra.db");
             		
             		ArrayList<Integer> codigos = bc.getCodigoCompra();
             		
             		for (int i = 0; i < codigos.size(); i++) {
-            			Integer cod = codigos.get(i);
-            			Compra c = bc.getCompra(cod);
+            			Integer codCom = codigos.get(i);
+            			Compra c = bc.getCompra(codCom);
             			model.addElement(c);
 						
 					}
@@ -255,6 +259,21 @@ public class VentanaGestionCompra extends JFrame{
            
             }
         });
+	    
+	  //Ver valores del producto seleccionado en el TextField correspondiente
+	    MouseListener seleccionar = new MouseAdapter() {
+            public void mouseClicked(MouseEvent mouseEvent) {
+            	Compra c = (Compra) listaCompras.getSelectedValue();
+            	clientejt.setText(c.getDniCliente());
+            	codigojt.setText(""+c.getCodigoCompra());
+            	fechajt.setText(c.getFecha());
+            	preciojt.setText(""+c.getPrecio());
+            	
+         }
+           
+		};
+		
+		listaCompras.addMouseListener(seleccionar);
 
 	    setResizable(false);
 	    setVisible(true);
