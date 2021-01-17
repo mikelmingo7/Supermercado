@@ -65,6 +65,7 @@ public class VentanaLoginAdministrador extends JFrame {
 		setResizable(false);
 		setLocationRelativeTo(null);
 		setBackground(Color.WHITE);
+		LOGGER.log(Level.INFO, "Programa Inicializado");
 
 
 		panelDecorativo = new JPanel();
