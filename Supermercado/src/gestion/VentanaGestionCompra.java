@@ -50,6 +50,8 @@ public class VentanaGestionCompra extends JFrame{
 	JTextField preciojt = new JTextField();
 	JLabel fechajl = new JLabel("Fecha");
 	JTextField fechajt = new JTextField();
+	JLabel cosascompradasjl = new JLabel("Cosas compradas");
+	JTextField cosascompradasjt = new JTextField();
 
 
 	JLabel listaC = new JLabel("Compras");
@@ -80,7 +82,7 @@ public class VentanaGestionCompra extends JFrame{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    setLocationRelativeTo(null);
 	    
-	    infoPanel.setLayout(new GridLayout(6,2));
+	    infoPanel.setLayout(new GridLayout(5,2));
 	    listaPanel.setLayout(new BorderLayout());
 	    acciones.setLayout(new GridLayout(1,6));
 	    productosPanel.setLayout(new BorderLayout());
@@ -144,6 +146,8 @@ public class VentanaGestionCompra extends JFrame{
 	    infoPanel.add(preciojt);
 	    infoPanel.add(fechajl);
 	    infoPanel.add(fechajt);
+	    infoPanel.add(cosascompradasjl);
+	    infoPanel.add(cosascompradasjt);
 	    
 	    
 	    
@@ -202,12 +206,13 @@ public class VentanaGestionCompra extends JFrame{
 					
 					for (int i = 0; i < listaProductos.getModel().getSize(); i++) {
 						Producto p = (Producto) modeloP.getElementAt(i);
-						productosDeCompra = productosDeCompra + ";" + p;
+						productosDeCompra = productosDeCompra + " ||| " + p;
 					}
 					
 					c.setNombreProducto(productosDeCompra);
 					
 					bc.storeCo(c);
+					
 				
 
 				} catch (DBException e1) {
@@ -219,6 +224,7 @@ public class VentanaGestionCompra extends JFrame{
 				fechajt.setText(null);
 				preciojt.setText(null);
 				codigojt.setText(null);
+				modeloP.clear();
 				
 				
             }
@@ -261,6 +267,15 @@ public class VentanaGestionCompra extends JFrame{
             	Producto p = (Producto) productosDisponibles.getSelectedItem();
             	Integer stockP = p.getStock();
             	stockP = stockP - 1;
+            	p.setStock(stockP);
+            	try {
+					bp.connect("producto.db");
+					bp.update(p);
+				} catch (DBException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+            	
             	
             	modeloP.addElement(p);
             }
@@ -273,6 +288,14 @@ public class VentanaGestionCompra extends JFrame{
             	Producto p = (Producto) productosDisponibles.getSelectedItem();
             	Integer stockP = p.getStock();
             	stockP = stockP + 1;
+            	p.setStock(stockP);
+            	try {
+					bp.connect("producto.db");
+					bp.update(p);
+				} catch (DBException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
             	modeloP.removeElement(p);
             }
         });
@@ -287,16 +310,7 @@ public class VentanaGestionCompra extends JFrame{
             	codigojt.setText(""+c.getCodigoCompra());
             	fechajt.setText(c.getFecha());
             	preciojt.setText(""+c.getPrecio());
-            	
-            	ArrayList<Producto> productosComprado = new ArrayList<>();
-            	
-            	String string = c.getNombreProducto();
-				String[] parts = string.split(";");
-				
-            	
-            	for (int i = 0; i < parts.length; i++) {
-            		String parte = parts[i];	
-				}
+            	cosascompradasjt.setText(c.getNombreProducto());
             	
          }
            
