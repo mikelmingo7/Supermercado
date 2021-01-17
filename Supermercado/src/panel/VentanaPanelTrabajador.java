@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import gestion.VentanaGestionCliente;
+import gestion.VentanaGestionInventario;
 import gestion.VentanaGestionProducto;
 
 public class VentanaPanelTrabajador extends Thread{
@@ -50,7 +51,7 @@ public class VentanaPanelTrabajador extends Thread{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				Thread threadInventario = new Thread() {
-					
+					VentanaGestionInventario vi = new VentanaGestionInventario();
 				};
 				
 				threadInventario.start();
