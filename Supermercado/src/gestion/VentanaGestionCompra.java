@@ -272,7 +272,7 @@ public class VentanaGestionCompra extends JFrame{
             }
         });
 	    
-	    
+	    //
 	    
 	  //Ver valores del producto seleccionado en el TextField correspondiente
 	    MouseListener seleccionar = new MouseAdapter() {
