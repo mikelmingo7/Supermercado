@@ -140,10 +140,12 @@ public class BaseProducto {
 			s.setDouble(3, p.getPrecio());
 			s.setString(4, p.getMarca());
 			s.setString(5, p.getSeccion());
-			s.setInt(6, p.getCodigo());
-			s.setInt(7,p.getStock());
+			s.setInt(6, p.getStock());
+			s.setInt(7, p.getCodigo());
 			
 			s.executeUpdate();
+			int i = s.executeUpdate();
+			System.out.println(i);
 			log( Level.INFO, "Actualizado el producto especificado", null );
 		} catch (SQLException e) {
 			throw new DBException("No se pudo guardar el producto en la BD", e);

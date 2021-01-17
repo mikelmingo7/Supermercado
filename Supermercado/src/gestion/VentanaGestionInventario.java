@@ -30,7 +30,7 @@ import clases.Producto;
 
 public class VentanaGestionInventario extends JFrame{
 	BaseProducto bp=new BaseProducto();
-	 
+	
 	JPanel listaPanel = new JPanel();
 	JPanel infoPanel = new JPanel();
 	JPanel botonPanel = new JPanel();
@@ -42,7 +42,7 @@ public class VentanaGestionInventario extends JFrame{
 	JLabel cantidadjl = new JLabel("Cantidad");
 	JTextField cantidadjt = new JTextField();
 	
-	
+	JButton cargar = new JButton("CARGAR");
 	JButton guardar = new JButton("GUARDAR");
 	JButton exportar= new JButton("EXPORTAR");
 	
@@ -64,7 +64,7 @@ public class VentanaGestionInventario extends JFrame{
 	    listaPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 	    infoPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 	    
-	    botonPanel.setLayout(new GridLayout(1,2));
+	    botonPanel.setLayout(new GridLayout(1,3));
 	    infoPanel.setLayout(new GridLayout(3,2));
 	    listaPanel.setLayout(new GridLayout(1,1));
 	    
@@ -79,6 +79,7 @@ public class VentanaGestionInventario extends JFrame{
 	    botonPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 	    
 	    botonPanel.add(guardar);
+	    botonPanel.add(cargar);
 	    botonPanel.add(exportar);
 	  
 	    
@@ -94,25 +95,6 @@ public class VentanaGestionInventario extends JFrame{
 	    infoPanel.add(cantidadjl);
 	    infoPanel.add(cantidadjt);
 
-	    
-	    model.clear();
-    	
-    	try {
-    		bp.connect("producto.db");
-    		
-    		ArrayList<Integer> codigos = bp.getCodigo();
-    		
-    		for (int i = 0; i < codigos.size(); i++) {
-    			Integer cod = codigos.get(i);
-    			Producto p = bp.getProducto(cod);
-    			model.addElement(p);
-				
-			}
-
-		} catch (DBException | SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
     	
     	MouseListener seleccionar = new MouseAdapter() {
             public void mouseClicked(MouseEvent mouseEvent) {
@@ -126,7 +108,7 @@ public class VentanaGestionInventario extends JFrame{
 	  
     	listaProductos.addMouseListener(seleccionar);
     	
-guardar.addActionListener(new ActionListener() {
+    	guardar.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -140,6 +122,7 @@ guardar.addActionListener(new ActionListener() {
 					nomb=nombrejt.getText();
 					cod=codigojt.getText();
 					can=(String) cantidadjt.getText();
+					
 					Producto p = new Producto();
 					
 					p.setCodigo( Integer.parseInt(cod) );
@@ -158,6 +141,35 @@ guardar.addActionListener(new ActionListener() {
 			}
 		});
         
+//Boton para cargar informacion de la BD a la tabla
+cargar.addActionListener(new ActionListener() {
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        //Eliminar producto de db
+    	
+    	model.clear();
+    	
+    	try {
+    		bp.connect("producto.db");
+    		
+    		ArrayList<Integer> codigos = bp.getCodigo();
+    		
+    		for (int i = 0; i < codigos.size(); i++) {
+    			Integer cod = codigos.get(i);
+    			Producto p = bp.getProducto(cod);
+    			model.addElement(p);
+				
+			}
+
+		} catch (DBException | SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+    	
+    	
+    	
+    }
+});
     	
 	  
 	    setVisible(true);
