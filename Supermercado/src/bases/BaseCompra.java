@@ -95,7 +95,7 @@ public class BaseCompra {
 		}
 	}
 	public Compra getCompra(Integer codigoCompra) throws DBException {
-		try (PreparedStatement s = conexion.prepareStatement("SELECT codigoCompra, nombreProducto, dniCliente, precio, fecha FROM TablaCompra WHERE nombreProducto = ?")) {
+		try (PreparedStatement s = conexion.prepareStatement("SELECT codigoCompra, nombreProducto, dniCliente, precio, fecha FROM TablaCompra WHERE codigoCompra = ?")) {
 			s.setInt(1, codigoCompra);
 			
 			ResultSet rs = s.executeQuery();
