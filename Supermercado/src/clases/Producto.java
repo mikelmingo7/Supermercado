@@ -15,7 +15,7 @@ public class Producto {
 	public Producto(String nombre, int codigo, String seccion, String marca, double peso, double precio, int stock) {
 		super();
 		this.nombre = nombre;
-		this.codigo = codigo;
+		this.codigo = codigo; 
 		this.seccion = seccion;
 		this.marca = marca;
 		this.peso = peso;

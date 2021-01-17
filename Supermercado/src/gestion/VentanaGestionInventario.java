@@ -13,8 +13,11 @@ import java.awt.event.MouseListener;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
@@ -32,6 +35,22 @@ import bases.DBException;
 import clases.Producto;
 
 public class VentanaGestionInventario extends JFrame{
+	private static Logger logger = null;
+	private static boolean LOGGING = true;
+	
+	private static Connection conexion = null;
+	 
+	private static void log( Level level, String msg, Throwable excepcion ) {
+		if (!LOGGING) return;
+		if (logger==null) {  // Logger por defecto local:
+			logger = Logger.getLogger( BaseProducto.class.getName() );  // Nombre del logger - el de la clase
+			logger.setLevel( Level.ALL );  // Loguea todos los niveles
+		}
+		if (excepcion==null)
+			logger.log( level, msg );
+		else
+			logger.log( level, msg, excepcion );
+	}
 	BaseProducto bp=new BaseProducto();
 	
 	JPanel listaPanel = new JPanel();
@@ -133,7 +152,7 @@ public class VentanaGestionInventario extends JFrame{
 					
 					bp.updateS(p);
 					
-					
+					log( Level.INFO, "Objeto guardado correctamente ", null );
 				} catch (DBException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -160,7 +179,7 @@ public class VentanaGestionInventario extends JFrame{
 	    			Integer cod = codigos.get(i);
 	    			Producto p = bp.getProducto(cod);
 	    			model.addElement(p);
-					
+	    			log( Level.INFO, "Objeto cargado correctamente ", null );
 				}
 	
 			} catch (DBException | SQLException e1) {
@@ -188,8 +207,9 @@ public class VentanaGestionInventario extends JFrame{
 				}
 	            //Cierro el stream
 	            fw.close();
+	            log( Level.INFO, "Exportado correctamente ", null );
 			}
-
+	    	
 			//Si existe un problema al escribir cae aqui
 			catch(Exception e1) {
 				System.out.println("Error al escribir");

@@ -22,7 +22,7 @@ public class Trabajador {
 			this.puesto = puesto;
 			this.horas_trabajadas = horas_trabajadas;
 			this.disponibilidad = disponibilidad;	
-		}
+		} 
 		
 		public Trabajador() {
 			super();
