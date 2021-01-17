@@ -72,7 +72,7 @@ public class VentanaGestionProducto extends JFrame{
 		setSize(900,500); 
 		setTitle("Gestión productos"); 
 	    setLocationRelativeTo(null);
-	    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	    setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	    try {
 	        UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 	} catch (Exception e) {}

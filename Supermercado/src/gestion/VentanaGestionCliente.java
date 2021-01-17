@@ -55,7 +55,7 @@ public class VentanaGestionCliente extends JFrame {
 	
 	public VentanaGestionCliente() {
 		setTitle("Ventana Cliente");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setSize(700, 400);
 		Font fuente = new Font("Times new roman", Font.CENTER_BASELINE, 15);
 		 

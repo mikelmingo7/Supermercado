@@ -79,7 +79,7 @@ public class VentanaGestionCompra extends JFrame{
 		setLayout(new BorderLayout());
 		setSize(900,500);
 		setTitle("Gestión compras");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	    setLocationRelativeTo(null);
 	    
 	    infoPanel.setLayout(new GridLayout(5,2));

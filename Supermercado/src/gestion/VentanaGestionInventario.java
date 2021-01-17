@@ -61,7 +61,7 @@ public class VentanaGestionInventario extends JFrame{
 		setSize(900,500);
 		setTitle("Gestión de Inventario");
 	    setLocationRelativeTo(null);
-	    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	    setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	    
 	    botonPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 	    listaPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
