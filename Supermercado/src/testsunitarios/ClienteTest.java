@@ -15,7 +15,7 @@ class ClienteTest {
 	    
 	@Test
 	public void testGetNombre() {
-		assertEquals("mikel", c.getNombre()); 
+		assertEquals("mikel", c.getNombre());  
 	}
 	@Test
 	public void testGetApellido() {
