@@ -259,6 +259,9 @@ public class VentanaGestionCompra extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 //Sumar producto a la lista de la compra
             	Producto p = (Producto) productosDisponibles.getSelectedItem();
+            	Integer stockP = p.getStock();
+            	stockP = stockP - 1;
+            	
             	modeloP.addElement(p);
             }
         });
@@ -268,6 +271,8 @@ public class VentanaGestionCompra extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 //Sumar producto a la lista de la compra
             	Producto p = (Producto) productosDisponibles.getSelectedItem();
+            	Integer stockP = p.getStock();
+            	stockP = stockP + 1;
             	modeloP.removeElement(p);
             }
         });
@@ -282,6 +287,16 @@ public class VentanaGestionCompra extends JFrame{
             	codigojt.setText(""+c.getCodigoCompra());
             	fechajt.setText(c.getFecha());
             	preciojt.setText(""+c.getPrecio());
+            	
+            	ArrayList<Producto> productosComprado = new ArrayList<>();
+            	
+            	String string = c.getNombreProducto();
+				String[] parts = string.split(";");
+				
+            	
+            	for (int i = 0; i < parts.length; i++) {
+            		String parte = parts[i];	
+				}
             	
          }
            

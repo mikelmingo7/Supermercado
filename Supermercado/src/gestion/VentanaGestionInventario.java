@@ -10,6 +10,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.File;
+import java.io.FileWriter;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -126,10 +128,9 @@ public class VentanaGestionInventario extends JFrame{
 					Producto p = new Producto();
 					
 					p.setCodigo( Integer.parseInt(cod) );
-					p.setNombre(nomb);
 					p.setStock(Integer.parseInt(can));
 					
-					bp.update(p);
+					bp.updateS(p);
 					
 					
 				} catch (DBException e) {
@@ -141,35 +142,59 @@ public class VentanaGestionInventario extends JFrame{
 			}
 		});
         
-//Boton para cargar informacion de la BD a la tabla
-cargar.addActionListener(new ActionListener() {
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        //Eliminar producto de db
-    	
-    	model.clear();
-    	
-    	try {
-    		bp.connect("producto.db");
-    		
-    		ArrayList<Integer> codigos = bp.getCodigo();
-    		
-    		for (int i = 0; i < codigos.size(); i++) {
-    			Integer cod = codigos.get(i);
-    			Producto p = bp.getProducto(cod);
-    			model.addElement(p);
+	//Boton para cargar informacion de la BD a la tabla
+	cargar.addActionListener(new ActionListener() {
+	    @Override
+	    public void actionPerformed(ActionEvent e) {
+	        //Eliminar producto de db
+	    	
+	    	model.clear();
+	    	
+	    	try {
+	    		bp.connect("producto.db");
+	    		
+	    		ArrayList<Integer> codigos = bp.getCodigo();
+	    		
+	    		for (int i = 0; i < codigos.size(); i++) {
+	    			Integer cod = codigos.get(i);
+	    			Producto p = bp.getProducto(cod);
+	    			model.addElement(p);
+					
+				}
+	
+			} catch (DBException | SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+	    	
+	    	
+	    	
+	    }
+	});
+	
+	//Boton para exportar la lista del inventario
+	exportar.addActionListener(new ActionListener() {
+	    @Override
+	    public void actionPerformed(ActionEvent e) {
+	    	try {
 				
+	    		//Abro stream, crea el fichero si no existe
+	            FileWriter fw = new FileWriter("G:\\productos.txt");
+	            //Escribimos en el fichero un String y un caracter 97 (a)
+	            for (int i = 0; i < model.getSize(); i++) {
+					Producto p = (Producto) model.getElementAt(i);  
+					fw.write(p.toString());		
+				}
+	            //Cierro el stream
+	            fw.close();
 			}
 
-		} catch (DBException | SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-    	
-    	
-    	
-    }
-});
+			//Si existe un problema al escribir cae aqui
+			catch(Exception e1) {
+				System.out.println("Error al escribir");
+			}
+	    }
+	});
     	
 	  
 	    setVisible(true);

@@ -76,7 +76,7 @@ public class Producto {
 	}
 	@Override
 	public String toString() {
-		return ""+ codigo + " | " + nombre + " de " + marca;
+		return ""+ codigo + " | " + nombre + " de " + marca + "| Disponibles: " + stock;
 	}
 	
 
