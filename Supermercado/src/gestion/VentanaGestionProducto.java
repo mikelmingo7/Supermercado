@@ -222,7 +222,7 @@ public class VentanaGestionProducto extends JFrame{
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
- model.clear();
+				model.clear();
             	
             	try {
             		bp.connect("producto.db");
