@@ -34,9 +34,9 @@ public class VentanaSeleccion extends JFrame{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				new VentanaLoginAdministrador("admin", LOGGER);
 				dispose();
-				
+				new VentanaLoginAdministrador("admin", LOGGER);
+			
 			}
 		});	
 		
@@ -50,6 +50,7 @@ public class VentanaSeleccion extends JFrame{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				dispose();
 				new VentanaLoginTrabajador("trabajador", null);
 				
 			}
