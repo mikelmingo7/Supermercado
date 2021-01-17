@@ -32,7 +32,6 @@ import org.sqlite.core.DB;
 
 import gestion.VentanaGestionCliente;
 import panel.VentanaPanelAdmin;
-import panel.VentanaPanelTrabajador;
 
 public class VentanaLoginAdministrador extends JFrame {
 
@@ -126,14 +125,9 @@ public class VentanaLoginAdministrador extends JFrame {
 
 						@Override
 						public void actionPerformed(ActionEvent e) {
-							if(cargo.matches("administrador")){
-								new VentanaPanelAdmin();
-							}else {
-								new VentanaPanelTrabajador();
-								
-							}
-						
 							dispose();
+							new VentanaPanelAdmin();					
+							
 
 						}
 							
