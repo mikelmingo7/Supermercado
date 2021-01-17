@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.net.URL;
 import java.nio.file.LinkOption;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -66,13 +67,15 @@ public class VentanaLoginTrabajador extends JFrame {
 		setResizable(false);
 		setLocationRelativeTo(null);
 		setBackground(Color.WHITE);
+		
+		URL imagen = getClass().getResource("/inicio2.png");
 		LOGGER.log(Level.INFO, "Programa Inicializado");
 
 
 		panelDecorativo = new JPanel();
 		panelDecorativo.setLayout(new GridLayout(1,1));
 		panelDecorativo.setBorder(BorderFactory.createEmptyBorder(10, 0, 20, 0)); //TOC
-		labelDecorativo = new JLabel(new ImageIcon("inicio2.png"));
+		labelDecorativo = new JLabel(new ImageIcon(imagen));
 		panelDecorativo.setBackground(Color.WHITE);
 		panelDecorativo.add(labelDecorativo);
 		add(panelDecorativo);

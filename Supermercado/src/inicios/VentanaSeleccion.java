@@ -51,7 +51,7 @@ public class VentanaSeleccion extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				new VentanaLoginTrabajador("trabajador", null);
+				new VentanaLoginTrabajador("trabajador", LOGGER);
 				
 			}
 		});

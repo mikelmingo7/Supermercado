@@ -178,7 +178,7 @@ public class VentanaGestionTrabajadores extends JFrame{
 				sal.setText(null);
 				hor.setText(null);
 				pues.setText(null);
-				hor.setText(null);
+				horT.setText(null);
 				dis.setText(null);
 				
             	

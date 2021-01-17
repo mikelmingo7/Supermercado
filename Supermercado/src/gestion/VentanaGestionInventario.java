@@ -12,7 +12,12 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -29,6 +34,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
+import java.io.InputStreamReader;
 
 import bases.BaseProducto;
 import bases.DBException;
@@ -198,15 +204,16 @@ public class VentanaGestionInventario extends JFrame{
 	    public void actionPerformed(ActionEvent e) {
 	    	try {
 				
+	    		
 	    		//Abro stream, crea el fichero si no existe
-	            FileWriter fw = new FileWriter("productos.txt");
+	            Writer writer = new OutputStreamWriter(new FileOutputStream(new File(".\\productos.txt").getCanonicalFile()));
 	            //Escribimos en el fichero un String y un caracter 97 (a)
 	            for (int i = 0; i < model.getSize(); i++) {
 					Producto p = (Producto) model.getElementAt(i);  
-					fw.write(p.toString()+ "\r\n");		
+					writer.write(p.toString()+ "\r\n");		
 				}
 	            //Cierro el stream
-	            fw.close();
+	            writer.close();
 	            log( Level.INFO, "Exportado correctamente ", null );
 			}
 	    	
