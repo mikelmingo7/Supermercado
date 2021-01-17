@@ -159,6 +159,18 @@ public class BaseProducto {
 		} catch (SQLException e) {
 			throw new DBException("No se pudo eliminar el usuario con id " + p.getCodigo(), e);	}
 	} 
+	public void updateS(Producto p) throws DBException {
+		try (PreparedStatement s = conexion.prepareStatement("UPDATE Producto SET  stock=?  WHERE codigo=?")) {
+			s.setInt(1, p.getStock());
+		
+			
+			s.executeUpdate();
+
+			log( Level.INFO, "Actualizado el producto especificado", null );
+		} catch (SQLException e) {
+			throw new DBException("No se pudo guardar el producto en la BD", e);
+		}
+	}
 
 		
 }
