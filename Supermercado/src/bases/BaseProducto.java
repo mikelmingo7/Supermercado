@@ -162,11 +162,12 @@ public class BaseProducto {
 	public void updateS(Producto p) throws DBException {
 		try (PreparedStatement s = conexion.prepareStatement("UPDATE Producto SET  stock=?  WHERE codigo=?")) {
 			s.setInt(1, p.getStock());
+			s.setInt(2,p.getCodigo());
 		
 			
 			s.executeUpdate();
 
-			log( Level.INFO, "Actualizado el producto especificado", null );
+			log( Level.INFO, "Actualizado el stock del producto especificado", null );
 		} catch (SQLException e) {
 			throw new DBException("No se pudo guardar el producto en la BD", e);
 		}
