@@ -9,7 +9,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import gestion.VentanaGestionCliente;
+import gestion.VentanaGestionCompra;
 import gestion.VentanaGestionInventario;
+import gestion.VentanaGestionPedido;
 import gestion.VentanaGestionProducto;
 
 public class VentanaPanelTrabajador extends Thread{
@@ -17,6 +19,8 @@ public class VentanaPanelTrabajador extends Thread{
 	JButton clientes = new JButton("Clientes");
 	JButton inventario = new JButton("Inventario");
 	JButton producto = new JButton("Productos");
+	JButton pedidos = new JButton("Pedidos");
+	JButton compras = new JButton("Compras");
 	
 	public VentanaPanelTrabajador() {
 		
@@ -26,13 +30,39 @@ public class VentanaPanelTrabajador extends Thread{
 		ventanapaneltrabajador.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		ventanapaneltrabajador.setSize(500,300);
 		ventanapaneltrabajador.setTitle("Panel Trabajador");
-		panel1.setLayout(new GridLayout(3,1));
+		panel1.setLayout(new GridLayout(5,1));
 		ventanapaneltrabajador.add(panel1);
 		ventanapaneltrabajador.setVisible(true);
 		
 		panel1.add(clientes);	
 		panel1.add(inventario);
 		panel1.add(producto);
+		panel1.add(pedidos);
+		panel1.add(compras);
+		
+		compras.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					Thread threadClientes = new Thread() {
+						VentanaGestionCompra v1 = new VentanaGestionCompra();
+					};
+					threadClientes.start();
+					
+				}
+			});
+		
+		pedidos.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				Thread threadClientes = new Thread() {
+					VentanaGestionPedido v1 = new VentanaGestionPedido();
+				};
+				threadClientes.start();
+				
+			}
+		});
 		
 		clientes.addActionListener(new ActionListener() {
 			
