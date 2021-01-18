@@ -52,13 +52,15 @@ public class VentanaGestionPedido extends JFrame{
 	JTextField preciojt = new JTextField();
 	JLabel fechajl = new JLabel("Fecha");
 	JTextField fechajt = new JTextField();
+	JLabel cosascompradasjl = new JLabel("Cosas compradas");
+	JTextField cosascompradasjt = new JTextField();
 	JLabel direccionjl = new JLabel("Direccion");
 	JTextField direccionjt = new JTextField();
 
 	JLabel listaP = new JLabel("Pedidos");
-	JList listaPedidos = new JList<>();
+	JList listaPedidos = new JList<Pedido>();
 	JScrollPane listaScroll = new JScrollPane(listaPedidos);
-	DefaultListModel model = new DefaultListModel<Compra>();
+	DefaultListModel model = new DefaultListModel<Pedido>();
 	
 	JComboBox productosDisponibles = new JComboBox();;
 	
@@ -79,11 +81,11 @@ public class VentanaGestionPedido extends JFrame{
 		
 		setLayout(new BorderLayout());
 		setSize(900,500);
-		setTitle("Gestión Pedidos");
+		setTitle("Gestión pedidos");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	    setLocationRelativeTo(null);
 	    
-	    infoPanel.setLayout(new GridLayout(6,2));
+	    infoPanel.setLayout(new GridLayout(5,2));
 	    listaPanel.setLayout(new BorderLayout());
 	    acciones.setLayout(new GridLayout(1,6));
 	    productosPanel.setLayout(new BorderLayout());
@@ -138,7 +140,7 @@ public class VentanaGestionPedido extends JFrame{
 	    listaPanel.add(listaScroll, BorderLayout.CENTER);
 	    
 	    
-	    infoPanel.setLayout(new GridLayout(10,2));
+	    infoPanel.setLayout(new GridLayout(6,2));
 	    infoPanel.add(codigojl);
 	    infoPanel.add(codigojt);
 	    infoPanel.add(clientejl);
@@ -147,6 +149,8 @@ public class VentanaGestionPedido extends JFrame{
 	    infoPanel.add(preciojt);
 	    infoPanel.add(fechajl);
 	    infoPanel.add(fechajt);
+	    infoPanel.add(cosascompradasjl);
+	    infoPanel.add(cosascompradasjt);
 	    infoPanel.add(direccionjl);
 	    infoPanel.add(direccionjt);
 	    
@@ -216,6 +220,7 @@ public class VentanaGestionPedido extends JFrame{
 					p.setNombreProducto(productosDeCompra);
 					
 					bpe.storeP(p);
+					
 				
 
 				} catch (DBException e1) {
@@ -228,6 +233,7 @@ public class VentanaGestionPedido extends JFrame{
 				preciojt.setText(null);
 				codigojt.setText(null);
 				direccionjt.setText(null);
+				modeloP.clear();
 				
             }
         });
@@ -267,6 +273,16 @@ public class VentanaGestionPedido extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 //Sumar producto a la lista de la compra
             	Producto p = (Producto) productosDisponibles.getSelectedItem();
+            	Integer stockP = p.getStock();
+            	stockP = stockP - 1;
+            	p.setStock(stockP);
+            	try {
+					bp.connect("producto.db");
+					bp.update(p);
+				} catch (DBException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
             	modeloP.addElement(p);
             }
         });
@@ -274,8 +290,18 @@ public class VentanaGestionPedido extends JFrame{
 	    restar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //Sumar producto a la lista de la compra
+            	 //Restar producto a la lista de la compra
             	Producto p = (Producto) productosDisponibles.getSelectedItem();
+            	Integer stockP = p.getStock();
+            	stockP = stockP + 1;
+            	p.setStock(stockP);
+            	try {
+					bp.connect("producto.db");
+					bp.update(p);
+				} catch (DBException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
             	modeloP.removeElement(p);
             }
         });
@@ -285,12 +311,13 @@ public class VentanaGestionPedido extends JFrame{
 	  //Ver valores del producto seleccionado en el TextField correspondiente
 	    MouseListener seleccionar = new MouseAdapter() {
             public void mouseClicked(MouseEvent mouseEvent) {
-            	Pedido p = (Pedido) listaPedidos.getSelectedValue();
-            	clientejt.setText(p.getDniCliente());
-            	codigojt.setText(""+p.getCodigoCompra());
-            	fechajt.setText(p.getFecha());
-            	preciojt.setText(""+p.getPrecio());
-            	direccionjt.setText(p.getDireccion());
+            	Pedido pe = (Pedido) listaPedidos.getSelectedValue();
+            	clientejt.setText(pe.getDniCliente());
+            	codigojt.setText(""+pe.getCodigoCompra());
+            	fechajt.setText(""+pe.getFecha());
+            	preciojt.setText(""+pe.getPrecio());
+            	direccionjt.setText(pe.getDireccion());
+            	cosascompradasjt.setText(pe.getNombreProducto());
             	
          }
            
@@ -306,7 +333,7 @@ public class VentanaGestionPedido extends JFrame{
 		listaPedidos.addMouseListener(seleccionar);
 
 		 
-	    pack();
+	    
 	    setResizable(true);
 	    setVisible(true);
 

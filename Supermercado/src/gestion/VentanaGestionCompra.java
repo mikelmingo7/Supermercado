@@ -137,7 +137,7 @@ public class VentanaGestionCompra extends JFrame{
 	    listaPanel.add(listaScroll, BorderLayout.CENTER);
 	    
 	    
-	    infoPanel.setLayout(new GridLayout(8,2));
+	    infoPanel.setLayout(new GridLayout(5,2));
 	    infoPanel.add(codigojl);
 	    infoPanel.add(codigojt);
 	    infoPanel.add(clientejl);
@@ -284,7 +284,7 @@ public class VentanaGestionCompra extends JFrame{
 	    restar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //Sumar producto a la lista de la compra
+                //Restar producto a la lista de la compra
             	Producto p = (Producto) productosDisponibles.getSelectedItem();
             	Integer stockP = p.getStock();
             	stockP = stockP + 1;
@@ -326,7 +326,7 @@ public class VentanaGestionCompra extends JFrame{
 		listaCompras.addMouseListener(seleccionar);
 
 		 
-	    pack();
+	    
 	    setResizable(true);
 	    setVisible(true);
 

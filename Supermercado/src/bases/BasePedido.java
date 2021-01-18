@@ -69,7 +69,7 @@ public class BasePedido {
 	
 	
   }
-	public static void dropProductoTable() throws DBException {
+	public static void dropPedidoTable() throws DBException {
 		try (Statement s = conexion.createStatement()) {
 			s.executeUpdate("DROP TABLE IF EXISTS TablaPedido");
 			log( Level.INFO, "Borrado la tabla correctamente", null );
@@ -85,11 +85,8 @@ public class BasePedido {
 			ps.setString(3, p.getDniCliente());
 			ps.setDouble(4, p.getPrecio());
 			ps.setString(5, p.getFecha());
-			ps.setString(5, p.getDireccion());
-			
-			
-			
-		
+			ps.setString(6, p.getDireccion());
+
 			ps.executeUpdate();
 			
 			log( Level.INFO, "Instertado el pedido correctamente", null );
@@ -136,14 +133,13 @@ public class BasePedido {
 	
 
 	public void update(Pedido p) throws DBException {
-		try (PreparedStatement s = conexion.prepareStatement("UPDATE TablaCompra SET nombreProducto=?, dniCliente=?, precio=?, fecha=?, direccion=?  WHERE codigoCompra=?")) {
-			s.setInt(1, p.getCodigoCompra());
-			s.setString(2, p.getNombreProducto());
-			s.setString(3, p.getDniCliente());
-			s.setDouble(4, p.getPrecio());
-			s.setString(5, p.getFecha());
-			s.setString(6, p.getDireccion());
-			
+		try (PreparedStatement s = conexion.prepareStatement("UPDATE TablaPedido SET nombreProducto=?, dniCliente=?, precio=?, fecha=?, direccion=?  WHERE codigoCompra=?")) {
+			s.setString(1, p.getNombreProducto());
+			s.setString(2, p.getDniCliente());
+			s.setDouble(3, p.getPrecio());
+			s.setString(4, p.getFecha());
+			s.setString(5, p.getDireccion());
+			s.setInt(6, p.getCodigoCompra());
 			s.executeUpdate();
 			log( Level.INFO, "Actualizado el pedido especificado", null );
 		} catch (SQLException e) {
@@ -151,7 +147,7 @@ public class BasePedido {
 		}
 	}
 	public void delete(Pedido p) throws DBException {
-		try (PreparedStatement s = conexion.prepareStatement("DELETE FROM TablaCompra WHERE codigoCompra=?")) {
+		try (PreparedStatement s = conexion.prepareStatement("DELETE FROM TablaPedido WHERE codigoCompra=?")) {
 			s.setInt(1, p.getCodigoCompra());
 			
 			s.executeUpdate();

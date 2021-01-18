@@ -20,8 +20,7 @@ public class Pedido extends Compra{
 	}
 	@Override
 	public String toString() {
-		return "Pedido [direccion=" + direccion + ", codigoCompra=" + codigoCompra + ", nombreProducto="
-				+ nombreProducto + ", dniCliente=" + dniCliente + ", precio=" + precio + ", fecha=" + fecha + "]";
+		return "" + codigoCompra;
 	}
 
 	
