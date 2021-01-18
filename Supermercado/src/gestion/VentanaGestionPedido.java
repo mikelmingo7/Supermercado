@@ -318,7 +318,7 @@ public class VentanaGestionPedido extends JFrame{
             	preciojt.setText(""+pe.getPrecio());
             	direccionjt.setText(pe.getDireccion());
             	cosascompradasjt.setText(pe.getNombreProducto());
-            	
+            	System.out.println(pe);
          }
            
 		};
@@ -329,7 +329,7 @@ public class VentanaGestionPedido extends JFrame{
 			}
 		};
 		
-		listaPedidos.addMouseListener(seleccionP);
+		listaProductos.addMouseListener(seleccionP);
 		listaPedidos.addMouseListener(seleccionar);
 
 		 

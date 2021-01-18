@@ -107,7 +107,7 @@ public class BasePedido {
 				p.setDniCliente(rs.getString("dniCliente"));
 				p.setPrecio(rs.getDouble("precio"));
 				p.setFecha(rs.getString("fecha"));
-				p.setFecha(rs.getString("direccion"));
+				p.setDireccion(rs.getString("direccion"));
 			
 				
 				return p;

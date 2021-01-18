@@ -22,6 +22,9 @@ public class Pedido extends Compra{
 	public String toString() {
 		return "" + codigoCompra;
 	}
+	
+	
+	
 
 	
 	
