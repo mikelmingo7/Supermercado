@@ -290,7 +290,7 @@ public class VentanaGestionPedido extends JFrame{
 	    restar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            	 //Restar producto a la lista de la compra
+            	 //Restar producto a  la lista de la compra
             	Producto p = (Producto) productosDisponibles.getSelectedItem();
             	Integer stockP = p.getStock();
             	stockP = stockP + 1;
